@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء حساب - البوصلة</title>
+    <!-- <link rel="stylesheet" href="login-signup.css"> -->
+    <link rel="stylesheet" href="login-signup.css?v=5">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"><!--مكتبة ايقونات-->
+</head>
+<body>
+<div class="container reverse">
+    <a href="home.html" class="close-btn" title="العودة للمتجر">
+        <i class="fa-solid fa-xmark"></i>
+    </a>
+    <div class="form-section">
+        <h2>إنشاء حساب جديد</h2>
+        <form action="backend/register.php" method="POST">
+            <div class="input-group">
+                <i class="fa-regular fa-user"></i>
+                <input type="text" name="name" placeholder="الاسم " required>
+            </div>
+            <div class="input-group">
+                <i class="fa-regular fa-envelope"></i>
+                <input type="email" name="email" placeholder="البريد الإلكتروني" required>
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" name="password" placeholder="كلمة المرور" required>
+            </div>
+            <button type="submit" class="btn-main">إنشاء الحساب</button>
+        </form>
+    </div>
+    <div class="overlay-section signup-bg">
+        <div class="overlay-content">
+            <img src="images/logo.png" alt="البوصلة" class="logo">
+            <h1>أهلاً بك في البوصلة!</h1>
+            <p>استكشف جمال الحضارات العالمية، قطعة فنية مستوحاة من قصور غرناطة ونقوش الحمراء.</p>
+            <a href="login.html" class="btn-outline">تسجيل الدخول</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

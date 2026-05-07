@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="andalusia.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>al-andalus</title>
+
+    <style>
+
+    .add-to-cart-btn {
+        background: #c4a35a; color: #fff; border: none;
+        padding: 8px 16px; border-radius: 6px; cursor: pointer;
+        font-size: 13px; margin-top: 8px; width: 100%;
+        transition: background .2s; font-family: inherit;
+    }
+    .add-to-cart-btn:hover { background: #a8873d; }
+    .add-to-cart-btn:disabled { background: #ccc; cursor: not-allowed; }
+    .card a.card-link { text-decoration: none; color: inherit; display: block; }
+    .card a.card-link:hover img { transform: scale(1.04); transition: transform .3s; }
+    .cart-nav-link { position: relative; }
+    .cart-nav-badge {
+        display:none; position:absolute; top:-8px; right:-8px;
+        background:#c4a35a; color:#fff; border-radius:50%;
+        width:18px; height:18px; font-size:11px;
+        text-align:center; line-height:18px;
+    }
+    /* .cart-nav-link { position: relative; } */
+    </style>
+
+</head>
+<body>
+     <div class="header">
+        <div class="container">
+          <div class="logo">
+            <img src="images/logo.png" alt="logo about busalah">
+          </div>
+          <div>
+            <ul class="navbar">
+                <li><a href="home.html">الرئيسية</a></li>
+                <li><a href="home.html#story">قصتـنا</a></li>
+                <li> <a href="home.html#categories">الـحضـارات</a></li>
+                <li><a href="#">ديـكـور</a></li>
+                <li><a href="#">اكسـسوارات</a></li>
+                <li><a href="#">مـلابـس</a></li>
+                <li><a href="cart-full.html" class="login-btn">سلة المشتريات</a></li>
+                <li><a href="login.html" class="login-btn">تسجيل الدخول</a></li>
+            </ul>
+
+          </div>
+        </div>  
+<!-- start home  -->
+    <div class="home">
+        <div class="container">
+            <div class="home-pic">
+                <h1>عبق الأندلس يزين المكان</h1>
+                <p>قطع فنية مستوحاة من عظمة التاريخ الأندلسي، مصنوعة يدوياً لتروي قصة حضارة لا تنسى.</p>
+                <a href="home.html#categories">تسوق الآن !</a>
+            </div>
+
+        </div>
+
+     </div>
+       <!--start category  -->
+       <div class="category">
+
+         <div class="above">
+        <h2>استكشف الحضارات</h2>
+        <h3>بوابتك لثقافات العالم من خلال قطع فنية مختارة تجسد التاريخ والروح الإبداعية لكل عصر</h3>
+        </div>
+
+       <div class="slider">
+      
+        <div class="hadara and">
+            <a href="andalus.html">
+            <h3>الأنـدلــس</h3>
+            <hr class="line">
+            </a>
+        </div>
+
+        <div class="hadara ps">
+            <a href="sham.html">
+            <h3>بلاد الشـام</h3>
+            <hr class="line">
+            </a>
+        </a>
+        </div>
+
+        <div class="hadara fk">
+            <a href="victory.html">
+            <h3> الفكتورية </h3>
+            <hr class="line">
+            </a>
+        </div>
+
+        <div class="hadara egp">
+            <a href="egp.html">
+            <h3>الفرعـونية</h3>
+            <hr class="line">
+            </a>
+        </div>
+
+       </div>
+       </div>
+
+    </div>
+
+
+<!-- start content -->
+
+<div class="contain">
+
+  <!-- Sidebar Filters -->
+  <aside class="sidebar">
+    <h3>تصفية النتائج</h3>
+
+    <div class="filter">
+      <h4>الفئات</h4>
+      <label><input type="checkbox"> ديكور منزلي</label>
+      <label><input type="checkbox"> اكسسوارات نسائية</label>
+      <label><input type="checkbox"> ملابس نسائية</label>
+    </div>
+
+   <div class="filter">
+  <h4>نطاق السعر</h4>
+
+  <div class="price-values">
+    <span id="minPrice">100</span> ر.س
+    -
+    <span id="maxPrice">5000</span> ر.س
+  </div>
+
+  <input type="range" id="rangeMin" min="100" max="5000" value="100">
+  <input type="range" id="rangeMax" min="100" max="5000" value="1500">
+</div>
+  </aside>
+
+  <!-- Products
+  <main class="products">
+
+    <div class="grid">
+
+      Card
+      <div class="card">
+        <span class="badge">الأكثر مبيعًا</span>
+        <img src="images/item1.png" alt="">
+        <h4>طقم أواني خزف أندلسي</h4>
+        <p class="price">1,200 ر.س</p>
+      </div>
+
+      <div class="card">
+        <span class="badge">جديد</span>
+        <img src="images/item2.png" alt="">
+        <h4>  وشاح حرير مزخرف   </h4>
+        <p class="price">320 ر.س</p>
+      </div>
+
+      <div class="card">
+        <span class="badge">فاخر</span>
+        <img src="images/item3.png" alt="">
+        <h4>  مصباح نحاسي تراثي   </h4>
+        <p class="price">850 ر.س</p>
+      </div>
+
+      <div class="card">
+        <img src="images/item4.png" alt="">
+        <h4>طقم أندلوسي فاخر جدًا</h4>
+        <p class="price">2200 ر.س</p>
+      </div>
+
+      <div class="card">
+        <span class="badge">جديد</span>
+        <img src="images/item5.png" alt="">
+        <h4>سجادة صلاة تقليدية</h4>
+        <p class="price">280 ر.س</p>
+      </div>
+
+      <div class="card">
+        <img src="images/item6.png" alt="">
+        <h4>صندوق مجوهرات فاخر</h4>
+        <p class="price">450 ر.س</p>
+      </div>
+
+       <div class="card">
+        <img src="images/item7.png" alt="">
+        <h4>سجادة أندلوسية غرزة قرطبة</h4>
+        <p class="price">450 ر.س</p>
+      </div>
+
+        <div class="card hidden">
+        <img src="images/item8.png" alt="">
+        <h4>قفطان أندلوسي أخضر مذهب</h4>
+        <p class="price">450 ر.س</p>
+      </div>
+
+        <div class="card hidden">
+        <img src="images/item9.png" alt="">
+        <h4>خاتم أندلوسي مرصع بالياقوت الأخضر</h4>
+        <p class="price">450 ر.س</p>
+      </div>
+
+    </div>
+
+    <button class="load-more">عرض المزيد</button>
+
+  </main> -->
+
+ <main class="products">
+        <div class="grid" id="products-grid">
+            <div style="text-align:center;padding:40px;color:#888;grid-column:1/-1">
+                <i class="fas fa-spinner fa-spin" style="font-size:28px;color:#c4a35a"></i>
+                <p style="margin-top:12px">جار تحميل المنتجات...</p>
+            </div>
+        </div>
+        <button class="load-more" id="load-more-btn" style="display:none">عرض المزيد</button>
+    </main>
+
+
+
+
+
+</div>
+   <!-- footer -->
+     <div class="footer">
+        <div class="horz">
+            <div class="feature-item">
+            <div class="icon-wrapper">
+                <i class="fa-solid fa-truck-fast"></i>
+            </div>
+            <h3>شحن دولي فاخر</h3>
+            <p>نصل إليك أينما كنت بتغليف يحمي القطع ويليق بقيمتها الفنية والتاريخية.</p>
+         </div>
+
+         <div class="feature-item">
+            <div class="icon-wrapper">
+                <i class="fa-solid fa-shield-check"></i> <i class="fa-solid fa-certificate"></i>
+            </div>
+            <h3>ضمان الأصالة</h3>
+            <p>كل قطعة تأتي مع شهادة توثيق توضح المصدر الثقافي والمواد المستخدمة في صناعتها.</p>
+         </div>
+
+         <div class="feature-item">
+            <div class="icon-wrapper">
+                <i class="fa-solid fa-rotate-left"></i>
+            </div>
+            <h3>استبدال سهل</h3>
+            <p>رضاكم هو أولويتنا، نوفر سياسة استبدال مرنة تضمن حصولكم على ما تطمحون إليه.</p>
+         </div>
+
+        </div>
+        <!-- footer  -->
+        <div class="horz">
+            <div class="footer-column newsletter">
+                <h4>انضم إلى نشرتنا الإخبارية</h4>
+                <div class="subscribe-form">
+                    <input type="email" placeholder="البريد الإلكتروني">
+                    <button type="button">اشترك</button>
+                </div>
+                <p>استكشف جمال الحضارات العالمية من خلال قطعنا الفريدة والمختارة بعناية.</p>
+            </div>
+
+            <div class="footer-column">
+                <h4>التسوق</h4>
+                <ul>
+                    <li><a href="andalus.html">الحضارة الأندلسية</a></li>
+                    <li><a href="egp.html">الحضارة الفرعونية</a></li>
+                    <li><a href="sham.html">الحضارة الشامية</a></li>
+                    <li><a href="victory.html">الفيكتورية</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>عن البوصلة</h4>
+                <ul>
+                    <li><a href="home.html#story">قصتـنا</a></li>
+                    <li><a href="#">الاستدامة</a></li>
+                    <li><a href="#">تواصل معنا</a></li>
+                    <li><a href="cart-full.html" class="login-btn">سلة المشتريات</a></li>
+                    <li><a href="login.html" class="login-btn">تسجيل الدخول</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-logo">
+                <img src="images/logo.png" alt="البوصلة - موقع التراث والحضارات">
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="copyright">
+                <p>&copy; جميع الحقوق محفوظة لـ (Al-Bousala) البوصلة 2026</p>
+            </div>
+            
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+            </div>
+
+            <div class="bottom-links">
+                <a href="#">الشروط والأحكام</a>
+                <a href="#">سياسة الخصوصية</a>
+            </div>
+        </div>
+
+     </div>
+
+
+<script src="bousala.js"></script>
+<script>
+const VISIBLE = 7;
+let allProducts = [];
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const grid = document.getElementById('products-grid');
+    try {
+        const res  = await fetch('backend/products.php?action=list&category=andalus');
+        const data = await res.json();
+        if (!data.success || !data.products.length) {
+            grid.innerHTML = '<p style="text-align:center;padding:40px;color:#999;grid-column:1/-1">لا توجد منتجات حالياً</p>';
+            return;
+        }
+        allProducts = data.products;
+        renderProducts(allProducts.slice(0, VISIBLE));
+        if (allProducts.length > VISIBLE) {
+            const btn = document.getElementById('load-more-btn');
+            btn.style.display = '';
+            btn.addEventListener('click', () => { renderProducts(allProducts); btn.style.display = 'none'; });
+        }
+    } catch(e) {
+        grid.innerHTML = '<p style="text-align:center;padding:40px;color:red;grid-column:1/-1">تعذر تحميل المنتجات</p>';
+    }
+    document.getElementById('rangeMax').addEventListener('input', function() {
+        document.getElementById('maxPrice').textContent = this.value;
+       renderProducts(allProducts.filter(p => p.price <= this.value));
+    });
+});
+
+function renderProducts(products) {
+    document.getElementById('products-grid').innerHTML = products.map(p => `
+        <div class="card">
+            <a class="card-link" href="product.html?id=${p.id}">
+                <img src="${p.image || 'images/logo.png'}" alt="${p.name}">
+                <h4>${p.name}</h4>
+                <p class="price">${Number(p.price)} ر.س</p>
+            </a>
+            ${p.stock > 0
+                ? `<button class="add-to-cart-btn" onclick="Cart.add(${p.id})">
+                       <i class="fas fa-shopping-cart"></i> أضف للسلة
+                   </button>`
+                : `<button class="add-to-cart-btn" disabled>نفذت الكمية</button>`
+            }
+        </div>`
+    ).join('');
+}
+
+// Newsletter وصف الاشتراك في النشرة الإخبارية 
+
+async function subscribeNewsletter() {
+    const email = document.getElementById('newsletter-email').value.trim();
+    if (!email) { Cart.showToast('يرجى إدخال بريدك الإلكتروني', 'error'); return; }
+    const body = new FormData(); body.append('email', email);
+    const res  = await fetch('backend/newsletter.php', { method: 'POST', body });
+    const data = await res.json();
+    Cart.showToast(data.message, data.success ? 'success' : 'error');
+    if (data.success) document.getElementById('newsletter-email').value = '';
+}
+</script>
+
+
+    
+</body>
+</html>
+

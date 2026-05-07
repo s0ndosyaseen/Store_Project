@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول - البوصلة</title>
+  <!-- <link rel="stylesheet" href="login-signup.css"> -->
+  <link rel="stylesheet" href="login-signup.css?v=5">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"><!--مكتبة ايقونات-->
+</head>
+<body>
+
+<div class="container">
+  <a href="home.html" class="close-btn" title="العودة للمتجر">
+    <i class="fa-solid fa-xmark"></i>
+  </a>
+
+  <div class="form-section">
+    <h2>تسجيل الدخول</h2>
+    <form action="home.html" method="POST">
+      <div class="input-group">
+        <i class="fa-regular fa-envelope"></i>
+        <input type="email" placeholder="البريد الإلكتروني" required>
+      </div>
+      <div class="input-group">
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" placeholder="كلمة المرور" required >
+      </div>
+      <a href="forgot-password.html" class="forgot-pass">نسيت كلمة المرور؟</a>
+      <button type="submit" class="btn-main">تسجيل الدخول</button>
+    </form>
+  </div>
+  <div class="overlay-section login-bg">
+    <div class="overlay-content">
+      <img src="images/logo.png" alt="البوصلة" class="logo">
+      <h1>مرحباً بعودتك إلى البوصلة!</h1>
+      <p>استكشف عالمك من جديد، فكل زاوية تخبئ قصصاً.</p>
+      <div class="switch-section">
+        <span>ليس لديك حساب؟</span>
+        <a href="signup.html" class="btn-outline">إنشاء حساب جديد <i class="fa-solid fa-arrow-left"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

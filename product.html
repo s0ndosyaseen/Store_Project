@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل المنتج - البوصلة</title>
+    <link rel="stylesheet" href="andalusia.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* ===== صفحة تفاصيل المنتج ===== */
+        /* .navbar li a { 
+        position: fixed; } */
+
+        .product-detail-page {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px 60px;
+        }
+
+        /* مسار التنقل */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .breadcrumb a { color: #c4a35a; text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb i { font-size: 11px; color: #bbb; }
+
+        /* بطاقة المنتج */
+        .product-card-detail {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+            padding: 40px;
+            align-items: start;
+        }
+        @media (max-width: 768px) {
+            .product-card-detail { grid-template-columns: 1fr; gap: 28px; padding: 24px; }
+        }
+
+        /* الصورة */
+        .product-image-wrap {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #f9f5ee;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .product-image-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform .4s ease;
+        }
+        .product-image-wrap img:hover { transform: scale(1.05); }
+
+        /* شارة الحضارة */
+        .civilization-badge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: rgba(196,163,90,.92);
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            backdrop-filter: blur(4px);
+        }
+
+        /* معلومات المنتج */
+        .product-info-detail { display: flex; flex-direction: column; gap: 18px; }
+
+        .product-info-detail h1 {
+            font-size: 28px;
+            color: #2c2416;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .product-price-big {
+            font-size: 34px;
+            font-weight: bold;
+            color: #c4a35a;
+            direction: ltr;
+            text-align: right;
+        }
+        .product-price-big span { font-size: 18px; color: #888; margin-right: 6px; }
+
+        .product-description {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.85;
+            border-right: 3px solid #c4a35a;
+            padding-right: 14px;
+        }
+
+        /* حالة المخزون */
+        .stock-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        .stock-badge.in-stock  { background: #e8f8ee; color: #27ae60; }
+        .stock-badge.out-stock { background: #fee; color: #e74c3c; }
+
+        /* اختيار الكمية */
+        .quantity-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .quantity-section label { font-size: 14px; color: #666; font-weight: bold; }
+        .qty-control {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .qty-control button {
+            background: #f5f0e8;
+            border: none;
+            padding: 8px 16px;
+            font-size: 18px;
+            cursor: pointer;
+            color: #c4a35a;
+            transition: background .2s;
+        }
+        .qty-control button:hover { background: #e8dcc8; }
+        .qty-control input {
+            border: none;
+            width: 50px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c2416;
+            outline: none;
+        }
+
+        /* زر الإضافة للسلة */
+        .btn-add-cart {
+            background: #c4a35a;
+            color: #fff;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background .25s, transform .15s;
+            width: 100%;
+            font-family: inherit;
+        }
+        .btn-add-cart:hover { background: #a8873d; transform: translateY(-2px); }
+        .btn-add-cart:active { transform: translateY(0); }
+        .btn-add-cart:disabled {
+            background: #ccc; cursor: not-allowed; transform: none;
+        }
+
+        .btn-back {
+            background: transparent;
+            border: 2px solid #c4a35a;
+            color: #c4a35a;
+            padding: 10px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all .2s;
+            font-family: inherit;
+        }
+        .btn-back:hover { background: #c4a35a; color: #fff; }
+
+        /* تفاصيل إضافية */
+        .product-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 13px;
+            color: #888;
+            border-top: 1px solid #f0ebe0;
+            padding-top: 16px;
+        }
+        .product-meta span { display: flex; align-items: center; gap: 8px; }
+        .product-meta i { color: #c4a35a; width: 16px; }
+
+        /* حالة التحميل */
+        .loading-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            color: #888;
+            gap: 16px;
+            font-size: 16px;
+        }
+        .loading-state i { font-size: 36px; color: #c4a35a; }
+
+        /* خطأ */
+        .error-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+        .error-state i { font-size: 48px; color: #ddd; display: block; margin-bottom: 16px; }
+
+        /* شارة عدد الكمية على زر السلة */
+        .cart-nav-badge {
+            display:none; position:absolute; top:-8px; right:-8px;
+            background:#c4a35a; color:#fff; border-radius:50%;
+            width:18px; height:18px; font-size:11px;
+            text-align:center; line-height:18px;
+        }
+        .cart-nav-link { position: relative; }
+    </style>
+</head>
+<body>
+
+<!-- ===== شريط التنقل ===== -->
+<div class="header">
+    <div class="container">
+        <div class="logo">
+            <a href="home.html">
+                <img src="images/logo.png" alt="البوصلة">
+            </a>
+        </div>
+        <div>
+            <ul class="navbar">
+                <li><a href="home.html">الرئيسية</a></li>
+                <li><a href="home.html#story">قصتـنا</a></li>
+                <li><a href="home.html#categories">الـحضـارات</a></li>
+                <li>
+                    <a href="cart-full.html" class="login-btn cart-nav-link">
+                        سلة المشتريات
+                        <span class="cart-count cart-nav-badge"></span>
+                    </a>
+                </li>
+                <li><a href="login.html" class="login-btn">تسجيل الدخول</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- ===== محتوى الصفحة ===== -->
+<div class="product-detail-page">
+
+    <!-- مسار التنقل -->
+    <nav class="breadcrumb" id="breadcrumb">
+        <a href="home.html"><i class="fas fa-home"></i> الرئيسية</a>
+        <i class="fas fa-chevron-left"></i>
+        <a href="#" id="cat-link">الحضارة</a>
+        <i class="fas fa-chevron-left"></i>
+        <span id="bread-product-name">المنتج</span>
+    </nav>
+
+    <!-- حالة التحميل -->
+    <div class="loading-state" id="loading-state">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>جار تحميل تفاصيل المنتج...</p>
+    </div>
+
+    <!-- حالة الخطأ (مخفية) -->
+    <div class="error-state" id="error-state" style="display:none">
+        <i class="fas fa-box-open"></i>
+        <h2>المنتج غير موجود</h2>
+        <p>لم يتم العثور على هذا المنتج. ربما تم حذفه أو الرابط خاطئ.</p>
+        <a href="home.html#categories" class="btn-back" style="margin:20px auto;display:inline-flex">
+            <i class="fas fa-arrow-right"></i> العودة للحضارات
+        </a>
+    </div>
+
+    <!-- بطاقة المنتج (مخفية حتى يتم التحميل) -->
+    <div class="product-card-detail" id="product-card" style="display:none">
+
+        <!-- عمود الصورة -->
+        <div class="product-image-wrap">
+            <img id="prod-img" src="" alt="">
+            <span class="civilization-badge" id="prod-badge"></span>
+        </div>
+
+        <!-- عمود المعلومات -->
+        <div class="product-info-detail">
+            <h1 id="prod-name"></h1>
+
+            <div class="product-price-big">
+                <span id="prod-price"></span>
+                <span>ر.س</span>
+            </div>
+
+            <p class="product-description" id="prod-desc"></p>
+
+            <div>
+                <span class="stock-badge" id="stock-badge"></span>
+            </div>
+
+            <!-- اختيار الكمية -->
+            <div class="quantity-section" id="qty-section">
+                <label>الكمية:</label>
+                <div class="qty-control">
+                    <button type="button" onclick="changeQty(-1)">−</button>
+                    <input type="number" id="qty-input" value="1" min="1" max="99">
+                    <button type="button" onclick="changeQty(1)">+</button>
+                </div>
+            </div>
+
+            <!-- أزرار الإجراء -->
+            <button class="btn-add-cart" id="btn-add" onclick="addToCartWithQty()">
+                <i class="fas fa-shopping-cart"></i>
+                أضف إلى السلة
+            </button>
+
+            <a href="#" class="btn-back" id="btn-back">
+                <i class="fas fa-arrow-right"></i>
+                العودة إلى الحضارة
+            </a>
+
+            <!-- معلومات إضافية -->
+            <div class="product-meta">
+                <span><i class="fas fa-truck-fast"></i> شحن دولي فاخر لجميع الطلبات</span>
+                <span><i class="fas fa-shield-check"></i> ضمان الأصالة مع شهادة توثيق</span>
+                <span><i class="fas fa-rotate-left"></i> سياسة استبدال مرنة خلال 14 يوم</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ===== Footer ===== -->
+<div class="footer-bottom" style="margin-top:auto">
+    <div class="copyright">
+        <p>&copy; جميع الحقوق محفوظة لـ (Al-Bousala) البوصلة 2026</p>
+    </div>
+    <div class="social-icons">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+    </div>
+    <div class="bottom-links">
+        <a href="#">الشروط والأحكام</a>
+        <a href="#">سياسة الخصوصية</a>
+    </div>
+</div>
+
+<script src="bousala.js"></script>
+<script>
+// ================================================
+// خريطة الحضارات: category → { الاسم، رابط الصفحة }
+// ================================================
+const CIVILIZATION_MAP = {
+    andalus: { name: 'الأندلس',    page: 'andalus.html',  badge: 'الأندلسية'  },
+    sham:    { name: 'بلاد الشام', page: 'sham.html',     badge: 'الشامية'    },
+    victory: { name: 'الفيكتورية', page: 'victory.html',  badge: 'الفيكتورية' },
+    egypt:   { name: 'الفرعونية',  page: 'egp.html',      badge: 'الفرعونية'  },
+};
+
+let currentProductId = null;
+
+// ================================================
+// تحميل بيانات المنتج عند فتح الصفحة
+// ================================================
+document.addEventListener('DOMContentLoaded', async () => {
+    const params = new URLSearchParams(window.location.search);
+    const id     = parseInt(params.get('id'));
+
+    if (!id || id <= 0) {
+        showError();
+        return;
+    }
+
+    try {
+        const res  = await fetch(`backend/products.php?action=single&id=${id}`);
+        const data = await res.json();
+
+        if (!data.success || !data.product) {
+            showError();
+            return;
+        }
+
+        renderProduct(data.product);
+    } catch(e) {
+        showError();
+    }
+});
+
+// ================================================
+// رسم بيانات المنتج في الصفحة
+// ================================================
+function renderProduct(p) {
+    currentProductId = p.id;
+
+    // الصورة
+    const img = document.getElementById('prod-img');
+    img.src = `${p.image || 'images/logo.png'}`;
+    img.alt = p.name;
+
+    // شارة الحضارة
+    const civ = CIVILIZATION_MAP[p.category] || { name: p.category, page: '#', badge: p.category };
+    document.getElementById('prod-badge').textContent = civ.badge;
+
+    // الاسم والوصف والسعر
+    document.getElementById('prod-name').textContent  = p.name;
+    document.getElementById('prod-desc').textContent  = p.description || 'قطعة فنية أصيلة مستوحاة من الحضارة، تجمع بين الجمال والتراث.';
+    document.getElementById('prod-price').textContent = Number(p.price);
+
+    // حالة المخزون
+    const stockEl = document.getElementById('stock-badge');
+    if (p.stock > 0) {
+        stockEl.className = 'stock-badge in-stock';
+        stockEl.innerHTML = `<i class="fas fa-check-circle"></i> متوفر في المخزون (${p.stock} قطعة)`;
+    } else {
+        stockEl.className = 'stock-badge out-stock';
+        stockEl.innerHTML = `<i class="fas fa-times-circle"></i> نفذت الكمية`;
+        document.getElementById('btn-add').disabled = true;
+        document.getElementById('qty-section').style.opacity = '0.4';
+        document.getElementById('qty-section').style.pointerEvents = 'none';
+    }
+
+    // مسار التنقل
+    document.getElementById('bread-product-name').textContent = p.name;
+    document.getElementById('cat-link').textContent = civ.name;
+    document.getElementById('cat-link').href        = civ.page;
+
+    // زر العودة
+    document.getElementById('btn-back').href = civ.page;
+
+    // تحديث عنوان التبويب
+    document.title = `${p.name} - البوصلة`;
+
+    // إظهار البطاقة وإخفاء التحميل
+    document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('product-card').style.display  = 'grid';
+}
+
+// ================================================
+// دوال الكمية
+// ================================================
+function changeQty(delta) {
+    const input = document.getElementById('qty-input');
+    const val   = Math.max(1, Math.min(99, (parseInt(input.value) || 1) + delta));
+    input.value = val;
+}
+
+async function addToCartWithQty() {
+    if (!currentProductId) return;
+    const qty = parseInt(document.getElementById('qty-input').value) || 1;
+    const btn = document.getElementById('btn-add');
+
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جار الإضافة...';
+
+    await Cart.add(currentProductId, qty);
+
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-shopping-cart"></i> أضف إلى السلة';
+}
+
+
+function showError() {
+    document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('error-state').style.display   = 'block';
+}
+</script>
+</body>
+</html>

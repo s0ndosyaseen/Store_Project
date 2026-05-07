@@ -1,0 +1,278 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #dfd3c3;
+
+    background-image:
+            linear-gradient(rgba(242, 236, 228, 0.7), rgba(242, 236, 228, 0.8)),
+            url('images/black-felt .png');
+    background-repeat: repeat;
+    background-size: auto;
+    animation: fadeInBody 0.5s ease-in;/*هاي وال@keyframes fadeInBody عشان تعمل الحركة */
+}
+@keyframes fadeInBody {
+    from { opacity: 0.8; }
+    to { opacity: 1; }
+}
+
+.container {
+    background-color: #fff;
+    width: 950px;
+    height: 550px;
+    display: flex;
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    position: relative;
+}
+
+.container.reverse {
+    flex-direction: row-reverse;
+}
+
+.form-section {
+    flex: 1;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #fdfcfb;
+    position: relative;
+    z-index: 2;
+    /* border-radius: 0 40px 40px 0;  انحناء بسيط من اليمين */
+}
+
+
+.form-section h2 {
+    color: #4a3a2a;
+    margin-bottom: 30px;
+    font-size: 28px;
+    text-align: center;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-group i {
+    color: #b7a792;
+    position: absolute;
+    right: 15px;
+    left: auto;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.input-group input {
+    width: 100%;
+    padding: 15px 45px 15px 15px;
+    border: none;
+    border-radius: 15px;
+    background: #e7e3dc;
+    font-size: 14px;
+    outline: none;
+    box-shadow:
+            inset 2px 2px 5px rgba(0,0,0,0.08),
+            inset -2px -2px 5px rgba(255,255,255,0.7),
+            0 4px 10px rgba(0,0,0,0.05);
+
+    transition: all 0.3s ease;
+}
+.input-group input:focus {
+    border: 1px solid #a67c37;
+    background: #f0ece5;
+    box-shadow:
+            inset 1px 1px 3px rgba(0,0,0,0.1),
+            inset -1px -1px 3px rgba(255,255,255,0.8),
+            0 0 0 2px rgba(166, 124, 55, 0.2);
+}
+/*
+.input-group input:focus {
+    background-color: #fff;
+    border-color: #a67c37;
+    box-shadow: 0 5px 15px rgba(166, 124, 55, 0.15);
+    transform: translateY(-2px);
+}*/
+.forgot-pass {
+    display: block;
+    color: #a08d7a;
+    text-decoration: none;
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+.forgot-pass:hover {
+    color: #a67c37;
+    text-decoration: underline;
+}
+
+.btn-main {
+    width: 100%;
+    padding: 15px;
+    background-color: #a67c37;
+    font-weight: 700;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(166, 124, 55, 0.2);
+}
+.btn-main:hover {
+    transform: translateY(-2px);
+}
+
+.overlay-section {
+    flex: 0.8;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    padding: 40px;
+    z-index: 1;
+}
+
+.login-bg {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                url('images/Login.png');
+    background-size: cover;
+    background-position: left;
+    border-radius: 20px 100px 100px 20px ;
+}
+
+.signup-bg {
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+    url('images/Signup.png');
+    background-size: cover;
+    background-position: left;
+    border-radius: 100px 20px 20px 100px ;
+
+
+}
+
+.overlay-content h1 {
+    font-size: 24px;
+    margin: 20px 0 10px;
+}
+
+.overlay-content p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.logo {
+    width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+    flex-shrink: 0; /*  بيمنع المتصفح من تصغير اللوجو مهما صار ضغط */
+    object-fit: contain; /* بيضمن إن الصورة تحافظ على أبعادها داخل المساحة */
+}
+.btn-outline {
+    display: inline-block;
+    padding: 10px 25px;
+    border: 1px solid #c59d5f;
+    background-color: rgba(197, 157, 95, 0.3);
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(166, 124, 55, 0.2);
+}
+
+.btn-outline:hover {
+    background-color: #c59d5f;
+    transform: translateY(-2px);
+}
+
+.switch-section {
+    margin-top: 20px;
+    font-size: 14px;
+}
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 35px;
+    height: 35px;
+    background-color: rgba(166, 124, 55, 0.1);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #a67c37;
+    text-decoration: none;
+    font-size: 18px;
+    z-index: 10;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(166, 124, 55, 0.2);
+}
+
+.close-btn:hover {
+    background-color: #a67c37;
+    color: white;
+    transform: rotate(90deg);
+}
+
+.container.reverse .close-btn {
+    right: auto;
+    left: 20px;
+}
+
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.container {
+    animation: fadeInUp 0.8s ease-out;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+}
+
+.form-section {
+    animation: fadeInUp 1s ease-out;
+}
+
+
+.success-message {
+    display: none;
+    margin-top: 15px;
+    color: #4CAF50;
+    font-size: 14px;
+    text-align: center;
+}
+
+.back-login {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    color: #a67c37;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.back-login:hover {
+    text-decoration: underline;
+}

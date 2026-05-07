@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+    <meta charset="UTF-8">
+    <title>سلة المشتريات - البوصلة</title>
+    <!-- <link rel="stylesheet" href="login-signup.css"> -->
+    <link rel="stylesheet" href="shopping.css?v=4">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"><!--مكتبة ايقونات-->
+</head>
+
+<body>
+<header class="main-header">
+    <nav>
+        <ul class="navbar">
+            <li class="user-menu">
+                <a href="#" class="user-icon guest"> <i class="fas fa-chevron-down"></i>
+                    <i class="fas fa-user-circle"></i>
+                </a>
+                <ul class="dropdown-content">
+                    <li class="user-email-display">Guest@Al-Bousala.com</li>
+                    <li><a href="login.html">تسجيل الخروج</a></li>
+                </ul>
+            </li>
+            <li><a href="home.html">الرئيسية</a></li>
+            <li><a href="home.html#story">قصتـنا</a></li>
+            <li> <a href="home.html#categories">الـحضـارات</a></li>
+          <!--  <li><a href="#">مـلابـس</a></li> -->
+            <li><a href="login.html" class="login-btn">تسجيل الدخول</a></li>
+        </ul>
+    </nav>
+    <div class="logo">
+        <a href="home.html">
+            <img src="images/logo.png" alt="البوصلة">
+        </a>
+    </div>
+</header>
+
+<main class="cart-container">
+    <div class="cart-items-section">
+        <h2 class="section-title">سلة المشتريات (2 منتجات)</h2>
+
+        <div class="cart-item-horizontal">
+            <img src="images/shami.png" alt="ثوب ملكي">
+            <div class="item-details">
+                <h3>ثوب ملكي من حيفا - مخمل أسود</h3>
+                <p>تطريز يدوي أصيل مع خيوط القصب الذهبية</p>
+                <span class="item-price">4500 ر.س</span>
+            </div>
+            <div class="item-actions">
+                <div class="quantity-box">
+                    <button>+</button>
+                    <span>1</span>
+                    <button>-</button>
+                </div>
+                <button class="remove-btn"><i class="fas fa-trash-alt"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <aside class="order-summary">
+        <div class="summary-content">
+            <h3>ملخص الطلب</h3>
+            <div class="summary-details">
+                <div class="summary-row">
+                    <span>المجموع الفرعي:</span>
+                    <span>4500 ر.س</span>
+                </div>
+
+                <div class="discount-label">
+                    <i class="fas fa-tag"></i>
+                    <span>خصم خاص : 5%</span>
+                </div>
+
+                <div class="summary-row">
+                    <span>التوصيل:</span>
+                    <span>50 ر.س</span>
+                </div>
+                <hr>
+                <div class="summary-row total">
+                    <span>الإجمالي:</span>
+                    <span class="total-amount">4325 ر.س</span>
+                </div>
+            </div>
+            <a href="checkout.html" class="checkout-btn">إتمام الشراء</a>
+        </div>
+    </aside>
+</main>
+
+<div class="footer-bottom">
+    <div class="copyright">
+        <p>&copy; جميع الحقوق محفوظة لـ (Al-Bousala) البوصلة 2026</p>
+    </div>
+
+    <div class="social-icons">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+    </div>
+
+    <div class="bottom-links">
+        <a href="#">الشروط والأحكام</a>
+        <a href="#">سياسة الخصوصية</a>
+    </div>
+</div>
+</body>
+</html>
