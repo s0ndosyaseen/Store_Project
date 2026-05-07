@@ -25,7 +25,7 @@
  .header .navbar li{
 display: inline-block;
 padding: 10PX;
-/* margin: 68px; */
+margin-top: 68px;
 font-size: 20px;
 font-weight: bold;
 
