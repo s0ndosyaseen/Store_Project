@@ -209,3 +209,19 @@ document.addEventListener('DOMContentLoaded', () => {
           btn.addEventListener('click', () => Cart.add(btn.dataset.addToCart));
     });
 });
+//////////////////////////////////////////////////////////لتعديل زر تسجيل الدخول الى تسجيل الخروج والعكس
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.cookie.includes("user_logged_in=true")) {
+        const loginLink = document.querySelector('.login-link');
+        if (loginLink) {
+            loginLink.innerHTML = "تسجيل الخروج";
+            loginLink.href = "backend/logout.php";
+        }
+
+        const emailDisplay = document.querySelector('.user-email-display');
+        if (emailDisplay) {
+            const email = document.cookie.split('user_email=')[1]?.split(';')[0];
+            emailDisplay.textContent = decodeURIComponent(email);
+        }
+    }
+});
