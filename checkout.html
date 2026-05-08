@@ -100,17 +100,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     } catch(e) {}
 
-    try {
-        const userRes = await fetch('backend/user-info.php');
-        const userData = await userRes.json();
-        if (userData.success && userData.user) {
-            const emailField = document.querySelector('input[name="email"]');
-            if (emailField) {
-                emailField.value = userData.user.email;
-            }
-        }
-    } catch(e) {}
-
     const orderForm = document.getElementById('orderForm');
     if (orderForm) {
         orderForm.addEventListener('submit', async (e) => {
@@ -138,7 +127,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     Cart.showToast(data.message, 'success');
                     setTimeout(() => {
                         window.location.href = 'home.html';
-                    }, 2000);
+                    }, 7000);
                 } else {
                     Cart.showToast(data.message || 'حدث خطأ في معالجة الطلب', 'error');
                     submitBtn.disabled = false;
