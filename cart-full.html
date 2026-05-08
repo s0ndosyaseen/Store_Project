@@ -38,24 +38,11 @@
 
 <main class="cart-container">
     <div class="cart-items-section">
-        <h2 class="section-title">سلة المشتريات (2 منتجات)</h2>
-
-        <div class="cart-item-horizontal">
-            <img src="images/shami.png" alt="ثوب ملكي">
-            <div class="item-details">
-                <h3>ثوب ملكي من حيفا - مخمل أسود</h3>
-                <p>تطريز يدوي أصيل مع خيوط القصب الذهبية</p>
-                <span class="item-price">4500 ر.س</span>
-            </div>
-            <div class="item-actions">
-                <div class="quantity-box">
-                    <button>+</button>
-                    <span>1</span>
-                    <button>-</button>
-                </div>
-                <button class="remove-btn"><i class="fas fa-trash-alt"></i></button>
-            </div>
-        </div>
+        <h2 class="section-title">سلة المشتريات </h2>
+     <div id="cart-loading" style="text-align:center;padding:50px;color:#888">
+         <i class="fas fa-spinner fa-spin" style="font-size:28px;color:#c4a35a"></i>
+         <p style="margin-top:12px">جار تحميل السلة...</p>
+    </div>
     </div>
 
     <aside class="order-summary">
@@ -64,22 +51,22 @@
             <div class="summary-details">
                 <div class="summary-row">
                     <span>المجموع الفرعي:</span>
-                    <span>4500 ر.س</span>
+                    <span id="cart-subtotal">0 ر.س</span>
                 </div>
 
-                <div class="discount-label">
+                <div class="discount-label" id="discount-row" style="display:none">
                     <i class="fas fa-tag"></i>
                     <span>خصم خاص : 5%</span>
                 </div>
 
                 <div class="summary-row">
                     <span>التوصيل:</span>
-                    <span>50 ر.س</span>
+                    <span id="cart-shipping">0 ر.س</span>
                 </div>
                 <hr>
                 <div class="summary-row total">
                     <span>الإجمالي:</span>
-                    <span class="total-amount">4325 ر.س</span>
+                    <span class="total-amount" id="cart-total">0 ر.س</span>
                 </div>
             </div>
             <a href="checkout.html" class="checkout-btn">إتمام الشراء</a>
@@ -103,5 +90,101 @@
         <a href="#">سياسة الخصوصية</a>
     </div>
 </div>
+
+<script src="bousala.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    const section = document.querySelector('.cart-items-section');
+    const loading = document.getElementById('cart-loading');
+
+    try {
+        const res  = await fetch('backend/cart.php?action=view');
+        const data = await res.json();
+        loading.remove();
+
+        if (!data.success || data.items.length === 0) {
+            window.location.href = 'cart-empty.html';
+            return;
+        }
+
+        section.querySelector('.section-title').textContent =
+            `سلة المشتريات (${data.items.length} ${data.items.length === 1 ? 'منتج' : 'منتجات'})`;
+
+        data.items.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'cart-item-horizontal';
+            div.dataset.itemId = item.id;
+            div.innerHTML = `
+                <img src="${item.image || 'images/logo.png'}" alt="${item.name}">
+                <div class="item-details">
+                    <h3>${item.name}</h3>
+                    <span class="item-price">${Number(item.price)} ر.س</span>
+                </div>
+                <div class="item-actions">
+                    <div class="quantity-box">
+                        <button onclick="updateQty(${item.id}, ${item.quantity + 1})">+</button>
+                        <span id="qty-${item.id}">${item.quantity}</span>
+                        <button onclick="updateQty(${item.id}, ${item.quantity - 1})">-</button>
+                    </div>
+                    <button class="remove-btn" onclick="removeItem(${item.id})">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>`;
+            section.appendChild(div);
+        });
+
+        updateSummary(data.totals);
+
+    } catch(e) {
+        loading.innerHTML = '<p style="color:red;text-align:center">تعذر تحميل السلة، يرجى المحاولة مجدداً</p>';
+    }
+});
+
+function updateSummary(t) {
+    document.getElementById('cart-subtotal').textContent = Number(t.subtotal) + ' ر.س';
+    document.getElementById('cart-shipping').textContent  = Number(t.shipping) + ' ر.س';
+    document.getElementById('cart-total').textContent     = Number(t.total) + ' ر.س';
+    const discRow = document.getElementById('discount-row');
+    if (t.discount > 0) {
+        document.getElementById('discount-text').textContent = `خصم خاص : ${t.discount_pct}%`;
+        discRow.style.display = '';
+    } else {
+        discRow.style.display = 'none';
+    }
+}
+
+async function updateQty(itemId, qty) {
+    if (qty <= 0) { removeItem(itemId); return; }
+    const body = new FormData();
+    body.append('action',   'update');
+    body.append('item_id',  itemId);
+    body.append('quantity', qty);
+    const res  = await fetch('backend/cart.php', { method: 'POST', body });
+    const data = await res.json();
+    if (data.success) {
+        document.getElementById('qty-' + itemId).textContent = qty;
+        updateSummary(data.totals);
+        Cart.updateBadge();
+    } else {
+        Cart.showToast(data.message, 'error');
+    }
+}
+
+async function removeItem(itemId) {
+    const body = new FormData();
+    body.append('action',  'remove');
+    body.append('item_id', itemId);
+    const res  = await fetch('backend/cart.php', { method: 'POST', body });
+    const data = await res.json();
+    if (data.success) {
+        const el = document.querySelector(`[data-item-id="${itemId}"]`);
+        if (el) el.remove();
+        if (data.count === 0) { window.location.href = 'cart-empty.html'; return; }
+        updateSummary(data.totals);
+        Cart.updateBadge();
+        document.querySelector('.section-title').textContent = `سلة المشتريات (${data.count} منتجات)`;
+    }
+}
+</script>
 </body>
 </html>
