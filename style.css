@@ -84,6 +84,8 @@ transform: translate(-50%,-50%);
 
 }
 
+
+
 /* start classes */
 
 .slider{
@@ -402,4 +404,40 @@ font-size: 24px;
     color: #d4a373;
 }
 
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px; /* يمكنكِ التحكم في العرض */
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 20px; /* حواف دائرية ناعمة */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* ظل لإعطاء عمق */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
 
+.video-container video {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* تأثير عند تمرير الماوس */
+.video-container:hover video {
+    transform: scale(1.03); /* تكبير بسيط جداً عند الهوفر */
+}
+
+/* طبقة نص اختيارية فوق الفيديو */
+.video-overlay {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.5); /* خلفية شبه شفافة */
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-family: 'Cairo', sans-serif; /* يفضل استخدام خط عربي أنيق */
+    backdrop-filter: blur(5px); /* تأثير الزجاج الضبابي */
+    pointer-events: none;
+}
