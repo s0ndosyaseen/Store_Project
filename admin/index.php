@@ -35,25 +35,40 @@ if (empty($_SESSION['is_admin'])) {
     <head>
         <meta charset="UTF-8">
         <title>لوحة التحكم - البوصلة</title>
-        <style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="stylesheet" href="../login-signup.css">
+        <!-- <style>
             body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #1a1a2e; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
             .login-box { background: #fff; padding: 40px; border-radius: 12px; width: 340px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,.4); }
             .login-box h2 { margin-bottom: 24px; color: #1a1a2e; }
             .login-box input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; margin-bottom: 16px; box-sizing: border-box; }
             .login-box button { width: 100%; padding: 12px; background: #c4a35a; color: #fff; border: none; border-radius: 8px; font-size: 15px; cursor: pointer; }
             .error { color: red; margin-bottom: 12px; font-size: 14px; }
-        </style>
+        </style> -->
     </head>
     <body>
-    <div class="login-box">
-        <h2>🔐 لوحة التحكم</h2>
+
+     
+    <div class="container" >
+    <div class="form-section my-custom-form">
+
+        <h2 style="color: #ffffff; background-color: #a67c37; border-radius: 20px 100px 100px 20px ; ">🔐 لوحة التحكم</h2>
+         <form method="POST" >
+           <div class="input-group">
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" name="admin_pass" placeholder="كلمة مرور الدخول" required autofocus >
+      </div>
+            <button type="submit" class="btn-main">تسجيل الدخول</button>
+
+        </form>
+    </div>
+        <!-- <div class="overlay-content login-bg">
+            <img src="../images/login.png" alt="البوصلة" class="logo" style="width:120px; height:120px;">
+        </div> -->
         <?php if (!empty($loginError)): ?>
             <p class="error"><?= htmlspecialchars($loginError) ?></p>
         <?php endif; ?>
-        <form method="POST">
-            <input type="password" name="admin_pass" placeholder="كلمة مرور الدخول" required autofocus>
-            <button type="submit">دخول</button>
-        </form>
+       
     </div>
     </body>
     </html>
@@ -109,11 +124,11 @@ $statusLabels = [
     'cancelled' => 'ملغي',
 ];
 $statusColors = [
-    'pending'   => '#f39c12',
-    'confirmed' => '#3498db',
-    'shipped'   => '#9b59b6',
-    'delivered' => '#27ae60',
-    'cancelled' => '#e74c3c',
+    'pending'   => '#e9d2af',
+    'confirmed' => '#c7b9a6',
+    'shipped'   => '#ece3aed4',
+    'delivered' => '#c0cea9',
+    'cancelled' => '#d8bb8f',
 ];
 ?>
 <!DOCTYPE html>
@@ -123,9 +138,48 @@ $statusColors = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة التحكم - البوصلة</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
+    <link rel="stylesheet" href="cs.css">
+    <!-- <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f5f5f0; color: #333; direction: rtl; }
+        /* body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f5f5f0; color: #333; direction: rtl; } */
+        body {
+    
+    background-color: #dfd3c3;
+
+    background-image:
+            linear-gradient(rgba(242, 236, 228, 0.7), rgba(242, 236, 228, 0.8)),
+            url('images/black-felt .png');
+    background-repeat: repeat;
+    background-size: auto;
+    animation: fadeInBody 0.5s ease-in;/*هاي وال@keyframes fadeInBody عشان تعمل الحركة */
+
+}
+
+        /* تحسين شكل الجدول */
+table {
+    border-spacing: 0 8px; /* مسافة بين الصفوف */
+    border-collapse: separate;
+    background: transparent;
+    box-shadow: none;
+}
+tr td {
+    background: #fff; /* جعل كل صف يبدو كأنه بطاقة منفصلة */
+    border: none !important;
+    padding: 15px;
+}
+tr td:first-child { border-radius: 0 12px 12px 0; } /* زوايا دائرية للصف */
+tr td:last-child { border-radius: 12px 0 0 12px; }
+
+/* تحسين الأزرار */
+.btn-save {
+    transition: all 0.3s;
+    box-shadow: 0 4px 6px rgba(196, 163, 90, 0.2);
+}
+.btn-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(196, 163, 90, 0.3);
+}
+
         header { background: #1a1a2e; color: #c4a35a; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; }
         header h1 { font-size: 20px; }
         header a { color: #fff; text-decoration: none; font-size: 14px; opacity: .7; }
@@ -148,11 +202,12 @@ $statusColors = [
         .btn-save { background: #c4a35a; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; }
         .btn-details { background: #1a1a2e; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; text-decoration: none; }
         .empty { text-align: center; padding: 40px; color: #aaa; }
-    </style>
+    </style> -->
 </head>
 <body>
 <header>
     <h1><i class="fas fa-compass"></i> لوحة تحكم البوصلة</h1>
+    <img src="../images/logo.png" alt="Logo" style="height:52px">
     <a href="?logout=1"><i class="fas fa-sign-out-alt"></i> خروج</a>
 </header>
 
@@ -184,6 +239,61 @@ $statusColors = [
             <div class="lbl">إجمالي الإيرادات</div>
         </div>
     </div>
+
+    <!-- قسم الرسم البياني -->
+<div class="chart-container">
+    <h3 style="margin-bottom: 15px;">تحليلات المبيعات (آخر 7 أيام)</h3>
+    <canvas id="salesChart" height="100"></canvas>
+</div>
+
+<!-- استدعاء مكتبة الرسم البياني -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctx = document.getElementById('salesChart').getContext('2d');
+
+// استقبال البيانات من PHP
+const labelsData = <?php echo $jsDays; ?>;
+const revenuesData = <?php echo $jsRevenues; ?>;
+
+const salesChart = new Chart(ctx, {
+    type: 'line', 
+    data: {
+        labels: labelsData, // الأيام الحقيقية من الداتابيز
+        datasets: [{
+            label: 'إجمالي المبيعات (ر.س)',
+            data: revenuesData, // المبالغ الحقيقية من الداتابيز
+            borderColor: '#c4a35a',
+            backgroundColor: 'rgba(196, 163, 90, 0.1)',
+            borderWidth: 3,
+            pointBackgroundColor: '#1a1a2e',
+            fill: true,
+            tension: 0.4
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                rtl: true,
+                bodyFont: { family: 'Cairo' },
+                titleFont: { family: 'Cairo' }
+            }
+        },
+        scales: {
+            y: { 
+                beginAtZero: true, 
+                position: 'right',
+                ticks: { font: { family: 'Cairo' } }
+            },
+            x: { 
+                ticks: { font: { family: 'Cairo' } }
+            }
+        }
+    }
+});
+</script>
 
     <!-- فلاتر الحالة -->
     <div class="filters">

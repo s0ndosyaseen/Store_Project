@@ -276,3 +276,11 @@ body {
 .back-login:hover {
     text-decoration: underline;
 }
+.my-custom-form {
+    background-image: url('images/hadara.png');
+    background-size: cover;       /* تجعل الصورة تغطي كامل مساحة الفورم */
+    background-position: center;  /* توسيط الصورة */
+    background-repeat: no-repeat; /* منع تكرار الصورة */
+    padding: 20px;                /* مسافة داخلية عشان الكلام ما يلزق بالأطراف */
+    border-radius: 10px;          /* زوايا ناعمة */
+}
