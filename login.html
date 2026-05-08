@@ -17,14 +17,15 @@
 
   <div class="form-section">
     <h2>تسجيل الدخول</h2>
-    <form action="home.html" method="POST">
+
+    <form action="backend/login.php" method="POST">
       <div class="input-group">
         <i class="fa-regular fa-envelope"></i>
-        <input type="email" placeholder="البريد الإلكتروني" required>
+        <input type="email" name="email" placeholder="البريد الإلكتروني" required>
       </div>
       <div class="input-group">
         <i class="fa-solid fa-lock"></i>
-        <input type="password" placeholder="كلمة المرور" required >
+        <input type="password" name="password" placeholder="كلمة المرور" required >
       </div>
       <a href="forgot-password.html" class="forgot-pass">نسيت كلمة المرور؟</a>
       <button type="submit" class="btn-main">تسجيل الدخول</button>
