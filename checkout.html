@@ -40,7 +40,7 @@
     <div class="checkout-grid">
         <section class="billing-form">
             <h2>تفاصيل الشحن</h2>
-            <form id="orderForm" action="process_order.php" method="POST">
+            <form id="orderForm">
                 <div class="input-group">
                     <input type="text" name="fname" placeholder="الاسم الأول" required>
                     <input type="text" name="lname" placeholder="الاسم الأخير" required>
@@ -53,15 +53,19 @@
             </form>
         </section>
 
-        <aside class="mini-summary">
+         <aside class="mini-summary">
             <h3>ملخصك</h3>
-            <div class="summary-line"><span>المجموع:</span> <span>4500 ر.س</span></div>
-            <div class="summary-line"><span>التوصيل:</span> <span>50 ر.س</span></div>
+            <div class="summary-line"><span>المجموع الفرعي:</span> <span id="co-subtotal">0 ر.س</span></div>
+            <div class="summary-line"><span>التوصيل:</span> <span id="co-shipping">50 ر.س</span></div>
+            <div class="summary-line" id="co-discount-row" style="display:none;color:#27ae60">
+                <span>خصم 5%:</span> <span id="co-discount">0 ر.س</span>
+            </div>
             <hr>
-            <div class="summary-line total"><span>الإجمالي:</span> <span>4550 ر.س</span></div>
+            <div class="summary-line total"><span>الإجمالي:</span> <span id="co-total">0 ر.س</span></div>
         </aside>
     </div>
 </main>
+
 <div class="footer-bottom">
     <div class="copyright">
         <p>&copy; جميع الحقوق محفوظة لـ (Al-Bousala) البوصلة 2026</p>
@@ -78,12 +82,76 @@
         <a href="#">سياسة الخصوصية</a>
     </div>
 </div>
+<script src="bousala.js"></script>
 <script>
-    document.getElementById('orderForm').addEventListener('submit', function(e) {
-        e.preventDefault();   //  منع الفورم من الانتقال لملف process_order.php
-        alert("شكراً لك! تم تقديم طلبك بنجاح.\nسيتم التواصل معك لتأكيد الشحن قريباً.");
-        window.location.href = 'home.html';//الانتقال الى شاشة الhome
-    });
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const res  = await fetch('backend/cart.php?action=view');
+        const data = await res.json();
+        if (data.success && data.totals) {
+            const t = data.totals;
+            document.getElementById('co-subtotal').textContent = Number(t.subtotal) + ' ر.س';
+            document.getElementById('co-shipping').textContent  = Number(t.shipping) + ' ر.س';
+            document.getElementById('co-total').textContent     = Number(t.total) + ' ر.س';
+            if (t.discount > 0) {
+                document.getElementById('co-discount').textContent = Number(t.discount) + ' ر.س';
+                document.getElementById('co-discount-row').style.display = '';
+            }
+        }
+    } catch(e) {}
+
+    try {
+        const userRes = await fetch('backend/user-info.php');
+        const userData = await userRes.json();
+        if (userData.success && userData.user) {
+            const emailField = document.querySelector('input[name="email"]');
+            if (emailField) {
+                emailField.value = userData.user.email;
+            }
+        }
+    } catch(e) {}
+
+    const orderForm = document.getElementById('orderForm');
+    if (orderForm) {
+        orderForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = orderForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'جاري معالجة الطلب...';
+            
+            const formData = new FormData(orderForm);
+            
+            try {
+                const res = await fetch('backend/proc_order.php', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+
+                const data = await res.json();
+                
+                if (data.success) {
+                    Cart.showToast(data.message, 'success');
+                    setTimeout(() => {
+                        window.location.href = 'home.html';
+                    }, 2000);
+                } else {
+                    Cart.showToast(data.message || 'حدث خطأ في معالجة الطلب', 'error');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
+                }
+            } catch(e) {
+                Cart.showToast('تعذر الاتصال بالخادم', 'error');
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        });
+    }
+});
 </script>
 </body>
 
