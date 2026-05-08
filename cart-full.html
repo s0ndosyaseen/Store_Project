@@ -55,7 +55,7 @@
 
                 <div class="discount-label" id="discount-row" style="display:none">
                     <i class="fas fa-tag"></i>
-                    <span>خصم خاص : 5%</span>
+                    <span id="discount-text">خصم خاص : 5%</span>
                 </div>
 
                 <div class="summary-row">
@@ -121,9 +121,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </div>
                 <div class="item-actions">
                     <div class="quantity-box">
-                        <button onclick="updateQty(${item.id}, ${item.quantity + 1})">+</button>
+                        <button onclick="updateQty(${item.id}, parseInt(document.getElementById('qty-${item.id}').textContent) + 1)">+</button>
                         <span id="qty-${item.id}">${item.quantity}</span>
-                        <button onclick="updateQty(${item.id}, ${item.quantity - 1})">-</button>
+                        <button onclick="updateQty(${item.id}, parseInt(document.getElementById('qty-${item.id}').textContent) - 1)">-</button>
                     </div>
                     <button class="remove-btn" onclick="removeItem(${item.id})">
                         <i class="fas fa-trash-alt"></i>
@@ -140,15 +140,25 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 function updateSummary(t) {
-    document.getElementById('cart-subtotal').textContent = Number(t.subtotal) + ' ر.س';
-    document.getElementById('cart-shipping').textContent  = Number(t.shipping) + ' ر.س';
-    document.getElementById('cart-total').textContent     = Number(t.total) + ' ر.س';
+    if(document.getElementById('cart-subtotal'))
+        document.getElementById('cart-subtotal').textContent = Number(t.subtotal) + ' ر.س';
+
+    if(document.getElementById('cart-shipping'))
+        document.getElementById('cart-shipping').textContent  = Number(t.shipping) + ' ر.س';
+
+    if(document.getElementById('cart-total'))
+        document.getElementById('cart-total').textContent     = Number(t.total) + ' ر.س';
+
     const discRow = document.getElementById('discount-row');
+    const discText = document.getElementById('discount-text');
+
     if (t.discount > 0) {
-        document.getElementById('discount-text').textContent = `خصم خاص : ${t.discount_pct}%`;
-        discRow.style.display = '';
+        if (discText) {
+            discText.textContent = `خصم خاص : ${t.discount_pct}%`;
+        }
+        if (discRow) discRow.style.display = 'flex';
     } else {
-        discRow.style.display = 'none';
+        if (discRow) discRow.style.display = 'none';
     }
 }
 
