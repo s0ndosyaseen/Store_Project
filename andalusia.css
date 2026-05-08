@@ -25,7 +25,7 @@
  .header .navbar li{
 display: inline-block;
 padding: 10PX;
-margin-top: 68px;
+/* margin-top: 68px; */
 font-size: 20px;
 font-weight: bold;
 
@@ -180,7 +180,6 @@ font-size: 24px;
 
 
 /* sstart content  */
-
 
 
 .contain {
@@ -493,3 +492,21 @@ input[type="range"] {
 .bottom-links a:hover {
     color: #d4a373;
 }
+
+.add-to-cart-btn {
+        background: #c4a35a; color: #fff; border: none;
+        padding: 8px 16px; border-radius: 6px; cursor: pointer;
+        font-size: 13px; margin-top: 8px; width: 100%;
+        transition: background .2s; font-family: inherit;
+    }
+    .add-to-cart-btn:hover { background: #a8873d; }
+    .add-to-cart-btn:disabled { background: #ccc; cursor: not-allowed; }
+    .card a.card-link { text-decoration: none; color: inherit; display: block; }
+    .card a.card-link:hover img { transform: scale(1.04); transition: transform .3s; }
+    .cart-nav-link { position: relative; }
+    .cart-nav-badge {
+        display:none; position:absolute; top:-8px; right:-8px;
+        background:#c4a35a; color:#fff; border-radius:50%;
+        width:18px; height:18px; font-size:11px;
+        text-align:center; line-height:18px;
+    }

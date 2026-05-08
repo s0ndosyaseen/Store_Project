@@ -21,21 +21,27 @@ $id       = (int)($_GET['id'] ?? 0);
 
 switch ($action) {
 
-    // قائمة المنتجات (مع فلترة حسب الحضارة)
+    // قائمة المنتجات (مع فلترة حسب الحضارة والفئة الفرعية)
     case 'list':
         $allowed = ['andalus', 'sham', 'victory', 'egypt'];
+        $subcategory = $_GET['subcategory'] ?? '';
+        
+        $sql = 'SELECT id, name, description, price, image, category, subcategory, stock FROM products WHERE 1=1';
+        $params = [];
+        
         if (!empty($category) && in_array($category, $allowed, true)) {
-            $stmt = $pdo->prepare(
-                'SELECT id, name, description, price, image, category, stock
-                 FROM products WHERE category = ? ORDER BY id ASC'
-            );
-            $stmt->execute([$category]);
-        } else {
-            $stmt = $pdo->query(
-                'SELECT id, name, description, price, image, category, stock
-                 FROM products ORDER BY category, id ASC'
-            );
+            $sql .= ' AND category = ?';
+            $params[] = $category;
         }
+        
+        if (!empty($subcategory)) {
+            $sql .= ' AND subcategory = ?';
+            $params[] = $subcategory;
+        }
+        
+        $sql .= ' ORDER BY id ASC';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
         $products = $stmt->fetchAll();
         echo json_encode(['success' => true, 'products' => $products], JSON_UNESCAPED_UNICODE);
         break;

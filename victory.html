@@ -105,10 +105,15 @@
     <h3>تصفية النتائج</h3>
 
     <div class="filter">
+      <h4>بحث سريع</h4>
+      <input type="text" id="search-products" placeholder="ابحث عن منتج..." style="width:100%;padding:8px;border:1px solid #ddd;border-radius:4px;font-family:inherit">
+    </div>
+
+    <div class="filter">
       <h4>الفئات</h4>
-      <label><input type="checkbox"> ديكور منزلي</label>
-      <label><input type="checkbox"> اكسسوارات نسائية</label>
-      <label><input type="checkbox"> ملابس نسائية</label>
+      <label><input type="checkbox" class="subcategory-filter" value="ديكور"> ديكور منزلي</label>
+      <label><input type="checkbox" class="subcategory-filter" value="اكسسوارات"> اكسسوارات نسائية</label>
+      <label><input type="checkbox" class="subcategory-filter" value="ملابس"> ملابس نسائية</label>
     </div>
 
    <div class="filter">
@@ -128,70 +133,14 @@
   <!-- Products -->
   <main class="products">
 
-    <div class="grid">
-
-      <!-- Card -->
-      <div class="card">
-        <span class="badge">جديد</span>
-        <img src="images/item21.png" alt="">
-        <h4>فستان الكرينولين الفكتوري</h4>
-        <p class="price">3000 ر.س</p>
-      </div>
-
-      <div class="card">
-        <span class="badge">الأكثر مبيعًا</span>
-        <img src="images/item22.png" alt="">
-        <h4>خزانة الكيدينزا الفكتورية</h4>
-        <p class="price">4500 ر.س</p>
-      </div>
-
-      <div class="card">
-        <span class="badge">فاخر</span>
-        <img src="images/item23.png" alt="">
-        <h4>ياقة فكتورية عالية</h4>
-        <p class="price">150 ر.س</p>
-      </div>
-
-      <div class="card">
-        <img src="images/item24.png" alt="">
-        <h4>قبعة دانتيل فكتورية</h4>
-        <p class="price">150 ر.س</p>
-      </div>
-
-      <div class="card">
-        <span class="badge">جديد</span>
-        <img src="images/item25.png" alt="">
-        <h4>مظلة دانتيل فكتورية</h4>
-        <p class="price">500 ر.س</p>
-      </div>
-
-      <div class="card">
-        <img src="images/item26.png" alt="">
-        <h4>أريكة الشيزلونج الفكتورية</h4>
-        <p class="price">2500 ر.س</p>
-      </div>
-
-       <div class="card">
-        <img src="images/item27.png" alt="">
-        <h4> طاولة فيكتورية بأرجل مقوسة</h4>
-        <p class="price">1400 ر.س</p>
-      </div>
-
-        <div class="card hidden">
-        <img src="images/item28.png" alt="">
-        <h4>بروش الكاميو</h4>
-        <p class="price">450 ر.س</p>
-      </div>
-
-        <div class="card hidden">
-        <img src="images/item29.png" alt="">
-        <h4>الأكمام المنفوخة + مشد الخصر</h4>
-        <p class="price">400 ر.س</p>
-      </div>
-
+    <div class="grid" id="products-grid">
+        <div style="text-align:center;padding:40px;color:#888;grid-column:1/-1">
+            <i class="fas fa-spinner fa-spin" style="font-size:28px;color:#c4a35a"></i>
+            <p style="margin-top:12px">جار تحميل المنتجات...</p>
+        </div>
     </div>
 
-    <button class="load-more">عرض المزيد</button>
+    <button class="load-more" id="load-more-btn" style="display:none">عرض المزيد</button>
 
   </main>
 
@@ -286,6 +235,112 @@
         </div>
 
      </div>
+
+    
+<script src="bousala.js"></script>
+<script>
+const VISIBLE = 7;
+let allProducts = [];
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const grid = document.getElementById('products-grid');
+    try {
+        const res  = await fetch('backend/products.php?action=list&category=victory');
+        const data = await res.json();
+        if (!data.success || !data.products.length) {
+            grid.innerHTML = '<p style="text-align:center;padding:40px;color:#999;grid-column:1/-1">لا توجد منتجات حالياً</p>';
+            return;
+        }
+        allProducts = data.products;
+        renderProducts(allProducts.slice(0, VISIBLE));
+        if (allProducts.length > VISIBLE) {
+            const btn = document.getElementById('load-more-btn');
+            btn.style.display = '';
+            btn.addEventListener('click', () => { renderProducts(allProducts); btn.style.display = 'none'; });
+        }
+    } catch(e) {
+        grid.innerHTML = '<p style="text-align:center;padding:40px;color:red;grid-column:1/-1">تعذر تحميل المنتجات</p>';
+    }
+   // دالة تطبيق الفلترة الكاملة
+    function applyFilters() {
+        const minPrice = parseFloat(document.getElementById('rangeMin').value);
+        const maxPrice = parseFloat(document.getElementById('rangeMax').value);
+        const searchText = document.getElementById('search-products')?.value.trim().toLowerCase() || '';
+        
+        // جمع الفئات المختارة
+        const selectedCategories = Array.from(document.querySelectorAll('.subcategory-filter:checked'))
+            .map(cb => cb.value);
+
+        const filtered = allProducts.filter(p => {
+            const productPrice = parseFloat(p.price);
+            const priceInRange = productPrice >= minPrice && productPrice <= maxPrice;
+            const matchesSearch = !searchText || p.name.toLowerCase().includes(searchText);
+            
+            // إذا ما اختارت فئات، كل المنتجات تمر
+            // إذا اختارت، المنتج لازم يكون في إحدى الفئات المختارة
+            const matchesCategory = selectedCategories.length === 0 || 
+                selectedCategories.includes(p.subcategory);
+            
+            return priceInRange && matchesSearch && matchesCategory;
+        });
+
+        renderProducts(filtered);
+        const btn = document.getElementById('load-more-btn');
+        if(btn) btn.style.display = 'none';
+    }
+
+    // معالج تغيير الحد الأدنى
+    document.getElementById('rangeMin').addEventListener('input', function() {
+        const minPrice = parseFloat(this.value);
+        const maxPrice = parseFloat(document.getElementById('rangeMax').value);
+        if (minPrice > maxPrice) {
+            this.value = maxPrice;
+        }
+        document.getElementById('minPrice').textContent = parseFloat(this.value);
+        applyFilters();
+    });
+
+    // معالج تغيير الحد الأقصى
+    document.getElementById('rangeMax').addEventListener('input', function() {
+        const maxPrice = parseFloat(this.value);
+        const minPrice = parseFloat(document.getElementById('rangeMin').value);
+        if (maxPrice < minPrice) {
+            this.value = minPrice;
+        }
+        document.getElementById('maxPrice').textContent = parseFloat(this.value);
+        applyFilters();
+    });
+
+    // معالج البحث بالأسماء
+    const searchInput = document.getElementById('search-products');
+    if (searchInput) {
+        searchInput.addEventListener('input', applyFilters);
+    }
+    
+    // معالج فلاتر الفئات الفرعية
+    document.querySelectorAll('.subcategory-filter').forEach(checkbox => {
+        checkbox.addEventListener('change', applyFilters);
+    });
+});
+
+function renderProducts(products) {
+    document.getElementById('products-grid').innerHTML = products.map(p => `
+        <div class="card">
+            <a class="card-link" href="product.html?id=${p.id}">
+                <img src="${p.image || 'images/logo.png'}" alt="${p.name}">
+                <h4>${p.name}</h4>
+                <p class="price">${Number(p.price)} ر.س</p>
+            </a>
+            ${p.stock > 0
+                ? `<button class="add-to-cart-btn" onclick="Cart.add(${p.id})">
+                       <i class="fas fa-shopping-cart"></i> أضف للسلة
+                   </button>`
+                : `<button class="add-to-cart-btn" disabled>نفذت الكمية</button>`
+            }
+        </div>`
+    ).join('');
+}
+</script>
 
     
 </body>

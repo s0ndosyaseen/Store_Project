@@ -42,7 +42,7 @@ const Cart = {
         body.append('product_id', productId);
         body.append('quantity', quantity);
 
-          try {
+        try {
             const res  = await fetch(API.cart, { method: 'POST', body });
             const data = await res.json();
             if (data.success) {
@@ -54,8 +54,8 @@ const Cart = {
             return data;
         } catch(e) {
             Cart.showToast('تعذر الاتصال بالخادم', 'error');
+            return { success: false, message: 'خطأ في الاتصال' };
         }
-        return data;
     },
 
     /** حذف عنصر من السلة */
@@ -64,29 +64,40 @@ const Cart = {
         body.append('action', 'remove');
         body.append('item_id', itemId);
 
-        const res  = await fetch(API.cart, { method: 'POST', body });
-        const data = await res.json();
+        try {
+            const res  = await fetch(API.cart, { method: 'POST', body });
+            const data = await res.json();
 
-        if (data.success) {
-            Cart.showToast('تم حذف المنتج', 'success');
-            Cart.renderCartPage(data.items, data.totals);
-            Cart.updateBadge();
+            if (data.success) {
+                Cart.showToast('تم حذف المنتج', 'success');
+                Cart.renderCartPage(data.items, data.totals);
+                Cart.updateBadge();
+            } else {
+                Cart.showToast(data.message || 'تعذر حذف المنتج', 'error');
+            }
+            return data;
+        } catch(e) {
+            Cart.showToast('تعذر الاتصال بالخادم', 'error');
+            return { success: false, message: 'خطأ في الاتصال' };
         }
-        return data;
     },
 
     /** تحديث الكمية */
     async update(itemId, quantity) {
         const body = new FormData();
-         body.append('action',   'update');
+        body.append('action',   'update');
         body.append('item_id',  itemId);
         body.append('quantity', quantity);
 
-        const res  = await fetch(API.cart, { method: 'POST', body });
-        const data = await res.json();
-        if (!data.success) Cart.showToast(data.message, 'error');
-        return data;
-   
+        try {
+            const res  = await fetch(API.cart, { method: 'POST', body });
+            const data = await res.json();
+            if (!data.success) Cart.showToast(data.message, 'error');
+            return data;
+        } catch(e) {
+            Cart.showToast('تعذر الاتصال بالخادم', 'error');
+            return { success: false, message: 'خطأ في الاتصال' };
+        }
     },
 
     /** رسالة Toast مؤقتة */
