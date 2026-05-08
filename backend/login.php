@@ -3,7 +3,6 @@ require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../config/functions.php';
 $pdo = getDB();
 
-session_start();
 if (isset($_SESSION['user_id'])) {
     header("Location: ../home.html");
     exit();
@@ -22,7 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = $stmt->fetch();
 
     if ($user && password_verify($password, $user['password'])) {
+
         $old_session_id = session_id();
+        session_regenerate_id(true);
         $_SESSION['user_id']    = $user['id'];
         $_SESSION['user_name']  = $user['name'];
         $_SESSION['user_email'] = $user['email'];
