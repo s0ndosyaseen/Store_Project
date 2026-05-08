@@ -161,15 +161,13 @@ font-size: 24px;
 }
 /* start our story */
 .story {
-
-    padding: 60px 10% ;
-    text-align: center; 
-   background-color:rgb(255, 234, 208);
-    border-top: 1px solid #e49a38;
+    padding: 80px 0;
+    background-color: #ffead0;
+    text-align: center;
 }
 
 .story h3 {
-    color: #b08968; 
+    color: #b08968;
     font-size: 1.2rem;
     margin-bottom: 10px;
 }
@@ -177,41 +175,69 @@ font-size: 24px;
 .story h1 {
     color: #333;
     font-size: 2.5rem;
-    margin-bottom: 40px;
-    font-family: 'Amiri', serif; }
-
-
-.content {
-    display: flex;
-    align-items: center; 
-    justify-content: space-between; 
-    gap: 50px; 
-    flex-wrap: wrap;
+    margin-bottom: 50px;
+    font-family: 'Amiri', serif;
 }
 
-.content p {
-    flex: 1; 
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #555;
-    text-align: justify; 
-    min-width: 300px; 
+.story-layout-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 40px;
+    align-items: center;
 }
 
-.content img {
-    flex: 1;
-    max-width: 500px; 
+.story-text-content {
+    text-align: right;
+}
+
+.story-text-content p {
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: #444;
+    margin-bottom: 20px;
+}
+.story-image-wrapper img {
     width: 100%;
-    height: auto;
-    border-radius: 15px; 
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
 }
 
-.content img:hover {
+.story-image-wrapper img:hover {
     transform: scale(1.02);
+    cursor: pointer;
 }
 
+.story-video-wrapper {
+    grid-column: 1 / span 2;
+    margin-top: 30px;
+}
+
+
+.video-container {
+    width: 100%;
+    max-width: 80% !important;
+    border-radius: 25px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+.video-container:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
+/* للهاتف */
+@media (max-width: 768px) {
+    .story-layout-grid {
+        grid-template-columns: 1fr;
+    }
+    .story-video-wrapper {
+        grid-column: 1;
+    }
+}
 /* start footer */
 
 .footer {
