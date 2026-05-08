@@ -30,9 +30,11 @@
                 <li><a href="home.html">الرئيسية</a></li>
                 <li><a href="home.html#story">قصتـنا</a></li>
                 <li> <a href="home.html#categories">الـحضـارات</a></li>
-                <li><a href="#">ديـكـور</a></li>
+                <!--
+                 <li><a href="#">ديـكـور</a></li>
                 <li><a href="#">اكسـسوارات</a></li>
                 <li><a href="#">مـلابـس</a></li>
+                 -->
                 <li><a href="cart-full.html" class="login-btn">سلة المشتريات</a></li>
                 <li><a href="login.html" class="login-btn login-link">تسجيل الدخول</a></li>
             </ul>
@@ -182,13 +184,12 @@
         <!-- footer  -->
         <div class="horz">
             <div class="footer-column newsletter">
-                <h4>انضم إلى نشرتنا الإخبارية</h4>
+                <h4>هل لديكِ حساب؟</h4>
                 <div class="subscribe-form">
-                    <input type="email" placeholder="البريد الإلكتروني">
-                    <button type="button">اشترك</button>
+                    <input type="email" id="quick-email" placeholder="أدخلي بريدك الإلكتروني">
+                    <button type="button" onclick="goToLogin()">تسجيل دخول</button>
                 </div>
-                <p>استكشف جمال الحضارات العالمية من خلال قطعنا الفريدة والمختارة بعناية.</p>
-
+                <p>سجلي دخولك الآن لتتمكني من إتمام عملية الشراء ومتابعة طلباتك السابقة.</p>
             </div>
 
             <div class="footer-column">
@@ -336,6 +337,26 @@ function renderProducts(products) {
             }
         </div>`
     ).join('');
+}
+document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const emailParam = params.get('email');
+
+    if (emailParam) {
+        const emailInput = document.querySelector('input[type="email"]');
+        if (emailInput) {
+            emailInput.value = decodeURIComponent(emailParam);
+        }
+    }
+});
+function goToLogin() {
+    const email = document.getElementById('quick-email').value.trim();
+    if (email) {
+        // الانتقال لصفحة login.html مع إرسال الإيميل في الرابط
+        window.location.href = `login.html?email=${encodeURIComponent(email)}`;
+    } else {
+        window.location.href = `login.html`;
+    }
 }
 </script>
 
