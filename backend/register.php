@@ -63,10 +63,19 @@ $userId = $pdo->lastInsertId();
 $sessionId = getSessionKey();
 $stmt = $pdo->prepare('UPDATE cart_items SET user_id = ?, session_id = NULL WHERE session_id = ?');
 $stmt->execute([$userId, $sessionId]);
-
+/*
 // تسجيل الدخول تلقائياً بعد التسجيل
 $_SESSION['user_id']   = $userId;
 $_SESSION['user_name'] = $name;
 $_SESSION['user_email'] = $email;
 
 redirectWith('../home.html', 'success', 'مرحباً ' . $name . '! تم إنشاء حسابك بنجاح');
+*/
+$stmt = $pdo->prepare('INSERT INTO users (name, email, password) VALUES (?, ?, ?)');
+$stmt->execute([$name, $email, $hashedPass]);
+
+echo "<script>
+    alert('تم إنشاء حسابك بنجاح يا $name! يرجى تسجيل الدخول الآن.');
+    window.location.href = '../login.html';
+</script>";
+exit;
