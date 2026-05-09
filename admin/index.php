@@ -116,6 +116,38 @@ $stats = $pdo->query(
 $usersCount = $pdo->query('SELECT COUNT(*) FROM users')->fetchColumn();
 $productsCount = $pdo->query('SELECT COUNT(*) FROM products')->fetchColumn();
 
+$chartQuery = $pdo->query("
+    SELECT 
+        DATE(created_at) as order_date, 
+        SUM(total) as daily_total 
+    FROM orders 
+    WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+      AND status != 'cancelled'
+    GROUP BY DATE(created_at)
+    ORDER BY DATE(created_at) ASC
+");
+$chartResults = $chartQuery->fetchAll(PDO::FETCH_ASSOC);
+
+// 2. تجهيز مصفوفات للأيام والمبالغ
+$days = [];
+$revenues = [];
+
+$arabicDays = [
+    'Sunday' => 'الأحد', 'Monday' => 'الاثنين', 'Tuesday' => 'الثلاثاء', 
+    'Wednesday' => 'الأربعاء', 'Thursday' => 'الخميس', 'Friday' => 'الجمعة', 'Saturday' => 'السبت'
+];
+
+// ملء المصفوفات بالبيانات
+foreach ($chartResults as $row) {
+    $dayName = date('l', strtotime($row['order_date']));
+    $days[] = $arabicDays[$dayName];
+    $revenues[] = (float)$row['daily_total'];
+}
+
+// 3. تحويلها لـ JSON لاستخدامها في JavaScript
+$jsDays = json_encode($days);
+$jsRevenues = json_encode($revenues);
+
 $statusLabels = [
     'pending'   => 'قيد الانتظار',
     'confirmed' => 'مؤكد',
