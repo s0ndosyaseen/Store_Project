@@ -148,6 +148,29 @@ foreach ($chartResults as $row) {
 $jsDays = json_encode($days);
 $jsRevenues = json_encode($revenues);
 
+
+// جلب مبيعات كل قسم (حضارة)
+$categoryStats = $pdo->query("
+    SELECT p.category, SUM(o.total) as total_sales
+    FROM products p
+    JOIN order_items oi ON p.id = oi.product_id
+    JOIN orders o ON oi.order_id = o.id
+    WHERE o.status != 'cancelled'
+    GROUP BY p.category
+")->fetchAll(PDO::FETCH_ASSOC);
+
+$catLabels = [];
+$catValues = [];
+
+foreach ($categoryStats as $row) {
+    // يمكنك تحويل أسماء الأقسام للعربية هنا إذا كانت مخزنة بالإنجليزي
+    $catLabels[] = $row['category']; 
+    $catValues[] = (float)$row['total_sales'];
+}
+
+$jsCatLabels = json_encode($catLabels);
+$jsCatValues = json_encode($catValues);
+
 $statusLabels = [
     'pending'   => 'قيد الانتظار',
     'confirmed' => 'مؤكد',
@@ -238,9 +261,9 @@ tr td:last-child { border-radius: 12px 0 0 12px; }
 </head>
 <body>
 <header>
-    <h1><i class="fas fa-compass"></i> لوحة تحكم البوصلة</h1>
-    <img src="../images/logo.png" alt="Logo" style="height:52px">
-    <a href="?logout=1"><i class="fas fa-sign-out-alt"></i> خروج</a>
+    <img src="../images/logo.png" alt="Logo" style="height: 70px; width: 120px;">
+    <h1 ><i class="fas fa-compass"></i> لوحة تحكم البوصلة</h1>
+    <a href="?logout=1" class="btn-logout"><i class="fas fa-sign-out-alt "></i> خروج</a>
 </header>
 
 <div class="main">
@@ -273,11 +296,18 @@ tr td:last-child { border-radius: 12px 0 0 12px; }
     </div>
 
     <!-- قسم الرسم البياني -->
-<div class="chart-container">
-    <h3 style="margin-bottom: 15px;">تحليلات المبيعات (آخر 7 أيام)</h3>
-    <canvas id="salesChart" height="100"></canvas>
-</div>
+ <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 30px;">
+    <div class="chart-container">
+        <h3 style="margin-bottom: 15px;">تحليلات المبيعات (آخر 7 أيام)</h3>
+         <canvas id="salesChart" height="100"></canvas>
+    </div>
+    <!-- الرسم الدائري للأقسام -->
+    <div class="chart-container">
+        <h3><i class="fas fa-chart-pie"></i> مبيعات الحضارات</h3>
+        <canvas id="categoryChart"></canvas>
+    </div>
 
+</div>
 <!-- استدعاء مكتبة الرسم البياني -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
@@ -321,6 +351,42 @@ const salesChart = new Chart(ctx, {
             },
             x: { 
                 ticks: { font: { family: 'Cairo' } }
+            }
+        }
+    }
+});
+
+
+const catCtx = document.getElementById('categoryChart').getContext('2d');
+
+const categoryChart = new Chart(catCtx, {
+    type: 'pie', // أو 'doughnut' لشكل أكثر حداثة
+    data: {
+        labels: <?php echo $jsCatLabels; ?>,
+        datasets: [{
+            data: <?php echo $jsCatValues; ?>,
+            backgroundColor: [
+                '#c4a35a', // اللون الذهبي الأساسي
+                '#1a1a2e', // الكحلي الداكن
+                '#e9d2af', // البيج
+                '#c7b9a6', // البرونزي
+                '#a67c37'  // البني النحاسي
+            ],
+            borderWidth: 2,
+            borderColor: '#ffffff'
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: { font: { family: 'Cairo', size: 12 } }
+            },
+            tooltip: {
+                rtl: true,
+                bodyFont: { family: 'Cairo' }
             }
         }
     }

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
 
 :root {
-    --primary-color: #c4a35a;
+    --primary-color: #e4c175;
     --accent-color: #876723;
     --bg-light: #f8f9fa;
     --text-dark: #a9832b;
@@ -56,14 +56,6 @@ header {
 .stat-card .num { font-size: 32px; font-weight: 700; color: var(--primary-color); }
 .stat-card .lbl { font-size: 14px; color: #636e72; font-weight: 600; }
 
-/* قسم الرسم البياني */
-.chart-container {
-    background: var(--white);
-    padding: 20px;
-    border-radius: 15px;
-    margin-bottom: 30px;
-    box-shadow: var(--shadow);
-}
 
 /* الفلاتر */
 .filters { margin-bottom: 25px; display: flex; gap: 12px; overflow-x: auto; padding-bottom: 10px; }
@@ -104,7 +96,87 @@ select { border: 1px solid #ddd; padding: 8px; border-radius: 8px; outline: none
 .chart-container h3 {
     color: #1a1a2e;
     font-size: 18px;
-    border-right: 4px solid #c4a35a;
-    padding-right: 15px;
+    border-inline-start: 4px solid #c4a35a;
+    padding-inline-start: 15px;
     margin-bottom: 20px;
+}
+
+ .chart-container {
+    background: rgba(254, 254, 254, 0.9); 
+    /* خلفية بيضاء شفافة قليلاً  */
+     border-radius: 15px;
+    padding: 20px;
+    border: 1px solid #c4a35a;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+}  
+
+@media (max-width: 768px) {
+    header { flex-direction: column; gap: 10px; }
+    .stats { grid-template-columns: 1fr; }
+    .filters { justify-content: center; }
+}
+.fas{
+    color: moccasin;
+
+}
+.chart-container {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    height: 400px; /* مهم جداً لظهور الرسم */
+    display: flex;
+    flex-direction: column;
+}
+.chart-container canvas {
+    flex-grow: 1; /* ليأخذ الرسم باقي مساحة البوكس */
+}
+body {
+   
+    min-height: 100vh;
+    background-color: #dfd3c3;
+
+    background-image:
+            linear-gradient(rgba(242, 236, 228, 0.7), rgba(242, 236, 228, 0.8)),
+            url('../images/black-felt.png');
+    background-repeat: repeat;
+    background-size: auto;
+    animation: fadeInBody 0.5s ease-in;
+    /*هاي وال@keyframes fadeInBody عشان تعمل الحركة */
+}
+
+/* header {
+    background: #1a1a2e;
+    color: #c4a35a;
+    padding: 12px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+} */
+
+.btn-logout {
+    background-color: #b33939; /* لون أحمر دافئ يتناسق مع الذهبي */
+    color: #ffffff !important; /* لون الخط أبيض */
+    text-decoration: none !important; /* حذف الخط تحت الكلمة */
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* مسافة بين الأيقونة والنص */
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.btn-logout:hover {
+    background-color: #cd6161; /* تفتيح اللون عند التمرير */
+    transform: translateY(-2px); /* حركة بسيطة للأعلى */
+    box-shadow: 0 4px 10px rgba(179, 57, 57, 0.3);
+}
+
+.btn-logout i {
+    font-size: 16px;
 }
