@@ -8,6 +8,17 @@ if (empty($_SESSION['is_admin'])) {
     header('Location: index.php');
     exit;
 }
+if (isset($_GET['logout'])) {
+    unset($_SESSION['is_admin']);
+    header('Location: index.php');
+    exit;
+}
+
+if (isset($_GET['go_home'])) {
+    unset($_SESSION['is_admin']);
+    header('Location: ../home.html');
+    exit;
+}
 
 require_once __DIR__ . '/../config/db.php';
 $pdo = getDB();
