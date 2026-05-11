@@ -8,6 +8,17 @@ if (empty($_SESSION['is_admin'])) {
     header('Location: index.php');
     exit;
 }
+if (isset($_GET['logout'])) {
+    unset($_SESSION['is_admin']);
+    header('Location: index.php');
+    exit;
+}
+
+if (isset($_GET['go_home'])) {
+    unset($_SESSION['is_admin']);
+    header('Location: ../home.html');
+    exit;
+}
 
 require_once __DIR__ . '/../config/db.php';
 $pdo = getDB();
@@ -73,8 +84,19 @@ $products = $pdo->query("SELECT * FROM products ORDER BY id DESC")->fetchAll();
     </style>
 </head>
 <body>
+<div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
+    <div style="text-align: center; padding: 20px;"><img src="../images/logo.png" alt="Logo" style="width: 80px;"></div>
+    <a href="index.php"><i class="fas fa-chart-line"></i> الإحصائيات والطلبات</a>
+    <a href="products_manager.php"><i class="fas fa-boxes"></i> إدارة المنتجات</a>
+    <a href="users_manager.php"><i class="fas fa-users"></i> إدارة المستخدمين</a>
+    <a href="?go_home=1"><i class="fas fa-store"></i> العودة للمتجر</a>
+    <a href="?logout=1" style="color: #ff7675; border-top: 1px solid #333; margin-top: 20px;"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a>
+</div>
+<div id="overlay" class="overlay" onclick="closeNav()"></div>
+
 <header>
-    <a href="index.php" style="color: #c4a35a;"><i class="fas fa-home"></i> العودة للرئيسية</a>
+    <button class="open-btn" onclick="openNav()"><i class="fas fa-bars"></i></button>
     <h1><i class="fas fa-box"></i> إدارة المنتجات</h1>
     <a href="add_product.php" class="btn-add"><i class="fas fa-plus"></i> إضافة منتج جديد</a>
 </header>
@@ -120,5 +142,16 @@ $products = $pdo->query("SELECT * FROM products ORDER BY id DESC")->fetchAll();
         </tbody>
     </table>
 </div>
+<script>
+    function openNav() {
+        document.getElementById("mySidebar").style.width = "260px";
+        document.getElementById("overlay").style.display = "block";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("overlay").style.display = "none";
+    }
+</script>
 </body>
 </html>
