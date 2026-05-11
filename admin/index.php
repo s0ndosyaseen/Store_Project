@@ -22,9 +22,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_pass'])) {
     }
 }
 
-if ($_GET['logout'] ?? false) {
+// تسجيل الخروج والعودة لصفحة قفل الأدمن
+if (isset($_GET['logout'])) {
     unset($_SESSION['is_admin']);
     header('Location: index.php');
+    exit;
+}
+
+//  العودة للمتجر وإنهاء الجلسة تماماً
+if (isset($_GET['go_home'])) {
+    unset($_SESSION['is_admin']);
+    header('Location: ../home.html');
     exit;
 }
 
@@ -260,10 +268,28 @@ tr td:last-child { border-radius: 12px 0 0 12px; }
     </style> -->
 </head>
 <body>
+<div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
+    <div style="text-align: center; padding: 20px;">
+        <img src="../images/logo.png" alt="Logo" style="width: 80px;">
+    </div>
+    <a href="index.php"><i class="fas fa-chart-line"></i> الإحصائيات والطلبات</a>
+    <a href="products_manager.php"><i class="fas fa-boxes"></i> إدارة المنتجات</a>
+    <a href="users_manager.php"><i class="fas fa-users"></i> إدارة المستخدمين</a>
+    <a href="?go_home=1"><i class="fas fa-store"></i> العودة للمتجر</a>
+    <a href="?logout=1" style="color: #ff7675; border-top: 1px solid #333; margin-top: 20px;">
+        <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+    </a>
+</div>
+
+<!-- طبقة التعتيم عند فتح القائمة -->
+<div id="overlay" class="overlay" onclick="closeNav()"></div>
 <header>
-    <img src="../images/logo.png" alt="Logo" style="height: 70px; width: 120px;">
-    <h1 ><i class="fas fa-compass"></i> لوحة تحكم البوصلة</h1>
-    <a href="?logout=1" class="btn-logout"><i class="fas fa-sign-out-alt "></i> خروج</a>
+    <button class="open-btn" onclick="openNav()">
+        <i class="fas fa-bars"></i>
+    </button>
+    <h1><i class="fas fa-compass"></i> لوحة تحكم البوصلة</h1>
+    <img src="../images/logo.png" alt="Logo" style="height: 60px; width: auto;">
 </header>
 
 <div class="main">
@@ -458,5 +484,17 @@ const categoryChart = new Chart(catCtx, {
     </table>
     <?php endif; ?>
 </div>
+<!--للسايدر -->
+<script>
+    function openNav() {
+        document.getElementById("mySidebar").style.width = "260px";
+        document.getElementById("overlay").style.display = "block";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("overlay").style.display = "none";
+    }
+</script>
 </body>
 </html>

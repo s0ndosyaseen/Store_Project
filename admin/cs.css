@@ -13,11 +13,73 @@
 
 body {
     font-family: 'Cairo', sans-serif;
-    background-color: #f0f2f5;
+    min-height: 100vh;
+    background-color: #dfd3c3;
+    background-image: linear-gradient(rgba(242, 236, 228, 0.7), rgba(242, 236, 228, 0.8)), url('../images/shope_background.png');
+    background-repeat: repeat;
+    background-size: auto;
     color: var(--text-dark);
     direction: rtl;
     line-height: 1.6;
 }
+/* ******************************************************************* */
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    right: 0;
+    background-color: #1a1a2e;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+}
+
+.sidebar a {
+    padding: 15px 25px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #c4a35a;
+    display: block;
+    transition: 0.3s;
+    border-bottom: 1px solid rgba(196,163,90,0.1);
+}
+
+.sidebar a:hover { color: #fff; background: #c4a35a22; }
+
+.sidebar .close-btn {
+    position: absolute;
+    top: 10px;
+    left: 25px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.open-btn {
+    font-size: 24px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #c4a35a;
+    transition: 0.3s;
+}
+.open-btn:hover {
+    color: #fff;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1500;
+    top: 0;
+    left: 0;
+}
+/**********************************************************/
 
 header {
     background: var(--primary-color);
@@ -102,14 +164,14 @@ select { border: 1px solid #ddd; padding: 8px; border-radius: 8px; outline: none
 }
 
  .chart-container {
-    background: rgba(254, 254, 254, 0.9); 
+    background: rgba(254, 254, 254, 0.9);
     /* خلفية بيضاء شفافة قليلاً  */
      border-radius: 15px;
     padding: 20px;
     border: 1px solid #c4a35a;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     margin-bottom: 30px;
-}  
+}
 
 @media (max-width: 768px) {
     header { flex-direction: column; gap: 10px; }
@@ -133,13 +195,13 @@ select { border: 1px solid #ddd; padding: 8px; border-radius: 8px; outline: none
     flex-grow: 1; /* ليأخذ الرسم باقي مساحة البوكس */
 }
 body {
-   
+
     min-height: 100vh;
     background-color: #dfd3c3;
 
     background-image:
             linear-gradient(rgba(242, 236, 228, 0.7), rgba(242, 236, 228, 0.8)),
-            url('../images/black-felt.png');
+            url('../images/shope_background.png');
     background-repeat: repeat;
     background-size: auto;
     animation: fadeInBody 0.5s ease-in;
