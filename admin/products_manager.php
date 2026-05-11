@@ -73,8 +73,14 @@ $products = $pdo->query("SELECT * FROM products ORDER BY id DESC")->fetchAll();
     </style>
 </head>
 <body>
+<?php include '_nav.php'; ?>
 <header>
+    <div> 
+     <button class="open-btn" onclick="openNav()" style="margin-left: 30px;">
+        <i class="fas fa-bars"></i>
+    </button>
     <a href="index.php" style="color: #c4a35a;"><i class="fas fa-home"></i> العودة للرئيسية</a>
+  </div>
     <h1><i class="fas fa-box"></i> إدارة المنتجات</h1>
     <a href="add_product.php" class="btn-add"><i class="fas fa-plus"></i> إضافة منتج جديد</a>
 </header>

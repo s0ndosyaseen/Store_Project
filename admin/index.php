@@ -2,87 +2,7 @@
 // =============================================
 // لوحة تحكم المدير - الطلبات
 // =============================================
-
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-require_once __DIR__ . '/../config/db.php';
-require_once __DIR__ . '/../config/functions.php';
-
-// حماية لوحة التحكم بكلمة مرور بسيطة
-// غيّر هذه القيمة لكلمة مرور حقيقية
-define('ADMIN_PASS', 'sonly');
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_pass'])) {
-    if ($_POST['admin_pass'] === ADMIN_PASS) {
-        $_SESSION['is_admin'] = true;
-    } else {
-        $loginError = 'كلمة المرور غير صحيحة';
-    }
-}
-
-// تسجيل الخروج والعودة لصفحة قفل الأدمن
-if (isset($_GET['logout'])) {
-    unset($_SESSION['is_admin']);
-    header('Location: index.php');
-    exit;
-}
-
-//  العودة للمتجر وإنهاء الجلسة تماماً
-if (isset($_GET['go_home'])) {
-    unset($_SESSION['is_admin']);
-    header('Location: ../home.html');
-    exit;
-}
-
-if (empty($_SESSION['is_admin'])) {
-    ?>
-    <!DOCTYPE html>
-    <html lang="ar" dir="rtl">
-    <head>
-        <meta charset="UTF-8">
-        <title>لوحة التحكم - البوصلة</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-        <link rel="stylesheet" href="../login-signup.css">
-        <!-- <style>
-            body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #1a1a2e; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-            .login-box { background: #fff; padding: 40px; border-radius: 12px; width: 340px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,.4); }
-            .login-box h2 { margin-bottom: 24px; color: #1a1a2e; }
-            .login-box input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; margin-bottom: 16px; box-sizing: border-box; }
-            .login-box button { width: 100%; padding: 12px; background: #c4a35a; color: #fff; border: none; border-radius: 8px; font-size: 15px; cursor: pointer; }
-            .error { color: red; margin-bottom: 12px; font-size: 14px; }
-        </style> -->
-    </head>
-    <body>
-
-     
-    <div class="container" >
-    <div class="form-section my-custom-form">
-
-        <h2 style="color: #ffffff; background-color: #a67c37; border-radius: 20px 100px 100px 20px ; ">🔐 لوحة التحكم</h2>
-         <form method="POST" >
-           <div class="input-group">
-        <i class="fa-solid fa-lock"></i>
-        <input type="password" name="admin_pass" placeholder="كلمة مرور الدخول" required autofocus >
-      </div>
-            <button type="submit" class="btn-main">تسجيل الدخول</button>
-
-        </form>
-    </div>
-        <!-- <div class="overlay-content login-bg">
-            <img src="../images/login.png" alt="البوصلة" class="logo" style="width:120px; height:120px;">
-        </div> -->
-        <?php if (!empty($loginError)): ?>
-            <p class="error"><?= htmlspecialchars($loginError) ?></p>
-        <?php endif; ?>
-       
-    </div>
-    </body>
-    </html>
-    <?php
-    exit;
-}
+require_once __DIR__ . '/_auth.php';
 
 $pdo = getDB();
 
@@ -202,88 +122,9 @@ $statusColors = [
     <title>لوحة التحكم - البوصلة</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="cs.css">
-    <!-- <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        /* body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f5f5f0; color: #333; direction: rtl; } */
-        body {
-    
-    background-color: #dfd3c3;
-
-    background-image:
-            linear-gradient(rgba(242, 236, 228, 0.7), rgba(242, 236, 228, 0.8)),
-            url('images/black-felt .png');
-    background-repeat: repeat;
-    background-size: auto;
-    animation: fadeInBody 0.5s ease-in;/*هاي وال@keyframes fadeInBody عشان تعمل الحركة */
-
-}
-
-        /* تحسين شكل الجدول */
-table {
-    border-spacing: 0 8px; /* مسافة بين الصفوف */
-    border-collapse: separate;
-    background: transparent;
-    box-shadow: none;
-}
-tr td {
-    background: #fff; /* جعل كل صف يبدو كأنه بطاقة منفصلة */
-    border: none !important;
-    padding: 15px;
-}
-tr td:first-child { border-radius: 0 12px 12px 0; } /* زوايا دائرية للصف */
-tr td:last-child { border-radius: 12px 0 0 12px; }
-
-/* تحسين الأزرار */
-.btn-save {
-    transition: all 0.3s;
-    box-shadow: 0 4px 6px rgba(196, 163, 90, 0.2);
-}
-.btn-save:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(196, 163, 90, 0.3);
-}
-
-        header { background: #1a1a2e; color: #c4a35a; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; }
-        header h1 { font-size: 20px; }
-        header a { color: #fff; text-decoration: none; font-size: 14px; opacity: .7; }
-        header a:hover { opacity: 1; }
-        .main { padding: 24px 32px; }
-        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 28px; }
-        .stat-card { background: #fff; border-radius: 10px; padding: 20px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,.06); }
-        .stat-card .num { font-size: 28px; font-weight: bold; color: #1a1a2e; }
-        .stat-card .lbl { font-size: 13px; color: #888; margin-top: 4px; }
-        .filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
-        .filters a { padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 13px; background: #eee; color: #555; }
-        .filters a.active, .filters a:hover { background: #1a1a2e; color: #fff; }
-        table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,.06); }
-        th { background: #1a1a2e; color: #c4a35a; padding: 12px 14px; text-align: right; font-size: 13px; font-weight: 600; }
-        td { padding: 11px 14px; font-size: 13px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
-        tr:last-child td { border-bottom: none; }
-        tr:hover td { background: #fafaf7; }
-        .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; color: #fff; }
-        select { border: 1px solid #ddd; border-radius: 6px; padding: 5px 10px; font-size: 12px; cursor: pointer; background: #fff; }
-        .btn-save { background: #c4a35a; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; }
-        .btn-details { background: #1a1a2e; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; text-decoration: none; }
-        .empty { text-align: center; padding: 40px; color: #aaa; }
-    </style> -->
 </head>
 <body>
-<div id="mySidebar" class="sidebar">
-    <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
-    <div style="text-align: center; padding: 20px;">
-        <img src="../images/logo.png" alt="Logo" style="width: 80px;">
-    </div>
-    <a href="index.php"><i class="fas fa-chart-line"></i> الإحصائيات والطلبات</a>
-    <a href="products_manager.php"><i class="fas fa-boxes"></i> إدارة المنتجات</a>
-    <a href="users_manager.php"><i class="fas fa-users"></i> إدارة المستخدمين</a>
-    <a href="?go_home=1"><i class="fas fa-store"></i> العودة للمتجر</a>
-    <a href="?logout=1" style="color: #ff7675; border-top: 1px solid #333; margin-top: 20px;">
-        <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
-    </a>
-</div>
-
-<!-- طبقة التعتيم عند فتح القائمة -->
-<div id="overlay" class="overlay" onclick="closeNav()"></div>
+<?php include '_nav.php'; ?>
 <header>
     <button class="open-btn" onclick="openNav()">
         <i class="fas fa-bars"></i>
@@ -484,17 +325,6 @@ const categoryChart = new Chart(catCtx, {
     </table>
     <?php endif; ?>
 </div>
-<!--للسايدر -->
-<script>
-    function openNav() {
-        document.getElementById("mySidebar").style.width = "260px";
-        document.getElementById("overlay").style.display = "block";
-    }
 
-    function closeNav() {
-        document.getElementById("mySidebar").style.width = "0";
-        document.getElementById("overlay").style.display = "none";
-    }
-</script>
 </body>
 </html>

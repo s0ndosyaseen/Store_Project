@@ -49,10 +49,18 @@ $statusLabels = [
     <title>تفاصيل الطلب #<?= $orderId ?></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="order.css">
+   
 </head>
 <body>
+
+<?php include '_nav.php'; ?>
+
 <header>
-    <a href="index.php"><i class="fas fa-arrow-right"></i> العودة</a>
+     <button class="open-btn" onclick="openNav()" style="margin-left: 30px;">
+        <i class="fas fa-bars"></i>
+    </button>
+     <a href="index.php"><i class="fas fa-arrow-right"></i> العودة</a>
+  
     <h1>تفاصيل الطلب #<?= $orderId ?></h1>
     <button onclick="window.print()" class="btn-print">
         <i class="fas fa-print"></i> طباعة الفاتورة
