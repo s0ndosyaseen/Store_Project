@@ -49,6 +49,8 @@ $msg = '';
             <p>
                 نحن هنا لمساعدتك والإجابة على جميع استفساراتك
             </p>
+            <a href="javascript:history.back()" style="color: #c4a35a;"><i class="fas fa-home"></i> العودة للصفحة السابقة</a>
+
         </div>
 
         <div class="contact-grid">
