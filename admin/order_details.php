@@ -52,7 +52,9 @@ $statusLabels = [
 </head>
 <body>
 <header>
-    <a href="index.php"><i class="fas fa-arrow-right"></i> العودة</a>
+    <a href="javascript:history.back()" >
+        <i class="fas fa-arrow-right"></i> عودة
+    </a>
     <h1>تفاصيل الطلب #<?= $orderId ?></h1>
     <button onclick="window.print()" class="btn-print">
         <i class="fas fa-print"></i> طباعة الفاتورة
