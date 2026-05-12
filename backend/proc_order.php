@@ -136,10 +136,10 @@ try {
     if ($isAjax) {
         jsonResponse(true, $successMessage, [
             'order_id' => $orderId,
-            'redirect_url' => '../home.html'
+            'redirect_url' => 'my_orders.php'
         ]);
     } else {
-        redirectWith('../home.html', 'success', $successMessage);
+        redirectWith('../my_orders.php', 'success', $successMessage);
     }
 
 } catch (Exception $e) {

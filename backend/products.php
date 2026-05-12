@@ -23,13 +23,12 @@ switch ($action) {
 
     // قائمة المنتجات (مع فلترة حسب الحضارة والفئة الفرعية)
     case 'list':
-        $allowed = ['andalus', 'sham', 'victory', 'egypt'];
         $subcategory = $_GET['subcategory'] ?? '';
         
         $sql = 'SELECT id, name, description, price, image, category, subcategory, stock FROM products WHERE 1=1';
         $params = [];
         
-        if (!empty($category) && in_array($category, $allowed, true)) {
+        if (!empty($category)) {
             $sql .= ' AND category = ?';
             $params[] = $category;
         }
