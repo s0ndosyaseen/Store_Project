@@ -141,47 +141,41 @@
 
 <script>
 
-const config = {
-    'andalus': {
-        title: 'الحضارة الأندلسية',
-        heroTitle: 'عبق الأندلس يزين المكان',
-        heroDesc: 'قطع فنية مستوحاة من عظمة التاريخ الأندلسي، مصنوعة يدوياً.',
-        image: 'images/bgand.png' 
-    },
-    'sham': {
-        title: 'بلاد الشام',
-        heroTitle: 'سحر الشام يكتمل بكِ',
-        heroDesc: 'من نقوش الحرير إلى زخارف الياسمين، ننقل لكِ روح الحارة الدمشقية.',
-        image: 'images/shami.png'
-    },
-    'egypt': {
-        title: 'الحضارة الفرعونية',
-        heroTitle: 'سحرُ الخلود يحيطُ بكِ',
-        heroDesc: 'قطعٌ نُحتت من روحِ التاريخ، لتعيدَ إحياءَ هيبةِ الملوك.',
-        image: 'images/phi.png'
-    },
-    'victory': {
-        title: 'العصر الفيكتوري',
-        heroTitle: 'أناقة ملكية تتجاوز الزمان',
-        heroDesc: 'تصاميم تفيض بالأنوثة، مستوحاة من رقي العصر الفيكتوري.',
-        image: 'images/vic.png'
-    }
-};
-
 
 const urlParams = new URLSearchParams(window.location.search);
 const type = urlParams.get('type') || 'egypt'; // الافتراضي فرعوني إذا ما في نوع
-const data = config[type];
 
 // 3. تحديث الصفحة بناءً على الحضارة
-if (data) {
-    document.title = data.title;
-    document.getElementById('hero-title').innerText = data.heroTitle;
-    document.getElementById('hero-desc').innerText = data.heroDesc;
-    document.getElementById('dynamic-bg').innerHTML = `
-        .home { background-image: url(${data.image}); background-size: cover; height: 700px; background-attachment: fixed; }
-    `;
+async function loadCategoryInfo() {
+    try {
+        const res = await fetch(`backend/get_category.php?type=${type}`);
+        const result = await res.json();
+
+        if (result.success) {
+            const data = result.data;
+            
+            // تحديث العناوين بناءً على أعمدة جدول categories
+            document.title = data.title;
+            document.getElementById('hero-title').innerText = data.hero_title;
+            document.getElementById('hero-desc').innerText = data.hero_desc;
+            
+            // تحديث الخلفية بالصورة المخزنة في الداتا بيس
+            document.getElementById('dynamic-bg').innerHTML = `
+                .home { 
+                    background-image: url(${data.bg_image}); 
+                    background-size: cover; 
+                    height: 700px; 
+                    background-attachment: fixed; 
+                }
+            `;
+        }
+    } catch(e) {
+        console.error("خطأ في جلب بيانات الحضارة:", e);
+    }
 }
+
+// استدعاء الدالة فوراً
+loadCategoryInfo();
 
 
     const VISIBLE = 7;
