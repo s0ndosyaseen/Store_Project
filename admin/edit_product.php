@@ -3,6 +3,7 @@ if (session_status() === PHP_SESSION_NONE) { session_start(); }
 if (empty($_SESSION['is_admin'])) { header('Location: index.php'); exit; }
 require_once __DIR__ . '/../config/db.php';
 $pdo = getDB();
+$categories = $pdo->query("SELECT slug, title FROM categories ORDER BY id ASC")->fetchAll();
 
 $id = (int)$_GET['id'];
 $stmt = $pdo->prepare("SELECT * FROM products WHERE id = ?");
@@ -57,11 +58,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="number" name="price" min="0" value="<?= $product['price'] ?>" required>
             <input type="number" name="stock" min="0" value="<?= $product['stock'] ?>">
 
-            <select name="category">
-                <option value="andalus" <?= $product['category'] == 'andalus' ? 'selected' : '' ?>>أندلسية</option>
-                <option value="sham" <?= $product['category'] == 'sham' ? 'selected' : '' ?>>بلاد الشام</option>
-                <option value="victory" <?= $product['category'] == 'victory' ? 'selected' : '' ?>>فيكتورية</option>
-                <option value="egypt" <?= $product['category'] == 'egypt' ? 'selected' : '' ?>>فرعونية</option>
+            <select name="category" required>
+                <?php foreach ($categories as $category): ?>
+                    <option value="<?= htmlspecialchars($category['slug']) ?>" <?= $product['category'] == $category['slug'] ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($category['title']) ?>
+                    </option>
+                <?php endforeach; ?>
             </select>
 
             <select name="subcategory">
