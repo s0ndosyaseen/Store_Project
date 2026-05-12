@@ -242,3 +242,88 @@ body {
 .btn-logout i {
     font-size: 16px;
 }
+
+/* =========================
+   Responsive admin surfaces
+========================= */
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+}
+
+@media (max-width: 900px) {
+    header {
+        position: static;
+        padding: 14px 18px;
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 22px;
+        line-height: 1.4;
+    }
+
+    .main {
+        padding: 20px 14px;
+        overflow-x: auto;
+    }
+
+    .table-wrapper,
+    .chart-container,
+    table {
+        width: 100%;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 720px;
+    }
+
+    .chart-container {
+        height: 320px;
+        padding: 16px;
+    }
+
+    .filters {
+        padding-inline: 4px;
+    }
+}
+
+@media (max-width: 560px) {
+    header img {
+        height: 48px !important;
+    }
+
+    header h1 {
+        font-size: 19px;
+    }
+
+    .open-btn {
+        font-size: 22px;
+    }
+
+    .stat-card {
+        padding: 18px;
+    }
+
+    .stat-card .num {
+        font-size: 26px;
+    }
+
+    .btn-save,
+    .btn-details,
+    .btn-logout {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+}

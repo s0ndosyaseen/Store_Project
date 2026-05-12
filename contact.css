@@ -232,3 +232,58 @@ button i{
     }
 
 }
+
+@media(max-width:420px){
+
+    html,
+    body{
+        max-width:100%;
+        overflow-x:hidden;
+    }
+
+    .contact-section{
+        padding:28px 12px;
+    }
+
+    .contact-header{
+        margin-bottom:28px;
+    }
+
+    .contact-header h1{
+        font-size:28px;
+        line-height:1.35;
+    }
+
+    .contact-header p{
+        font-size:14px;
+        line-height:1.8;
+    }
+
+    .contact-info,
+    .contact-form-box{
+        padding:18px;
+        border-radius:16px;
+    }
+
+    .info-card{
+        gap:12px;
+        padding:14px;
+    }
+
+    .info-card i{
+        width:44px;
+        height:44px;
+        font-size:17px;
+    }
+
+    .contact-form-box h2{
+        font-size:22px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    button{
+        border-radius:12px;
+        font-size:14px;
+    }
+}

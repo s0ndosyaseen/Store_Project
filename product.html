@@ -237,6 +237,45 @@
             text-align:center; line-height:18px;
         }
         .cart-nav-link { position: relative; }
+
+        @media (max-width: 520px) {
+            .product-detail-page {
+                margin: 22px auto;
+                padding: 0 12px 34px;
+            }
+
+            .product-card-detail {
+                padding: 16px;
+                border-radius: 14px;
+                gap: 18px;
+            }
+
+            .product-info-detail h1 {
+                font-size: 22px;
+            }
+
+            .product-price-big {
+                font-size: 28px;
+            }
+
+            .product-image-wrap {
+                aspect-ratio: 4 / 5;
+            }
+
+            .quantity-section,
+            .qty-control,
+            .btn-back {
+                width: 100%;
+            }
+
+            .qty-control {
+                justify-content: space-between;
+            }
+
+            .qty-control input {
+                flex: 1;
+            }
+        }
     </style>
 </head>
 <body>
