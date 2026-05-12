@@ -24,6 +24,7 @@
             <li><a href="home.html">الرئيسية</a></li>
             <li><a href="home.html#story">قصتـنا</a></li>
             <li> <a href="home.html#categories">الـحضـارات</a></li>
+            <li><a href="my_orders.php" class="login-btn">تتبع الطلب</a></li>
             <!--  <li><a href="#">مـلابـس</a></li> -->
             <li><a href="login.html" class="login-btn login-link">تسجيل الدخول</a></li>
         </ul>
@@ -125,7 +126,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (data.success) {
                     Cart.showToast(data.message, 'success');
                     setTimeout(() => {
-                        window.location.href = 'home.html';
+                        window.location.href = data.redirect_url || 'my_orders.php';
                     }, 7000);
                 } else {
                     Cart.showToast(data.message || 'حدث خطأ في معالجة الطلب', 'error');

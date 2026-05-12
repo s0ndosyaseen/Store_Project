@@ -31,6 +31,7 @@
             <ul class="navbar">
                 <li><a href="home.html#story">قصتـنا</a></li>
                 <li> <a href="home.html#categories">الـحضـارات</a></li>
+                <li><a href="my_orders.php" class="login-btn">تتبع الطلب</a></li>
                 <!--
                 <li><a href="#">ديـكـور</a></li>
                 <li><a href="#">اكسـسوارات</a></li>
@@ -211,6 +212,43 @@
     <script src="bousala.js"></script>
 
      <script>
+        async function loadDynamicCategories() {
+            const slider = document.querySelector('#categories .slider');
+            if (!slider) return;
+
+            try {
+                const res = await fetch('backend/categories.php');
+                const data = await res.json();
+                if (!data.success || !Array.isArray(data.categories) || data.categories.length === 0) return;
+
+                slider.innerHTML = '';
+                data.categories.forEach(cat => {
+                    const image = cat.bg_image || 'images/logo.png';
+                    const card = document.createElement('div');
+                    card.className = 'hadara';
+                    card.style.backgroundImage = `linear-gradient(rgba(0,0,0,.10), rgba(0,0,0,.35)), url("${image}")`;
+
+                    const link = document.createElement('a');
+                    link.href = `category.php?type=${encodeURIComponent(cat.slug)}`;
+
+                    const title = document.createElement('h3');
+                    title.textContent = cat.title || cat.slug;
+
+                    const line = document.createElement('hr');
+                    line.className = 'line';
+
+                    link.appendChild(title);
+                    link.appendChild(line);
+                    card.appendChild(link);
+                    slider.appendChild(card);
+                });
+            } catch (e) {
+                console.error('تعذر تحميل الحضارات:', e);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadDynamicCategories);
+
         function toggleMute() {
     var video = document.getElementById("myVideo");
     var btn = document.getElementById("muteBtn");
