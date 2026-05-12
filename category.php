@@ -4,20 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="andalusia.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="bousala.js"></script>
-    <style>
-
-        .home{
-            background-image: url(images/shami.png) ;
-            height: 700px;
-            background-position: center;
-            background-size:contain; ;
-            background-attachment: fixed;
-        }
-    </style>
-    <title>sham</title>
+    <title id="dynamic-title">البوصلة</title>
+    <style id="dynamic-bg"></style>
 </head>
 <body>
 <div class="header">
@@ -45,16 +35,16 @@
     <div class="home" >
         <div class="container">
             <div class="home-pic">
-                <h1>سحر الشام يكتمل بكِ وبمنزلكِ</h1>
-                <p>من نقوش الحرير في أزيائنا إلى زخارف الياسمين في قطع الديكور، ننقل لكِ روح الحارة الدمشقية بكل تفاصيلها.</p>
-                <a href="home.html#categories">تسوق الآن !</a>
+             <h1 id="hero-title"></h1>
+                <p id="hero-desc"></p>
+                <a href="#categories">تسوق الآن !</a>
             </div>
 
         </div>
 
     </div>
     <!--start category  -->
-    <div class="category">
+    <div class="category" id="categories">
 
         <div class="above">
             <h2>استكشف الحضارات</h2>
@@ -64,29 +54,28 @@
         <div class="slider">
 
             <div class="hadara and">
-                <a href="andalus.html">
+                <a href="category.php?type=andalus">
                     <h3>الأنـدلــس</h3>
                     <hr class="line">
                 </a>
             </div>
 
             <div class="hadara ps">
-                <a href="sham.html">
+                <a href="category.php?type=sham">
                     <h3>بلاد الشـام</h3>
                     <hr class="line">
-                </a>
                 </a>
             </div>
 
             <div class="hadara fk">
-                <a href="victory.html">
+                <a href="category.php?type=victory">
                     <h3> الفكتورية </h3>
                     <hr class="line">
                 </a>
             </div>
-
+ 
             <div class="hadara egp">
-                <a href="egp.html">
+                <a href="category.php?type=egypt">
                     <h3>الفرعـونية</h3>
                     <hr class="line">
                 </a>
@@ -148,101 +137,60 @@
 
 </div>
 
+<?php include 'footer.php'; ?>
 
-
-
-
-
-<!-- footer -->
-<div class="footer">
-    <div class="horz">
-        <div class="feature-item">
-            <div class="icon-wrapper">
-                <i class="fa-solid fa-truck-fast"></i>
-            </div>
-            <h3>شحن دولي فاخر</h3>
-            <p>نصل إليك أينما كنت بتغليف يحمي القطع ويليق بقيمتها الفنية والتاريخية.</p>
-        </div>
-
-        <div class="feature-item">
-            <div class="icon-wrapper">
-                <i class="fa-solid fa-shield-check"></i> <i class="fa-solid fa-certificate"></i>
-            </div>
-            <h3>ضمان الأصالة</h3>
-            <p>كل قطعة تأتي مع شهادة توثيق توضح المصدر الثقافي والمواد المستخدمة في صناعتها.</p>
-        </div>
-
-        <div class="feature-item">
-            <div class="icon-wrapper">
-                <i class="fa-solid fa-rotate-left"></i>
-            </div>
-            <h3>استبدال سهل</h3>
-            <p>رضاكم هو أولويتنا، نوفر سياسة استبدال مرنة تضمن حصولكم على ما تطمحون إليه.</p>
-        </div>
-
-    </div>
-    <!-- footer  -->
-    <div class="horz">
-        <div class="footer-column newsletter">
-            <h4>هل لديكِ حساب؟</h4>
-            <div class="subscribe-form">
-                <input type="email" id="quick-email" placeholder="أدخلي بريدك الإلكتروني">
-                <button type="button" onclick="goToLogin()">تسجيل دخول</button>
-            </div>
-            <p>سجلي دخولك الآن لتتمكني من إتمام عملية الشراء ومتابعة طلباتك السابقة.</p>
-        </div>
-
-        <div class="footer-column">
-            <h4>التسوق</h4>
-            <ul>
-                <li><a href="andalus.html">الحضارة الأندلسية</a></li>
-                <li><a href="egp.html">الحضارة الفرعونية</a></li>
-                <li><a href="sham.html">الحضارة الشامية</a></li>
-                <li><a href="victory.html">الفيكتورية</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-column">
-            <h4>عن البوصلة</h4>
-            <ul>
-                <li><a href="home.html#story">قصتـنا</a></li>
-                <li><a href="#">الاستدامة</a></li>
-                <li><a href="#">تواصل معنا</a></li>
-                <li><a href="cart-full.html" class="login-btn">سلة المشتريات</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-logo">
-            <img src="images/logo.png" alt="البوصلة - موقع التراث والحضارات">
-        </div>
-    </div>
-
-    <div class="footer-bottom">
-        <div class="copyright">
-            <p>&copy; جميع الحقوق محفوظة لـ (Al-Bousala) البوصلة 2026</p>
-        </div>
-
-        <div class="social-icons">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-        </div>
-
-        <div class="bottom-links">
-            <a href="#">الشروط والأحكام</a>
-            <a href="#">سياسة الخصوصية</a>
-        </div>
-    </div>
-
-</div>
 <script>
+
+const config = {
+    'andalus': {
+        title: 'الحضارة الأندلسية',
+        heroTitle: 'عبق الأندلس يزين المكان',
+        heroDesc: 'قطع فنية مستوحاة من عظمة التاريخ الأندلسي، مصنوعة يدوياً.',
+        image: 'images/bgand.png' 
+    },
+    'sham': {
+        title: 'بلاد الشام',
+        heroTitle: 'سحر الشام يكتمل بكِ',
+        heroDesc: 'من نقوش الحرير إلى زخارف الياسمين، ننقل لكِ روح الحارة الدمشقية.',
+        image: 'images/shami.png'
+    },
+    'egypt': {
+        title: 'الحضارة الفرعونية',
+        heroTitle: 'سحرُ الخلود يحيطُ بكِ',
+        heroDesc: 'قطعٌ نُحتت من روحِ التاريخ، لتعيدَ إحياءَ هيبةِ الملوك.',
+        image: 'images/phi.png'
+    },
+    'victory': {
+        title: 'العصر الفيكتوري',
+        heroTitle: 'أناقة ملكية تتجاوز الزمان',
+        heroDesc: 'تصاميم تفيض بالأنوثة، مستوحاة من رقي العصر الفيكتوري.',
+        image: 'images/vic.png'
+    }
+};
+
+
+const urlParams = new URLSearchParams(window.location.search);
+const type = urlParams.get('type') || 'egypt'; // الافتراضي فرعوني إذا ما في نوع
+const data = config[type];
+
+// 3. تحديث الصفحة بناءً على الحضارة
+if (data) {
+    document.title = data.title;
+    document.getElementById('hero-title').innerText = data.heroTitle;
+    document.getElementById('hero-desc').innerText = data.heroDesc;
+    document.getElementById('dynamic-bg').innerHTML = `
+        .home { background-image: url(${data.image}); background-size: cover; height: 700px; background-attachment: fixed; }
+    `;
+}
+
+
     const VISIBLE = 7;
     let allProducts = [];
 
     document.addEventListener('DOMContentLoaded', async () => {
         const grid = document.getElementById('products-grid');
         try {
-            const res  = await fetch('backend/products.php?action=list&category=sham');
+            const res  = await fetch(`backend/products.php?action=list&category=${type}`);
             const data = await res.json();
             if (!data.success || !data.products.length) {
                 grid.innerHTML = '<p style="text-align:center;padding:40px;color:#999;grid-column:1/-1">لا توجد منتجات حالياً</p>';
@@ -273,8 +221,7 @@
                 const priceInRange = productPrice >= minPrice && productPrice <= maxPrice;
                 const matchesSearch = !searchText || p.name.toLowerCase().includes(searchText);
 
-                // إذا ما اختارت فئات، كل المنتجات تمر
-                // إذا اختارت، المنتج لازم يكون في إحدى الفئات المختارة
+
                 const matchesCategory = selectedCategories.length === 0 ||
                     selectedCategories.includes(p.subcategory);
 
@@ -286,7 +233,7 @@
             if(btn) btn.style.display = 'none';
         }
 
-        // معالج تغيير الحد الأدنى
+        //  تغيير الحد الأدنى
         document.getElementById('rangeMin').addEventListener('input', function() {
             const minPrice = parseFloat(this.value);
             const maxPrice = parseFloat(document.getElementById('rangeMax').value);
@@ -297,7 +244,7 @@
             applyFilters();
         });
 
-        // معالج تغيير الحد الأقصى
+        //  تغيير الحد الأقصى
         document.getElementById('rangeMax').addEventListener('input', function() {
             const maxPrice = parseFloat(this.value);
             const minPrice = parseFloat(document.getElementById('rangeMin').value);
@@ -308,13 +255,12 @@
             applyFilters();
         });
 
-        // معالج البحث بالأسماء
+        //  البحث 
         const searchInput = document.getElementById('search-products');
         if (searchInput) {
             searchInput.addEventListener('input', applyFilters);
         }
 
-        // معالج فلاتر الفئات الفرعية
         document.querySelectorAll('.subcategory-filter').forEach(checkbox => {
             checkbox.addEventListener('change', applyFilters);
         });
@@ -357,8 +303,7 @@
             window.location.href = `login.html`;
         }
     }
+
 </script>
-
-
 </body>
 </html>
