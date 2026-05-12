@@ -405,28 +405,120 @@ function stepClass(string $step, string $current, array $steps): string {
         }
 
         @media (max-width: 850px) {
+            .orders-shell {
+                width: calc(100% - 22px);
+                margin: 18px auto 46px;
+            }
+
+            .orders-hero {
+                min-height: 210px;
+                padding: 24px 18px;
+                border-radius: 14px;
+            }
+
             .orders-stats,
             .order-body {
                 grid-template-columns: 1fr;
             }
 
+            .orders-stats {
+                gap: 10px;
+                margin: 14px 0 16px;
+            }
+
+            .stat-box {
+                padding: 14px 16px;
+            }
+
+            .order-card {
+                border-radius: 14px;
+            }
+
             .order-top {
                 flex-direction: column;
+                padding: 18px;
+                gap: 12px;
+            }
+
+            .status-pill {
+                align-self: stretch;
+                justify-content: center;
             }
 
             .timeline {
-                grid-template-columns: 1fr;
-                gap: 8px;
+                grid-template-columns: repeat(4, minmax(74px, 1fr));
+                gap: 6px;
+                padding: 16px 12px 4px;
+                overflow-x: auto;
+                scrollbar-width: none;
+            }
+
+            .timeline::-webkit-scrollbar {
+                display: none;
             }
 
             .track-step {
-                grid-template-columns: 36px 1fr;
-                justify-items: start;
-                text-align: right;
+                min-width: 74px;
+                font-size: 11px;
+                text-align: center;
+                justify-items: center;
             }
 
             .track-step::before {
-                display: none;
+                display: block;
+                top: 16px;
+            }
+
+            .track-step i {
+                width: 34px;
+                height: 34px;
+            }
+
+            .order-body {
+                padding: 16px;
+            }
+
+            .order-item {
+                grid-template-columns: 52px 1fr;
+            }
+
+            .order-item img {
+                width: 52px;
+                height: 52px;
+            }
+
+            .order-item > strong {
+                grid-column: 2;
+                justify-self: start;
+                font-size: 13px;
+            }
+
+            .summary-box {
+                padding: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .orders-hero h1 {
+                font-size: 28px;
+            }
+
+            .orders-hero p {
+                font-size: 14px;
+                line-height: 1.8;
+            }
+
+            .empty-panel {
+                padding: 30px 16px;
+            }
+
+            .order-title h2 {
+                font-size: 18px;
+            }
+
+            .action-row a {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>

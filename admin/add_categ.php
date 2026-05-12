@@ -168,21 +168,82 @@ $messageType = $_GET['type'] ?? 'success';
             width: min(1180px, calc(100% - 32px));
             margin: 28px auto 50px;
             display: grid;
-            grid-template-columns: 380px 1fr;
-            gap: 22px;
+            grid-template-columns: minmax(320px, 400px) minmax(0, 1fr);
+            gap: 20px;
             align-items: start;
+        }
+
+        .categories-hero {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+            padding: 24px;
+            border-radius: 18px;
+            background:
+                linear-gradient(135deg, rgba(26,26,46,.95), rgba(135,103,35,.72)),
+                url('../images/shope_background.png');
+            color: #fff;
+            box-shadow: 0 16px 38px rgba(58, 43, 18, .14);
+        }
+
+        .categories-hero .eyebrow {
+            display: inline-flex;
+            background: rgba(255,255,255,.12);
+            color: #f9e7ba;
+            border: 1px solid rgba(255,255,255,.16);
+            border-radius: 999px;
+            padding: 4px 11px;
+            font-size: 12px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .categories-hero h2 {
+            margin: 0 0 6px;
+            font-size: 28px;
+            color: #fff;
+        }
+
+        .categories-hero p {
+            margin: 0;
+            color: #f5dfae;
+        }
+
+        .hero-count {
+            min-width: 112px;
+            display: grid;
+            place-items: center;
+            padding: 14px;
+            border-radius: 16px;
+            background: rgba(255,255,255,.12);
+            border: 1px solid rgba(255,255,255,.16);
+        }
+
+        .hero-count strong {
+            font-size: 34px;
+            line-height: 1;
+        }
+
+        .hero-count span {
+            color: #f9e7ba;
+            font-size: 13px;
+            font-weight: 800;
         }
 
         .panel {
             background: rgba(255, 255, 255, 0.96);
             border: 1px solid rgba(135, 103, 35, 0.18);
-            border-radius: 14px;
-            box-shadow: 0 12px 30px rgba(48, 39, 23, 0.10);
+            border-radius: 18px;
+            box-shadow: 0 14px 34px rgba(48, 39, 23, 0.09);
+            overflow: hidden;
         }
 
         .panel-head {
             padding: 20px 22px 14px;
             border-bottom: 1px solid #f0e4c9;
+            background: #fffaf0;
         }
 
         .panel-head h2,
@@ -323,7 +384,11 @@ $messageType = $_GET['type'] ?? 'success';
 
         .table-wrap {
             overflow-x: auto;
-            border-radius: 0 0 14px 14px;
+            border-radius: 0 0 18px 18px;
+        }
+
+        .table-wrap table {
+            min-width: 760px;
         }
 
         .category-thumb {
@@ -383,9 +448,88 @@ $messageType = $_GET['type'] ?? 'success';
                 margin-top: 18px;
             }
 
-            .form-actions .btn,
-            .table-actions .btn {
+            .form-actions .btn {
                 width: 100%;
+            }
+
+            .table-actions .btn {
+                width: auto;
+                min-width: 84px;
+            }
+
+            .categories-hero {
+                align-items: stretch;
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .categories-hero h2 {
+                font-size: 23px;
+            }
+
+            .hero-count {
+                width: 100%;
+                grid-template-columns: auto auto;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .table-wrap table {
+                min-width: 0;
+                border-collapse: separate;
+                border-spacing: 0 12px;
+                background: transparent;
+                padding: 0 12px 12px;
+            }
+
+            .table-wrap thead {
+                display: none;
+            }
+
+            .table-wrap table,
+            .table-wrap tbody,
+            .table-wrap tr,
+            .table-wrap td {
+                display: block;
+                width: 100%;
+            }
+
+            .table-wrap tr {
+                background: #fff;
+                border: 1px solid #eadfc8;
+                border-radius: 14px;
+                padding: 12px;
+                box-shadow: 0 8px 20px rgba(58,43,18,.06);
+            }
+
+            .table-wrap td {
+                display: flex;
+                justify-content: space-between;
+                gap: 14px;
+                padding: 9px 4px;
+                border-bottom: 1px solid #f2e7d3;
+                text-align: left;
+            }
+
+            .table-wrap td:last-child {
+                border-bottom: 0;
+            }
+
+            .table-wrap td::before {
+                content: attr(data-label);
+                color: #7a5a20;
+                font-weight: 800;
+                text-align: right;
+                flex: 0 0 96px;
+            }
+
+            .category-thumb {
+                width: 112px;
+                height: 74px;
+            }
+
+            .table-actions {
+                justify-content: flex-end;
             }
         }
     </style>
@@ -416,6 +560,18 @@ $messageType = $_GET['type'] ?? 'success';
 <?php endif; ?>
 
 <main class="categories-page">
+    <section class="categories-hero">
+        <div>
+            <span class="eyebrow">إدارة الواجهة</span>
+            <h2>الحضارات المعروضة في المتجر</h2>
+            <p>أضيفي حضارة جديدة أو عدلي بيانات الواجهة والصورة التي تظهر للمستخدم.</p>
+        </div>
+        <div class="hero-count">
+            <strong><?= count($categories) ?></strong>
+            <span>حضارة</span>
+        </div>
+    </section>
+
     <section class="panel">
         <div class="panel-head">
             <h2>
@@ -498,16 +654,16 @@ $messageType = $_GET['type'] ?? 'success';
                     <tbody>
                     <?php foreach ($categories as $category): ?>
                         <tr>
-                            <td>
+                            <td data-label="الصورة">
                                 <img class="category-thumb" src="<?= htmlspecialchars(imageUrl($category['bg_image'] ?? '')) ?>" alt="">
                             </td>
-                            <td>
+                            <td data-label="الحضارة">
                                 <strong><?= htmlspecialchars($category['title'] ?? '') ?></strong>
                                 <div class="muted"><?= htmlspecialchars($category['hero_title'] ?? '') ?></div>
                             </td>
-                            <td><span class="slug"><?= htmlspecialchars($category['slug'] ?? '') ?></span></td>
-                            <td class="muted"><?= htmlspecialchars(shortText($category['hero_desc'] ?? '')) ?></td>
-                            <td>
+                            <td data-label="الاسم البرمجي"><span class="slug"><?= htmlspecialchars($category['slug'] ?? '') ?></span></td>
+                            <td data-label="الوصف" class="muted"><?= htmlspecialchars(shortText($category['hero_desc'] ?? '')) ?></td>
+                            <td data-label="إجراءات">
                                 <div class="table-actions">
                                     <a class="btn btn-edit" href="add_categ.php?edit=<?= (int)$category['id'] ?>">
                                         <i class="fas fa-edit"></i>

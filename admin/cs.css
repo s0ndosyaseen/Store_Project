@@ -327,3 +327,470 @@ img {
         text-align: center;
     }
 }
+
+/* =========================
+   Refined Dashboard Design
+========================= */
+
+.admin-dashboard {
+    width: min(1220px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 28px 0 44px;
+}
+
+.dashboard-head,
+.orders-panel {
+    background: rgba(255,255,255,.94);
+    border: 1px solid rgba(135,103,35,.16);
+    border-radius: 18px;
+    box-shadow: 0 14px 35px rgba(58,43,18,.08);
+}
+
+.dashboard-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.eyebrow {
+    display: inline-flex;
+    color: #876723;
+    background: #f6ead2;
+    border: 1px solid #ead8b8;
+    border-radius: 999px;
+    padding: 4px 11px;
+    font-size: 12px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.dashboard-head h2 {
+    color: #1a1a2e;
+    font-size: 28px;
+    margin: 0 0 4px;
+}
+
+.dashboard-head p,
+.orders-panel-head p {
+    color: #7a6a48;
+    margin: 0;
+}
+
+.dashboard-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.dashboard-actions a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 15px;
+    border-radius: 12px;
+    background: #1a1a2e;
+    color: #f8e7bd;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 13px;
+}
+
+.dashboard-actions a i {
+    color: #c4a35a;
+}
+
+.admin-dashboard .stats {
+    grid-template-columns: repeat(6, minmax(130px, 1fr));
+    gap: 14px;
+}
+
+.admin-dashboard .stat-card {
+    min-height: 122px;
+    display: grid;
+    align-content: center;
+    border: 1px solid rgba(135,103,35,.13);
+    border-right: 0;
+    border-top: 4px solid #c4a35a;
+    border-radius: 16px;
+    box-shadow: 0 10px 24px rgba(58,43,18,.07);
+}
+
+.admin-dashboard .stat-card .num {
+    color: #1a1a2e;
+    font-size: 26px;
+}
+
+.admin-dashboard .stat-card .lbl {
+    color: #806b3a;
+}
+
+.dashboard-charts {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(320px, .9fr);
+    gap: 18px;
+    margin-bottom: 22px;
+}
+
+.dashboard-charts .chart-container {
+    margin-bottom: 0;
+    height: 360px;
+    border: 1px solid rgba(135,103,35,.14);
+    border-radius: 18px;
+    box-shadow: 0 14px 35px rgba(58,43,18,.08);
+}
+
+.orders-panel {
+    overflow: hidden;
+}
+
+.orders-panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 22px 14px;
+    border-bottom: 1px solid #f0e4c9;
+}
+
+.orders-panel-head h3 {
+    margin: 0 0 4px;
+    color: #1a1a2e;
+    font-size: 19px;
+}
+
+.orders-panel-head h3 i {
+    color: #c4a35a;
+}
+
+.admin-table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.orders-table th {
+    background: #f5ead3;
+    color: #5b4215;
+    white-space: nowrap;
+}
+
+.orders-table td {
+    color: #342713;
+    vertical-align: middle;
+}
+
+.orders-table td form {
+    min-width: 220px;
+}
+
+@media (max-width: 1180px) {
+    .admin-dashboard .stats {
+        grid-template-columns: repeat(3, minmax(150px, 1fr));
+    }
+
+    .dashboard-charts {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 760px) {
+    .admin-dashboard {
+        width: calc(100% - 18px);
+        padding-top: 16px;
+    }
+
+    .dashboard-head {
+        display: grid;
+        padding: 18px;
+        gap: 16px;
+    }
+
+    .dashboard-head h2 {
+        font-size: 23px;
+    }
+
+    .dashboard-actions a {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .admin-dashboard .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .admin-dashboard .stat-card {
+        min-height: 104px;
+        padding: 16px 10px;
+    }
+
+    .admin-dashboard .stat-card .num {
+        font-size: 22px;
+    }
+
+    .dashboard-charts .chart-container {
+        height: 300px !important;
+    }
+
+    .orders-panel-head {
+        padding: 18px;
+    }
+
+    .orders-table {
+        min-width: 0 !important;
+        border-collapse: separate;
+        border-spacing: 0 12px;
+        background: transparent;
+        padding: 0 12px 12px;
+    }
+
+    .orders-table thead {
+        display: none;
+    }
+
+    .orders-table,
+    .orders-table tbody,
+    .orders-table tr,
+    .orders-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .orders-table tr {
+        background: #fff;
+        border: 1px solid #eadfc8;
+        border-radius: 14px;
+        padding: 12px;
+        box-shadow: 0 8px 20px rgba(58,43,18,.06);
+    }
+
+    .orders-table td {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 9px 4px;
+        border-bottom: 1px solid #f2e7d3;
+        text-align: left;
+    }
+
+    .orders-table td:last-child {
+        border-bottom: 0;
+    }
+
+    .orders-table td::before {
+        content: attr(data-label);
+        color: #7a5a20;
+        font-weight: 800;
+        text-align: right;
+        flex: 0 0 92px;
+    }
+
+    .orders-table td form {
+        min-width: 0;
+        width: 100%;
+        justify-content: flex-end;
+        flex-wrap: wrap !important;
+    }
+}
+
+@media (max-width: 460px) {
+    .admin-dashboard .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Polished mobile admin override */
+@media (max-width: 900px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    header {
+        position: sticky !important;
+        top: 0;
+        display: grid !important;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px !important;
+        text-align: center;
+    }
+
+    header > div:first-child {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+    }
+
+    header > div:first-child a {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 80px;
+    }
+
+    header h1 {
+        min-width: 0;
+        margin: 0;
+        font-size: clamp(16px, 4vw, 21px) !important;
+        line-height: 1.35;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    header img {
+        justify-self: end;
+        height: 44px !important;
+        width: 44px !important;
+        object-fit: contain;
+    }
+
+    header > a,
+    header .btn-add {
+        justify-self: end;
+        white-space: nowrap;
+        max-width: 42vw;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .open-btn {
+        width: 42px;
+        height: 42px;
+        display: inline-grid;
+        place-items: center;
+        border-radius: 10px;
+        background: rgba(135, 103, 35, .12);
+    }
+
+    .main,
+    .settings-grid,
+    .categories-page {
+        width: min(100% - 20px, 1180px) !important;
+        margin-inline: auto !important;
+        padding: 18px 0 !important;
+    }
+
+    .settings-grid,
+    .categories-page {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+
+    .form-card,
+    .panel,
+    .form-container,
+    .table-wrapper {
+        border-radius: 14px !important;
+        padding: 18px !important;
+    }
+
+    .form-container {
+        width: min(100% - 20px, 680px) !important;
+        margin: 18px auto !important;
+    }
+
+    .chart-container {
+        min-height: 300px;
+        height: 300px !important;
+    }
+
+    .main > div[style*="grid-template-columns"] {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+
+    .table-wrapper,
+    .table-wrap,
+    .main {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+        min-width: 680px;
+    }
+
+    .actions-cell,
+    .table-actions,
+    td form[style*="display:flex"] {
+        display: flex !important;
+        flex-wrap: nowrap;
+        gap: 8px;
+        align-items: center;
+    }
+
+    input,
+    select,
+    textarea,
+    button,
+    .btn,
+    .btn-add,
+    .btn-edit,
+    .btn-delete,
+    .btn-save,
+    .btn-details {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 560px) {
+    header {
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        gap: 8px;
+    }
+
+    header h1 {
+        font-size: 16px !important;
+    }
+
+    header img {
+        height: 38px !important;
+        width: 38px !important;
+    }
+
+    header > a,
+    header .btn-add {
+        max-width: 34vw;
+        padding-inline: 10px !important;
+        font-size: 12px !important;
+    }
+
+    .main,
+    .settings-grid,
+    .categories-page {
+        width: calc(100% - 16px) !important;
+    }
+
+    .form-card,
+    .panel,
+    .form-container,
+    .table-wrapper {
+        padding: 14px !important;
+    }
+
+    .stats {
+        gap: 12px;
+    }
+
+    .filters {
+        justify-content: flex-start;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .filters::-webkit-scrollbar {
+        display: none;
+    }
+}

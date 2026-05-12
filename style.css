@@ -709,3 +709,50 @@ video {
         padding-top: 250px;
     }
 }
+
+/* Cleaner mobile nav override */
+@media (max-width: 768px) {
+    .header {
+        overflow: visible;
+    }
+
+    .header .navbar {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 4px 14px 10px;
+        scroll-snap-type: x proximity;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .header .navbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .header .navbar li {
+        width: auto;
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+    }
+
+    .header .navbar li a {
+        width: auto;
+        white-space: nowrap;
+        background: #fff6e8;
+        border: 1px solid rgba(166,124,55,.18);
+        color: #8a5f1e;
+        box-shadow: 0 4px 12px rgba(95, 60, 18, .06);
+    }
+
+    .home .home-pic {
+        top: 58%;
+    }
+}
+
+@media (max-width: 430px) {
+    .header .navbar li {
+        width: auto;
+    }
+}
