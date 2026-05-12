@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2026 at 11:11 PM
+-- Generation Time: May 12, 2026 at 11:33 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -44,6 +44,32 @@ INSERT INTO `cart_items` (`id`, `user_id`, `session_id`, `product_id`, `quantity
 (38, NULL, 'kd1e8esfh1hokmsh7h6aa9vfur', 1, 2, '2026-05-08 15:14:55'),
 (39, NULL, 'kd1e8esfh1hokmsh7h6aa9vfur', 2, 1, '2026-05-08 15:14:57'),
 (40, NULL, 'kd1e8esfh1hokmsh7h6aa9vfur', 3, 1, '2026-05-08 15:14:59');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL,
+  `slug` varchar(50) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `hero_title` varchar(200) DEFAULT NULL,
+  `hero_desc` text DEFAULT NULL,
+  `bg_image` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `slug`, `title`, `hero_title`, `hero_desc`, `bg_image`) VALUES
+(1, 'andalus', 'الحضارة الأندلسية', 'عبق الأندلس يزين المكان', 'قطع فنية مستوحاة من عظمة التاريخ الأندلسي، مصنوعة يدوياً.', 'images/bgand.png'),
+(2, 'sham', 'بلاد الشام', 'سحر الشام يكتمل بكِ', 'من نقوش الحرير إلى زخارف الياسمين، ننقل لكِ روح الحارة الدمشقية.', 'images/shami.png'),
+(3, 'egypt', 'الحضارة الفرعونية', 'سحرُ الخلود يحيطُ بكِ', 'قطعٌ نُحتت من روحِ التاريخ، لتعيدَ إحياءَ هيبةِ الملوك.', 'images/phi.png'),
+(4, 'victory', 'العصر الفيكتوري', 'أناقة ملكية تتجاوز الزمان', 'تصاميم تفيض بالأنوثة، مستوحاة من رقي العصر الفيكتوري.', 'images/vic.png'),
+(5, 'othmani', 'الحضارة العثمانية', 'الحضارة العثمانية  تفوح بعبق الاصالة', 'هي الجمال حين يجمع عبق العرب ونقش الاتراك.', 'images/category_20260512_233159_d9e1e46f.png');
 
 -- --------------------------------------------------------
 
@@ -103,7 +129,8 @@ INSERT INTO `orders` (`id`, `user_id`, `fname`, `lname`, `email`, `phone`, `addr
 (32, 1, 'guyjk,', 'gk.jlvgkjh', 'sondos.yaseen@gmail.com', '0594916840', 'ljhblin', 5000.00, 50.00, 250.00, 4800.00, 'pending', '2026-05-06 10:10:56'),
 (33, 1, 'sondos', 'yaseen', 'sondos.yaseen@gmail.com', '0598352860', 'kilo', 4100.00, 50.00, 205.00, 3945.00, 'confirmed', '2026-05-04 15:39:30'),
 (34, NULL, 'sondos', 'yaseen', 'sondos.yaseen@gmail.com', '0598352860', 'kkl', 6110.00, 50.00, 305.50, 5854.50, 'pending', '2026-05-03 14:56:28'),
-(35, 1, 'sondos', 'yaseen', 'sondos.yaseen@gmail.com', '0598352860', 'allt', 16800.00, 50.00, 840.00, 16010.00, 'shipped', '2026-05-02 09:47:27');
+(35, 1, 'sondos', 'yaseen', 'sondos.yaseen@gmail.com', '0598352860', 'allt', 16800.00, 50.00, 840.00, 16010.00, 'shipped', '2026-05-02 09:47:27'),
+(36, 4, 'sandi', 'yaseen', 'sabaayaseen52@gmail.com', '0594916840', 'nablus', 5450.00, 50.00, 272.50, 5227.50, 'delivered', '2026-05-12 20:06:40');
 
 -- --------------------------------------------------------
 
@@ -134,7 +161,10 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `product_name`, `quan
 (10, 26, 2, 'وشاح حرير مزخرف', 2, 1200.00),
 (11, 27, 7, 'ثوب ملكي من حيفا', 6, 2800.00),
 (18, 30, 6, 'ثوب فلسطيني تقليدي', 1, 2500.00),
-(19, 30, 8, 'برقع + عرجة', 1, 2500.00);
+(19, 30, 8, 'برقع + عرجة', 1, 2500.00),
+(20, 36, 6, 'ثوب فلسطيني تقليدي', 1, 2500.00),
+(21, 36, 8, 'برقع + عرجة', 1, 2500.00),
+(22, 36, 3, 'مصباح نحاسي تراثي', 1, 450.00);
 
 -- --------------------------------------------------------
 
@@ -148,7 +178,7 @@ CREATE TABLE `products` (
   `description` text DEFAULT NULL,
   `price` decimal(10,2) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `category` enum('andalus','sham','victory','egypt') NOT NULL,
+  `category` varchar(50) NOT NULL,
   `stock` int(11) DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `subcategory` enum('ديكور','اكسسوارات','ملابس') NOT NULL DEFAULT 'ديكور'
@@ -161,12 +191,12 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `category`, `stock`, `created_at`, `subcategory`) VALUES
 (1, 'طقم أواني خزف أندلسي', 'طقم فاخر مصنوع من السيراميك عالي الجودة، مزين بنقوش هندسية مستوحاة من قصر الحمراء، يضيف لمسة ملكية على مائدتك.', 850.00, 'images/item1.png', 'andalus', 17, '2026-05-07 11:08:26', 'ديكور'),
 (2, 'وشاح حرير مزخرف', 'وشاح من الحرير الطبيعي الناعم، يتميز بألوان زاهية وزخارف نباتية دقيقة، مثالي لإطلالة راقية وعصرية بلمسة تراثية.', 1200.00, 'images/item2.png', 'andalus', 10, '2026-05-07 11:08:26', 'اكسسوارات'),
-(3, 'مصباح نحاسي تراثي', 'قطعة فنية مشغولة يدوياً من النحاس الخالص، تعكس ظلالاً ساحرة وتضفي أجواءً من الدفء والأصالة على زوايا منزلك.', 450.00, 'images/item3.png', 'andalus', 27, '2026-05-07 11:08:26', 'ديكور'),
+(3, 'مصباح نحاسي تراثي', 'قطعة فنية مشغولة يدوياً من النحاس الخالص، تعكس ظلالاً ساحرة وتضفي أجواءً من الدفء والأصالة على زوايا منزلك.', 450.00, 'images/item3.png', 'andalus', 26, '2026-05-07 11:08:26', 'ديكور'),
 (4, 'طقم أندلوسي فاخر جدًا', 'سخة حصرية وراقية بتفاصيل مذهبة دقيقة، مصمم خصيصاً للمناسبات الكبرى ولمحبي الاقتناء المتميز.', 3200.00, 'images/item4.png', 'andalus', 8, '2026-05-07 11:08:26', 'ملابس'),
 (5, 'سجادة صلاة تقليدية', 'سجادة صلاة مريحة مبطنة، محاكة بخيوط متينة وتصميم كلاسيكي يجمع بين البساطة والروحانية.', 980.00, 'images/item5.png', 'andalus', 11, '2026-05-07 11:08:26', 'ديكور'),
-(6, 'ثوب فلسطيني تقليدي', 'قطعة تراثية فريدة تجسد الهوية الفلسطينية، مطرزة يدوياً بدقة عالية وبألوان كلاسيكية تعكس عراقة الماضي وأصالة الحرفة.', 2500.00, 'images/item11.png', 'sham', 9, '2026-04-23 08:01:26', 'ملابس'),
+(6, 'ثوب فلسطيني تقليدي', 'قطعة تراثية فريدة تجسد الهوية الفلسطينية، مطرزة يدوياً بدقة عالية وبألوان كلاسيكية تعكس عراقة الماضي وأصالة الحرفة.', 2500.00, 'images/item11.png', 'sham', 8, '2026-04-23 08:01:26', 'ملابس'),
 (7, 'ثوب ملكي من حيفا', 'تصميم فاخر مستوحى من جمال مدينة حيفا، يتميز بقصات ملكية وتفاصيل تطريز غنية تجعل منه خياراً مثالياً للمناسبات الكبرى والباحثات عن التميز.', 2800.00, 'images/item12.png', 'sham', 0, '2026-05-07 11:08:26', 'ملابس'),
-(8, 'برقع + عرجة', 'طقم إكسسوارات تراثي يجمع بين \"العرجة\" المزدانة بالقطع المعدنية والبرقع التقليدي، لإضافة لمسة أصيلة وجمالية على الزي الشعبي', 2500.00, 'images/item13.png', 'sham', 2, '2026-05-07 11:08:26', 'اكسسوارات'),
+(8, 'برقع + عرجة', 'طقم إكسسوارات تراثي يجمع بين \"العرجة\" المزدانة بالقطع المعدنية والبرقع التقليدي، لإضافة لمسة أصيلة وجمالية على الزي الشعبي', 2500.00, 'images/item13.png', 'sham', 1, '2026-05-07 11:08:26', 'اكسسوارات'),
 (9, 'خاتم تطريز يدوي ذهبي', 'قطعة فنية صغيرة تحمل تفاصيل التطريز الدقيق داخل إطار ذهبي أنيق، لتمزج بين الحداثة في التصميم وجمال التراث اليدوي.', 1500.00, 'images/item14.png', 'sham', 18, '2026-05-07 11:08:26', 'اكسسوارات'),
 (10, 'بلاط السيراميك الشامي', 'قطعة ديكور فاخرة مستوحاة من البيوت الشامية القديمة، تتميز بزخارف هندسية ملونة تضفي لمسة فنية وروحاً دمشقية على أركان المنزل.', 750.00, 'images/item15.png', 'sham', 22, '2026-05-07 11:08:26', 'ديكور'),
 (11, 'فستان الكرينولين الفكتوري', 'فستان فاخر يجسد أناقة العصر الفيكتوري بامتياز، يتميز بتصميم التنورة الواسعة المدعومة بإطار الكرينولين التقليدي، مع تفاصيل دقيقة من الدانتيل والحرير لإطلالة ملكية تاريخية.', 3600.00, 'images/item21.png', 'victory', 6, '2026-05-07 11:08:26', 'ملابس'),
@@ -240,7 +270,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`) VALUES
-(1, 'sondos', 'sondos.yaseen@gmail.com', '$2y$12$flnU8wOvlFAuBpXQUcOZo.Flx38kzrDHuT7Ek/GiLdc5vvyHjIJDG', '2026-05-07 09:06:10');
+(1, 'sondos', 'sondos.yaseen@gmail.com', '$2y$12$flnU8wOvlFAuBpXQUcOZo.Flx38kzrDHuT7Ek/GiLdc5vvyHjIJDG', '2026-05-07 09:06:10'),
+(4, 'sabaa', 'sabaayaseen52@gmail.com', '$2y$12$VT4ancvx.mOn6rCTFrv9JuD4ZAaHqGneyaz3L31epfQu/.IP5td8i', '2026-05-12 20:05:54');
 
 --
 -- Indexes for dumped tables
@@ -253,6 +284,13 @@ ALTER TABLE `cart_items`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `slug` (`slug`);
 
 --
 -- Indexes for table `contact_messages`
@@ -301,7 +339,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `contact_messages`
@@ -313,13 +357,13 @@ ALTER TABLE `contact_messages`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -331,7 +375,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
