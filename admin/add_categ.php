@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/_auth.php';
+require_once __DIR__ . '/../config/db.php';
+$pdo = getDB();
 
 $errors = [];
 $editCategory = null;
