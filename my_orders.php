@@ -589,7 +589,9 @@ function stepClass(string $step, string $current, array $steps): string {
         </section>
     <?php else: ?>
         <?php
-            $activeOrders = array_filter($orders, fn($order) => !in_array($order['status'], ['delivered', 'cancelled'], true));
+        $activeOrders = array_filter($orders, function($order) {
+            return !in_array($order['status'], ['delivered', 'cancelled'], true);
+        });
             $latestOrder = $orders[0];
         ?>
         <section class="orders-stats">
