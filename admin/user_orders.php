@@ -8,7 +8,7 @@ $pdo = getDB();
 $user_id = (int)($_GET['user_id'] ?? 0);
 $user_name = $_GET['name'] ?? 'المستخدم';
 
-// جلب طلبات المستخدم
+
 $stmt = $pdo->prepare("SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC");
 $stmt->execute([$user_id]);
 $user_orders = $stmt->fetchAll();

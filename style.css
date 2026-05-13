@@ -1,9 +1,7 @@
-
 *{
     padding: 0;
     margin: 0;
   box-sizing: border-box;
-
 }
 .body{
     background-color:bisque;
@@ -13,14 +11,10 @@
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
-   /* background-color: aqua; */
-   /* height: 1000px; */
-   
 }
 .header .logo{
     float :left ;
      WIDTH: 37%;
-
 }
  .header .navbar li{
 display: inline-block;
@@ -28,7 +22,6 @@ padding: 10PX;
 margin-top: 68px;
 font-size: 20px;
 font-weight: bold;
-
  }
 .header .navbar li a{
     text-decoration: none;
@@ -41,13 +34,10 @@ font-weight: bold;
 .header .logo img{
  width: 100%;
 }
-
  .header .navbar{
     float: right;
     margin-right: 51px;
  }
-
- /* start home */
 .home{
     background-image: url(images/ho.png) ;
     height: 700px;
@@ -55,16 +45,13 @@ font-weight: bold;
     background-size:cover ;
     background-attachment: fixed;
 }
-
 .home .home-pic{
 position: absolute;
 left: 50%;
 top :60%;
 text-align: center;
 transform: translate(-50%,-50%);
-
 }
-
 .home .home-pic h1{
     color:antiquewhite;
     font-size: 70px;
@@ -72,7 +59,6 @@ transform: translate(-50%,-50%);
 .home .home-pic p{
     color: antiquewhite;
     font-size: 20px;
-
 }
 .home .home-pic a{
     text-decoration: none;
@@ -81,20 +67,13 @@ transform: translate(-50%,-50%);
     padding: 10px 50px;
     margin: 22px;
     display: inline-block;
-
 }
-
-
-
-/* start classes */
-
 .slider{
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     gap: 20px;
     padding: 20px;
-    
 }
 .slider::-webkit-scrollbar {
     display: none;
@@ -102,7 +81,6 @@ transform: translate(-50%,-50%);
 .above{
     display: inline-block;
     margin: 20px;
- 
 }
 .above h3{
     color: rgb(83, 87, 87);
@@ -114,36 +92,27 @@ transform: translate(-50%,-50%);
   background-position: center;
 background-size: cover; 
 background-repeat: no-repeat; 
-
 transition: all 0.5s ease-in-out; 
     filter: grayscale(0%); 
-
 }
-/* واووووو اشياء حلوة */
 .hadara:hover {
     filter: grayscale(70%);
-
     transform: scale(1.02); 
     cursor: pointer;
 }
-
 .hadara.and{
     background-image: url(images/and.png);
-
 }
 .hadara.ps{
     background-image: url(images/ps.jpg);
 }
 .hadara.fk{
     background-image: url(images/fk.png);
-
 }
 .hadara.egp{
         background-image: url(images/egp.png);
-    
 }
 .hadara h3{
-    /* text-align: center; */
 font-size: 24px; 
   line-height: 32px; 
   font-weight: 700; 
@@ -159,37 +128,31 @@ font-size: 24px;
   border-color: #E6A64DFF; 
   border-style: solid; 
 }
-/* start our story */
 .story {
     padding: 80px 0;
     background-color: #ffead0;
     text-align: center;
 }
-
 .story h3 {
     color: #b08968;
     font-size: 1.2rem;
     margin-bottom: 10px;
 }
-
 .story h1 {
     color: #333;
     font-size: 2.5rem;
     margin-bottom: 50px;
     font-family: 'Amiri', serif;
 }
-
 .story-layout-grid {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
     gap: 40px;
     align-items: center;
 }
-
 .story-text-content {
     text-align: right;
 }
-
 .story-text-content p {
     font-size: 1.15rem;
     line-height: 1.9;
@@ -204,18 +167,14 @@ font-size: 24px;
     box-shadow: 0 15px 35px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
 }
-
 .story-image-wrapper img:hover {
     transform: scale(1.02);
     cursor: pointer;
 }
-
 .story-video-wrapper {
     grid-column: 1 / span 2;
     margin-top: 30px;
 }
-
-
 .video-container {
     width: 100%;
     max-width: 80% !important;
@@ -228,8 +187,6 @@ font-size: 24px;
     transform: scale(1.02);
     cursor: pointer;
 }
-
-/* للهاتف */
 @media (max-width: 768px) {
     .story-layout-grid {
         grid-template-columns: 1fr;
@@ -238,14 +195,10 @@ font-size: 24px;
         grid-column: 1;
     }
 }
-/* start footer */
-
 .footer {
     background-color:bisque;
     padding: 60px 20px;
-    /* border-top: 1px solid #e49a38; */
 }
-
 .horz {
     display: flex;
     justify-content: center;
@@ -254,16 +207,12 @@ font-size: 24px;
     gap: 40px;
     margin: 0 auto;
      border-top: 1px solid #e49a38;
-
 }
-
 .feature-item {
-
     flex: 1;
     text-align: center;
     padding: 40px;
 }
-
 .icon-wrapper {
     width: 80px;
     height: 80px;
@@ -276,73 +225,57 @@ font-size: 24px;
     margin: 0 auto 20px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
 }
-
 .icon-wrapper i {
     font-size: 30px;
     color:peachpuff; 
 }
-
 .feature-item h3 {
     font-size: 1.4rem;
     color: #333;
     margin-bottom: 15px;
     font-weight: bold;
 }
-
 .feature-item p {
     font-size: 0.95rem;
     color: #777;
     line-height: 1.6;
     margin: 0 auto;
 }
-
-/*اسفل  مع اللوجو*/
-
-
 .footer-column {
     flex: 1;
     margin: 0 15px;
     padding: 40px;
 }
-
 .footer-column h4 {
     color: #4a4a4a;
     font-size: 1.1rem;
     margin-bottom: 20px;
     font-weight: bold;
 }
-
 .footer-column ul {
     list-style: none;
     padding: 0;
 }
-
 .footer-column ul li {
     margin-bottom: 10px;
 }
-
 .footer-column ul li a {
     text-decoration: none;
     color: #888;
     font-size: 0.95rem;
     transition: color 0.3s;
 }
-
 .footer-column ul li a:hover {
     color: #d4a373; 
 }
-
-/* تنسيق النشرة الإخبارية */
 .newsletter {
     flex: 1.5; 
 }
-
 .subscribe-form {
     display: flex;
     gap: 10px;
     margin-bottom: 15px;
 }
-
 .subscribe-form input {
     flex: 1;
     padding: 10px 15px;
@@ -350,7 +283,6 @@ font-size: 24px;
     border-radius: 8px;
     outline: none;
 }
-
 .subscribe-form button {
     padding: 10px 20px;
     background-color: #fff;
@@ -359,26 +291,19 @@ font-size: 24px;
     cursor: pointer;
     transition: all 0.3s;
 }
-
 .subscribe-form button:hover {
     background-color: #f8f8f8;
     border-color: #d4a373;
 }
-
 .newsletter p {
     color: #999;
     font-size: 0.85rem;
     line-height: 1.6;
 }
-
-/* تنسيق اللوجو */
 .footer-logo img {
     max-width: 303px;
     height: auto;
 }
-
-/* اسفل شيء يخص الحقوق */
-
 .footer-bottom {
     display: flex;
     justify-content: space-between;
@@ -388,18 +313,14 @@ font-size: 24px;
     background-color: #684005;
     direction: rtl;
 }
-
 .copyright p {
     color: #f1cc88;
     font-size: 0.85rem;
 }
-
-/* أيقونات السوشيال ميديا الدائرية */
 .social-icons {
     display: flex;
     gap: 15px;
 }
-
 .social-icons a {
     width: 35px;
     height: 35px;
@@ -412,35 +333,30 @@ font-size: 24px;
     text-decoration: none;
     transition: all 0.3s;
 }
-
 .social-icons a:hover {
     border-color: #d4a373;
     color: #d4a373;
     transform: translateY(-3px);
 }
-
 .bottom-links a {
     text-decoration: none;
     color: #e8dda4;
     font-size: 0.85rem;
     margin-left: 20px;
 }
-
 .bottom-links a:hover {
     color: #d4a373;
 }
-
 .video-container {
     position: relative;
     width: 100%;
-    max-width: 900px; /* يمكنكِ التحكم في العرض */
+    max-width: 900px; 
     margin: 20px auto;
     overflow: hidden;
-    border-radius: 20px; /* حواف دائرية ناعمة */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* ظل لإعطاء عمق */
+    border-radius: 20px; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); 
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 .video-container video {
     width: 100%;
     height: auto;
@@ -448,104 +364,81 @@ font-size: 24px;
     object-fit: cover;
     transition: transform 0.5s ease;
 }
-
-/* تأثير عند تمرير الماوس */
 .video-container:hover video {
-    transform: scale(1.03); /* تكبير بسيط جداً عند الهوفر */
+    transform: scale(1.03); 
 }
-
-/* طبقة نص اختيارية فوق الفيديو */
 .video-overlay {
     position: absolute;
     bottom: 20px;
     right: 20px;
-    background: rgba(0, 0, 0, 0.5); /* خلفية شبه شفافة */
+    background: rgba(0, 0, 0, 0.5); 
     color: #fff;
     padding: 10px 20px;
     border-radius: 30px;
-    font-family: 'Cairo', sans-serif; /* يفضل استخدام خط عربي أنيق */
-    backdrop-filter: blur(5px); /* تأثير الزجاج الضبابي */
+    font-family: 'Cairo', sans-serif; 
+    backdrop-filter: blur(5px); 
     pointer-events: none;
 }
-
-/* =========================
-   Responsive layout
-========================= */
-
 html,
 body {
     max-width: 100%;
     overflow-x: hidden;
 }
-
 img,
 video {
     max-width: 100%;
 }
-
 @media (max-width: 1100px) {
     .container {
         width: min(92%, 980px);
         margin-inline: auto;
     }
-
     .header .logo {
         width: 28%;
     }
-
     .header .navbar {
         margin-right: 20px;
     }
-
     .header .navbar li {
         font-size: 17px;
         padding: 8px;
     }
-
     .home .home-pic h1 {
         font-size: 52px;
     }
-
     .hadara {
         flex-basis: 390px;
         height: 390px;
     }
-
     .hadara h3 {
         padding-top: 315px;
     }
-
     .feature-item,
     .footer-column {
         flex-basis: 42%;
         padding: 28px;
     }
 }
-
 @media (max-width: 768px) {
     .container {
         width: calc(100% - 28px);
         margin-inline: 14px;
     }
-
     .header {
         padding: 12px 0 16px;
         text-align: center;
     }
-
     .header .logo,
     .header .navbar {
         float: none;
         width: 100%;
         margin: 0;
     }
-
     .header .logo img {
         width: min(210px, 58vw);
         display: block;
         margin: 0 auto 8px;
     }
-
     .header .navbar {
         display: flex;
         flex-wrap: wrap;
@@ -553,14 +446,12 @@ video {
         gap: 8px;
         padding: 0 10px;
     }
-
     .header .navbar li {
         display: inline-flex;
         margin-top: 0;
         padding: 0;
         font-size: 14px;
     }
-
     .header .navbar li a {
         display: inline-flex;
         align-items: center;
@@ -570,89 +461,72 @@ video {
         border-radius: 10px;
         background: rgba(255, 255, 255, 0.35);
     }
-
     .home {
         min-height: 560px;
         height: auto;
         background-attachment: scroll;
         position: relative;
     }
-
     .home .home-pic {
         width: min(92%, 560px);
         top: 54%;
     }
-
     .home .home-pic h1 {
         font-size: clamp(32px, 11vw, 48px);
         line-height: 1.25;
     }
-
     .home .home-pic p {
         font-size: 16px;
         line-height: 1.8;
     }
-
     .home .home-pic a {
         padding: 10px 26px;
         margin: 16px 0 0;
     }
-
     .above {
         display: block;
         margin: 24px 16px 10px;
     }
-
     .above h2 {
         font-size: 26px;
     }
-
     .above h3 {
         font-size: 15px;
         line-height: 1.8;
     }
-
     .slider {
         gap: 14px;
         padding: 16px;
         scroll-padding-inline: 16px;
     }
-
     .hadara {
         flex-basis: min(84vw, 340px);
         height: 360px;
         border-radius: 16px;
         overflow: hidden;
     }
-
     .hadara h3 {
         padding-top: 285px;
         padding-right: 16px;
         font-size: 21px;
     }
-
     .story {
         padding: 50px 0;
     }
-
     .story h1 {
         font-size: 28px;
         margin-bottom: 28px;
     }
-
     .story-text-content {
         text-align: right;
     }
-
     .video-container {
         max-width: 100% !important;
         border-radius: 16px;
     }
-
     .horz {
         gap: 0;
     }
-
     .feature-item,
     .footer-column,
     .newsletter {
@@ -660,62 +534,49 @@ video {
         padding: 24px 14px;
         margin: 0;
     }
-
     .subscribe-form {
         flex-direction: column;
     }
-
     .footer-logo {
         text-align: center;
         width: 100%;
     }
-
     .footer-logo img {
         max-width: min(230px, 70vw);
     }
-
     .footer-bottom {
         flex-direction: column;
         gap: 14px;
         text-align: center;
     }
-
     .bottom-links a {
         margin: 0 8px;
         display: inline-block;
     }
 }
-
 @media (max-width: 430px) {
     .header .navbar li {
         width: calc(50% - 6px);
     }
-
     .header .navbar li a {
         width: 100%;
         font-size: 13px;
     }
-
     .home .home-pic h1 {
         font-size: 30px;
     }
-
     .hadara {
         flex-basis: 86vw;
         height: 315px;
     }
-
     .hadara h3 {
         padding-top: 250px;
     }
 }
-
-/* Cleaner mobile nav override */
 @media (max-width: 768px) {
     .header {
         overflow: visible;
     }
-
     .header .navbar {
         flex-wrap: nowrap;
         justify-content: flex-start;
@@ -726,17 +587,14 @@ video {
         scrollbar-width: none;
         -webkit-overflow-scrolling: touch;
     }
-
     .header .navbar::-webkit-scrollbar {
         display: none;
     }
-
     .header .navbar li {
         width: auto;
         flex: 0 0 auto;
         scroll-snap-align: start;
     }
-
     .header .navbar li a {
         width: auto;
         white-space: nowrap;
@@ -745,12 +603,10 @@ video {
         color: #8a5f1e;
         box-shadow: 0 4px 12px rgba(95, 60, 18, .06);
     }
-
     .home .home-pic {
         top: 58%;
     }
 }
-
 @media (max-width: 430px) {
     .header .navbar li {
         width: auto;

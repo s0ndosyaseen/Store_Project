@@ -1,12 +1,12 @@
 <?php
-// =============================================
-// لوحة تحكم المدير - الطلبات
-// =============================================
+
+
+
 require_once __DIR__ . '/_auth.php';
 
 $pdo = getDB();
 
-// تحديث حالة الطلب
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'], $_POST['status'])) {
     $allowed = ['pending', 'confirmed', 'shipped', 'delivered', 'cancelled'];
     if (in_array($_POST['status'], $allowed, true)) {
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'], $_POST['s
     exit;
 }
 
-// فلتر الحالة
+
 $statusFilter = $_GET['status'] ?? 'all';
 $allowed = ['pending', 'confirmed', 'shipped', 'delivered', 'cancelled'];
 
@@ -29,7 +29,7 @@ if ($statusFilter !== 'all' && in_array($statusFilter, $allowed, true)) {
 }
 $orders = $stmt->fetchAll();
 
-// إحصائيات سريعة
+
 $stats = $pdo->query(
     "SELECT
         COUNT(*) AS total,
@@ -44,12 +44,12 @@ $stats = $pdo->query(
 $usersCount = $pdo->query('SELECT COUNT(*) FROM users')->fetchColumn();
 $productsCount = $pdo->query('SELECT COUNT(*) FROM products')->fetchColumn();
 
-// جلب بيانات آخر 7 أيام من المبيعات
+
 $chartQuery = $pdo->query("
-    SELECT 
-        DATE(created_at) as order_date, 
-        SUM(total) as daily_total 
-    FROM orders 
+    SELECT
+        DATE(created_at) as order_date,
+        SUM(total) as daily_total
+    FROM orders
     WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
       AND status != 'cancelled'
     GROUP BY DATE(created_at)
@@ -57,22 +57,22 @@ $chartQuery = $pdo->query("
 ");
 $chartResults = $chartQuery->fetchAll(PDO::FETCH_ASSOC);
 
-// تحويل النتائج إلى مصفوفة مفهرسة حسب التاريخ للوصول السريع
+
 $salesByDate = [];
 foreach ($chartResults as $row) {
     $salesByDate[$row['order_date']] = (float)$row['daily_total'];
 }
 
-// تجهيز مصفوفات للأيام والمبالغ
+
 $days = [];
 $revenues = [];
 
 $arabicDays = [
-    'Sunday' => 'الأحد', 'Monday' => 'الاثنين', 'Tuesday' => 'الثلاثاء', 
+    'Sunday' => 'الأحد', 'Monday' => 'الاثنين', 'Tuesday' => 'الثلاثاء',
     'Wednesday' => 'الأربعاء', 'Thursday' => 'الخميس', 'Friday' => 'الجمعة', 'Saturday' => 'السبت'
 ];
 
-// حلقة على جميع الأيام السبعة (بما فيها الأيام بدون طلبات)
+
 for ($i = 6; $i >= 0; $i--) {
     $date = date('Y-m-d', strtotime("-$i days"));
     $dayName = date('l', strtotime($date));
@@ -80,12 +80,12 @@ for ($i = 6; $i >= 0; $i--) {
     $revenues[] = $salesByDate[$date] ?? 0;
 }
 
-// 3. تحويلها لـ JSON لاستخدامها في JavaScript
+
 $jsDays = json_encode($days);
 $jsRevenues = json_encode($revenues);
 
 
-// جلب مبيعات كل قسم (حضارة)
+
 $categoryStats = $pdo->query("
     SELECT p.category, SUM(o.total) as total_sales
     FROM products p
@@ -99,8 +99,8 @@ $catLabels = [];
 $catValues = [];
 
 foreach ($categoryStats as $row) {
-    // يمكنك تحويل أسماء الأقسام للعربية هنا إذا كانت مخزنة بالإنجليزي
-    $catLabels[] = $row['category']; 
+
+    $catLabels[] = $row['category'];
     $catValues[] = (float)$row['total_sales'];
 }
 
@@ -199,17 +199,17 @@ $statusColors = [
 <script>
 const ctx = document.getElementById('salesChart').getContext('2d');
 
-// استقبال البيانات من PHP
+
 const labelsData = <?php echo $jsDays; ?>;
 const revenuesData = <?php echo $jsRevenues; ?>;
 
 const salesChart = new Chart(ctx, {
-    type: 'line', 
+    type: 'line',
     data: {
-        labels: labelsData, // الأيام الحقيقية من الداتابيز
+        labels: labelsData,
         datasets: [{
             label: 'إجمالي المبيعات (ر.س)',
-            data: revenuesData, // المبالغ الحقيقية من الداتابيز
+            data: revenuesData,
             borderColor: '#c4a35a',
             backgroundColor: 'rgba(196, 163, 90, 0.1)',
             borderWidth: 3,
@@ -230,12 +230,12 @@ const salesChart = new Chart(ctx, {
             }
         },
         scales: {
-            y: { 
-                beginAtZero: true, 
+            y: {
+                beginAtZero: true,
                 position: 'right',
                 ticks: { font: { family: 'Cairo' } }
             },
-            x: { 
+            x: {
                 ticks: { font: { family: 'Cairo' } }
             }
         }
@@ -246,17 +246,17 @@ const salesChart = new Chart(ctx, {
 const catCtx = document.getElementById('categoryChart').getContext('2d');
 
 const categoryChart = new Chart(catCtx, {
-    type: 'pie', // أو 'doughnut' لشكل أكثر حداثة
+    type: 'pie',
     data: {
         labels: <?php echo $jsCatLabels; ?>,
         datasets: [{
             data: <?php echo $jsCatValues; ?>,
             backgroundColor: [
-                '#c4a35a', // اللون الذهبي الأساسي
-                '#1a1a2e', // الكحلي الداكن
-                '#e9d2af', // البيج
-                '#c7b9a6', // البرونزي
-                '#a67c37'  // البني النحاسي
+                '#c4a35a',
+                '#1a1a2e',
+                '#e9d2af',
+                '#c7b9a6',
+                '#a67c37'
             ],
             borderWidth: 2,
             borderColor: '#ffffff'

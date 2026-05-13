@@ -34,20 +34,10 @@ CREATE TABLE `accounts` (
                             `role` enum('admin','employee') DEFAULT 'employee'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `accounts`
---
-
 INSERT INTO `accounts` (`id`, `username`, `password`, `role`) VALUES
                                                                   (1, 'admin', '$2y$10$XiSXDw.w40AIlwLnC6VP2.wqwqMy1Cz4OeKDWLANlyOSuhKtpRYvi', 'admin'),
                                                                   (7, 'acc2', '$2y$10$hBuOsSI4qDKuVh8.jK6ZIemRhOcBHc06h4eH8gLtfvaWIM31c1xYu', 'employee'),
                                                                   (8, 'acc1', '$2y$10$Ys30C8in58soQlRN4AOUjONTj1LPdIiYfO2G6vuEzgKSeNqHu/ZEa', 'employee');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `cart_items`
---
 
 CREATE TABLE `cart_items` (
                               `id` int(11) NOT NULL,
@@ -58,20 +48,10 @@ CREATE TABLE `cart_items` (
                               `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `cart_items`
---
-
 INSERT INTO `cart_items` (`id`, `user_id`, `session_id`, `product_id`, `quantity`, `created_at`) VALUES
                                                                                                      (38, NULL, 'kd1e8esfh1hokmsh7h6aa9vfur', 1, 2, '2026-05-08 15:14:55'),
                                                                                                      (39, NULL, 'kd1e8esfh1hokmsh7h6aa9vfur', 2, 1, '2026-05-08 15:14:57'),
                                                                                                      (40, NULL, 'kd1e8esfh1hokmsh7h6aa9vfur', 3, 1, '2026-05-08 15:14:59');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `categories`
---
 
 CREATE TABLE `categories` (
                               `id` int(11) NOT NULL,
@@ -82,22 +62,12 @@ CREATE TABLE `categories` (
                               `bg_image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `categories`
---
-
 INSERT INTO `categories` (`id`, `slug`, `title`, `hero_title`, `hero_desc`, `bg_image`) VALUES
                                                                                             (1, 'andalus', 'الحضارة الأندلسية', 'عبق الأندلس يزين المكان', 'قطع فنية مستوحاة من عظمة التاريخ الأندلسي، مصنوعة يدوياً.', 'images/bgand.png'),
                                                                                             (2, 'sham', 'بلاد الشام', 'سحر الشام يكتمل بكِ', 'من نقوش الحرير إلى زخارف الياسمين، ننقل لكِ روح الحارة الدمشقية.', 'images/shami.png'),
                                                                                             (3, 'egypt', 'الحضارة الفرعونية', 'سحرُ الخلود يحيطُ بكِ', 'قطعٌ نُحتت من روحِ التاريخ، لتعيدَ إحياءَ هيبةِ الملوك.', 'images/phi.png'),
                                                                                             (4, 'victory', 'العصر الفيكتوري', 'أناقة ملكية تتجاوز الزمان', 'تصاميم تفيض بالأنوثة، مستوحاة من رقي العصر الفيكتوري.', 'images/vic.png'),
                                                                                             (5, 'othmani', 'الحضارة العثمانية', 'الحضارة العثمانية  تفوح بعبق الاصالة', 'هي الجمال حين يجمع عبق العرب ونقش الاتراك.', 'images/category_20260512_233159_d9e1e46f.png');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `contact_messages`
---
 
 CREATE TABLE `contact_messages` (
                                     `id` int(11) NOT NULL,
@@ -107,20 +77,10 @@ CREATE TABLE `contact_messages` (
                                     `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `contact_messages`
---
-
 INSERT INTO `contact_messages` (`id`, `name`, `email`, `message`, `created_at`) VALUES
                                                                                     (1, 'sondos', 'sondos.yaseen85@gmail.com', 'هناك خطأ في التسليم', '2026-05-11 20:10:26'),
                                                                                     (2, 'soos', 'sondos.yaseen@gmail.com', 'هناك منتج لم يصلني', '2026-05-11 20:11:36'),
                                                                                     (3, 'soos', 'sondos.yaseen@gmail.com', 'هناك منتج لم يصلني', '2026-05-11 20:37:24');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `orders`
---
 
 CREATE TABLE `orders` (
                           `id` int(11) NOT NULL,
@@ -138,10 +98,6 @@ CREATE TABLE `orders` (
                           `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `orders`
---
-
 INSERT INTO `orders` (`id`, `user_id`, `fname`, `lname`, `email`, `phone`, `address`, `subtotal`, `shipping`, `discount`, `total`, `status`, `created_at`) VALUES
                                                                                                                                                                (24, NULL, 'sondos', 'yaseen', 'sondos.yaseen@gmail.com', '0598352860', 'kkl', 6110.00, 50.00, 305.50, 5854.50, 'confirmed', '2026-05-08 14:56:28'),
                                                                                                                                                                (26, 1, 'sondos', 'yaseen', 'sondos.yaseen@gmail.com', '0598352860', 'kilo', 4100.00, 50.00, 205.00, 3945.00, 'confirmed', '2026-05-08 15:39:30'),
@@ -154,12 +110,6 @@ INSERT INTO `orders` (`id`, `user_id`, `fname`, `lname`, `email`, `phone`, `addr
                                                                                                                                                                (35, 1, 'sondos', 'yaseen', 'sondos.yaseen@gmail.com', '0598352860', 'allt', 16800.00, 50.00, 840.00, 16010.00, 'shipped', '2026-05-02 09:47:27'),
                                                                                                                                                                (36, 4, 'sandi', 'yaseen', 'sabaayaseen52@gmail.com', '0594916840', 'nablus', 5450.00, 50.00, 272.50, 5227.50, 'delivered', '2026-05-12 20:06:40');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `order_items`
---
-
 CREATE TABLE `order_items` (
                                `id` int(11) NOT NULL,
                                `order_id` int(11) NOT NULL,
@@ -168,10 +118,6 @@ CREATE TABLE `order_items` (
                                `quantity` int(11) NOT NULL,
                                `price` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `order_items`
---
 
 INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `product_name`, `quantity`, `price`) VALUES
                                                                                                     (1, 24, 1, 'طقم أواني خزف أندلسي', 1, 850.00),
@@ -188,12 +134,6 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `product_name`, `quan
                                                                                                     (21, 36, 8, 'برقع + عرجة', 1, 2500.00),
                                                                                                     (22, 36, 3, 'مصباح نحاسي تراثي', 1, 450.00);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `products`
---
-
 CREATE TABLE `products` (
                             `id` int(11) NOT NULL,
                             `name` varchar(200) NOT NULL,
@@ -205,10 +145,6 @@ CREATE TABLE `products` (
                             `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
                             `subcategory` enum('ديكور','اكسسوارات','ملابس') NOT NULL DEFAULT 'ديكور'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `products`
---
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `category`, `stock`, `created_at`, `subcategory`) VALUES
                                                                                                                              (1, 'طقم أواني خزف أندلسي', 'طقم فاخر مصنوع من السيراميك عالي الجودة، مزين بنقوش هندسية مستوحاة من قصر الحمراء، يضيف لمسة ملكية على مائدتك.', 850.00, 'images/item1.png', 'andalus', 17, '2026-05-07 11:08:26', 'ديكور'),
@@ -248,21 +184,11 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `category
                                                                                                                              (35, 'أساور فرعونية عريضة', 'طقم أساور للمعصم بتصميم \"الكلبش\" العريض، مزينة بنقوش بارزة لرموز قديمة كزهرة اللوتس والجعران، تمنح اليد مظهراً قوياً وجذاباً.', 900.00, 'images/item38.png', 'egypt', 4, '2026-05-07 11:08:26', 'اكسسوارات'),
                                                                                                                              (36, 'سرير عريض فرعوني مميز', 'قطعة أثاث فاخرة تتميز برأسية سرير مرتفعة محفورة برموز الحماية والراحة، مصمم بأرجل مرتفعة وتفاصيل مذهبة ليحول غرفة النوم إلى جناح ملكي من العصور القديمة.', 2400.00, 'images/item39.png', 'egypt', 7, '2026-05-07 11:08:26', 'ديكور');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `settings`
---
-
 CREATE TABLE `settings` (
                             `setting_key` varchar(100) NOT NULL,
                             `setting_value` text NOT NULL DEFAULT '',
                             `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `settings`
---
 
 INSERT INTO `settings` (`setting_key`, `setting_value`, `updated_at`) VALUES
                                                                           ('admin_password', 'sonly', '2026-05-13 07:48:47'),
@@ -273,12 +199,6 @@ INSERT INTO `settings` (`setting_key`, `setting_value`, `updated_at`) VALUES
                                                                           ('store_phone', '0598898003', '2026-05-11 15:36:20'),
                                                                           ('store_whatsapp', '+970598352860', '2026-05-11 18:27:04');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
 CREATE TABLE `users` (
                          `id` int(11) NOT NULL,
                          `name` varchar(150) NOT NULL,
@@ -287,156 +207,80 @@ CREATE TABLE `users` (
                          `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `users`
---
-
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`) VALUES
                                                                           (1, 'sondos', 'sondos.yaseen@gmail.com', '$2y$12$flnU8wOvlFAuBpXQUcOZo.Flx38kzrDHuT7Ek/GiLdc5vvyHjIJDG', '2026-05-07 09:06:10'),
                                                                           (4, 'sabaa', 'sabaayaseen52@gmail.com', '$2y$12$VT4ancvx.mOn6rCTFrv9JuD4ZAaHqGneyaz3L31epfQu/.IP5td8i', '2026-05-12 20:05:54');
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `accounts`
---
 ALTER TABLE `accounts`
     ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
---
--- Indexes for table `cart_items`
---
 ALTER TABLE `cart_items`
     ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `product_id` (`product_id`);
 
---
--- Indexes for table `categories`
---
 ALTER TABLE `categories`
     ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `slug` (`slug`);
 
---
--- Indexes for table `contact_messages`
---
 ALTER TABLE `contact_messages`
     ADD PRIMARY KEY (`id`);
 
---
--- Indexes for table `orders`
---
 ALTER TABLE `orders`
     ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
---
--- Indexes for table `order_items`
---
 ALTER TABLE `order_items`
     ADD PRIMARY KEY (`id`),
   ADD KEY `order_id` (`order_id`),
   ADD KEY `product_id` (`product_id`);
 
---
--- Indexes for table `products`
---
 ALTER TABLE `products`
     ADD PRIMARY KEY (`id`);
 
---
--- Indexes for table `settings`
---
 ALTER TABLE `settings`
     ADD PRIMARY KEY (`setting_key`);
 
---
--- Indexes for table `users`
---
 ALTER TABLE `users`
     ADD PRIMARY KEY (`id`);
 
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `accounts`
---
 ALTER TABLE `accounts`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
---
--- AUTO_INCREMENT for table `cart_items`
---
 ALTER TABLE `cart_items`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
---
--- AUTO_INCREMENT for table `categories`
---
 ALTER TABLE `categories`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
---
--- AUTO_INCREMENT for table `contact_messages`
---
 ALTER TABLE `contact_messages`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
---
--- AUTO_INCREMENT for table `orders`
---
 ALTER TABLE `orders`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
---
--- AUTO_INCREMENT for table `order_items`
---
 ALTER TABLE `order_items`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
---
--- AUTO_INCREMENT for table `products`
---
 ALTER TABLE `products`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
---
--- AUTO_INCREMENT for table `users`
---
 ALTER TABLE `users`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `cart_items`
---
 ALTER TABLE `cart_items`
     ADD CONSTRAINT `cart_items_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `cart_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 
---
--- Constraints for table `orders`
---
 ALTER TABLE `orders`
     ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
 
---
--- Constraints for table `order_items`
---
 ALTER TABLE `order_items`
     ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+;
+;
+;

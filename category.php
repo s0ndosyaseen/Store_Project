@@ -9,9 +9,7 @@
     <title id="dynamic-title">البوصلة</title>
     <style id="dynamic-bg"></style>
     <style>
-        /* =========================
-   PRODUCTS HEADINGS
-========================= */
+
 
 .products-heading,
 .bestsellers-header {
@@ -91,9 +89,7 @@
 
 
 
-/* =========================
-   BESTSELLERS SLIDER
-========================= */
+
 
 .bestsellers-section {
     position: relative;
@@ -135,9 +131,7 @@
 
 
 
-/* =========================
-   PRODUCT CARD
-========================= */
+
 
 .bestseller-card {
     position: relative;
@@ -245,9 +239,7 @@
 
 
 
-/* =========================
-   SLIDER BUTTONS
-========================= */
+
 
 .slider-controls {
       position: absolute;
@@ -309,14 +301,12 @@
 }
 
 
-/* =========================
-   LAYOUT
-========================= */
+
 
 .contain {
     display: grid;
     grid-template-columns: 280px 1fr;
-    
+
     gap: 14px;
 
     align-items: start;
@@ -324,9 +314,7 @@
     position: relative;
 }
 
-/* =========================
-   SIDEBAR
-========================= */
+
 
 .sidebar {
     position: sticky;
@@ -413,17 +401,13 @@
     transform: translateX(-3px);
 }
 
-/* =========================
-   PRODUCTS AREA
-========================= */
+
 
 .products {
     min-width: 0;
 }
 
-/* =========================
-   PRODUCTS GRID
-========================= */
+
 
 .grid {
     display: grid;
@@ -434,9 +418,7 @@
     gap: 20px;
 }
 
-/* =========================
-   FIX CARD SIZE
-========================= */
+
 
 .bestseller-card {
     flex: 0 0 210px;
@@ -446,9 +428,7 @@
     height: 210px;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+
 
 @media (max-width: 1100px) {
 
@@ -495,9 +475,7 @@
 }
 
 
-/* =========================
-   PROMO CAROUSEL
-========================= */
+
 
 .promo-carousel {
     position: relative;
@@ -557,9 +535,7 @@
 
 
 
-/* =========================
-   DOTS
-========================= */
+
 
 .promo-dots {
     position: absolute;
@@ -595,9 +571,7 @@
 
 
 
-/* =========================
-   RESPONSIVE
-========================= */
+
 
 @media (max-width: 768px) {
 
@@ -697,7 +671,7 @@
                     <hr class="line">
                 </a>
             </div>
- 
+
             <div class="hadara egp">
                 <a href="category.php?type=egypt">
                     <h3>الفرعـونية</h3>
@@ -747,7 +721,7 @@
 
     <!-- Products -->
     <main class="products">
-        
+
         <!-- Bestsellers Slider Section -->
         <section class="bestsellers-section">
             <div class="bestsellers-header">
@@ -833,9 +807,9 @@ async function loadDynamicCategories() {
 document.addEventListener('DOMContentLoaded', loadDynamicCategories);
 
 const urlParams = new URLSearchParams(window.location.search);
-const type = urlParams.get('type') || 'egypt'; // الافتراضي فرعوني إذا ما في نوع
+const type = urlParams.get('type') || 'egypt';
 
-// 3. تحديث الصفحة بناءً على الحضارة
+
 async function loadCategoryInfo() {
     try {
         const res = await fetch(`backend/get_category.php?type=${type}`);
@@ -843,19 +817,19 @@ async function loadCategoryInfo() {
 
         if (result.success) {
             const data = result.data;
-            
-            // تحديث العناوين بناءً على أعمدة جدول categories
+
+
             document.title = data.title;
             document.getElementById('hero-title').innerText = data.hero_title;
             document.getElementById('hero-desc').innerText = data.hero_desc;
-            
-            // تحديث الخلفية بالصورة المخزنة في الداتا بيس
+
+
             document.getElementById('dynamic-bg').innerHTML = `
-                .home { 
-                    background-image: url(${data.bg_image}); 
-                    background-size: cover; 
-                    height: 700px; 
-                    background-attachment: fixed; 
+                .home {
+                    background-image: url(${data.bg_image});
+                    background-size: cover;
+                    height: 700px;
+                    background-attachment: fixed;
                 }
             `;
         }
@@ -864,7 +838,7 @@ async function loadCategoryInfo() {
     }
 }
 
-// استدعاء الدالة فوراً
+
 loadCategoryInfo();
 
 
@@ -882,12 +856,12 @@ loadCategoryInfo();
                 return;
             }
             allProducts = data.products;
-            bestsellers = allProducts.slice(0, 5); // أفضل 5 منتجات مبيعاً
-            
-            // عرض الأكثر مبيعاً في الشريط اليدوي
+            bestsellers = allProducts.slice(0, 5);
+
+
             renderBestsellers(bestsellers);
-            
-            // عرض جميع المنتجات في الشبكة العادية
+
+
             renderProducts(allProducts.slice(0, VISIBLE));
             if (allProducts.length > VISIBLE) {
                 const btn = document.getElementById('load-more-btn');
@@ -897,13 +871,13 @@ loadCategoryInfo();
         } catch(e) {
             document.getElementById('products-grid').innerHTML = '<p style="text-align:center;padding:40px;color:red;grid-column:1/-1">تعذر تحميل المنتجات</p>';
         }
-        // دالة تطبيق الفلترة الكاملة
+
         function applyFilters() {
             const minPrice = parseFloat(document.getElementById('rangeMin').value);
             const maxPrice = parseFloat(document.getElementById('rangeMax').value);
             const searchText = document.getElementById('search-products')?.value.trim().toLowerCase() || '';
 
-            // جمع الفئات المختارة
+
             const selectedCategories = Array.from(document.querySelectorAll('.subcategory-filter:checked'))
                 .map(cb => cb.value);
 
@@ -924,7 +898,7 @@ loadCategoryInfo();
             if(btn) btn.style.display = 'none';
         }
 
-        //  تغيير الحد الأدنى
+
         document.getElementById('rangeMin').addEventListener('input', function() {
             const minPrice = parseFloat(this.value);
             const maxPrice = parseFloat(document.getElementById('rangeMax').value);
@@ -935,7 +909,7 @@ loadCategoryInfo();
             applyFilters();
         });
 
-        //  تغيير الحد الأقصى
+
         document.getElementById('rangeMax').addEventListener('input', function() {
             const maxPrice = parseFloat(this.value);
             const minPrice = parseFloat(document.getElementById('rangeMin').value);
@@ -946,7 +920,7 @@ loadCategoryInfo();
             applyFilters();
         });
 
-        //  البحث 
+
         const searchInput = document.getElementById('search-products');
         if (searchInput) {
             searchInput.addEventListener('input', applyFilters);
@@ -995,7 +969,7 @@ loadCategoryInfo();
         </div>`
         ).join('');
 
-        // تفعيل التحكم بالأسهم
+
         setupBestsellersSliderControls();
     }
 
@@ -1003,10 +977,10 @@ loadCategoryInfo();
         const slider = document.getElementById('bestsellers-slider');
         const prevBtn = document.getElementById('bestsellers-prev');
         const nextBtn = document.getElementById('bestsellers-next');
-        
+
         if (!slider || !prevBtn || !nextBtn) return;
 
-        const cardWidth = 280; // عرض الكارت + الفراغ
+        const cardWidth = 280;
         let position = 0;
 
         prevBtn.addEventListener('click', () => {
@@ -1025,7 +999,7 @@ loadCategoryInfo();
         'images/role.png',
         'images/role3.png',
         'images/role2.png'
-        
+
     ];
 
     function initPromoCarousel() {
@@ -1079,7 +1053,7 @@ loadCategoryInfo();
     function goToLogin() {
         const email = document.getElementById('quick-email').value.trim();
         if (email) {
-            // الانتقال لصفحة login.html مع إرسال الإيميل في الرابط
+
             window.location.href = `login.html?email=${encodeURIComponent(email)}`;
         } else {
             window.location.href = `login.html`;

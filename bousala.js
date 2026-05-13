@@ -1,29 +1,16 @@
-/**
- * =============================================
- * Al-Bousala Store - Frontend JS Integration
- * يربط صفحات HTML بالـ PHP Backend
- * =============================================
- */
 
-// const _isSubfolder = window.location.pathname.includes('/fixed_html/');
+
 const _API_BASE    =  'backend/';
 
-
 const API = {
-    // cart:     'backend/cart.php',
-    // products: 'backend/products.php',
+
         cart:       _API_BASE + 'cart.php',
     products:   _API_BASE + 'products.php',
     newsletter: _API_BASE + 'newsletter.php',
 };
 
-// ====================================================
-// إدارة السلة
-// ====================================================
-
 const Cart = {
 
-    /** جلب عدد المنتجات في السلة وتحديث الشارة */
     async updateBadge() {
         try {
             const res = await fetch(API.cart + '?action=count');
@@ -32,10 +19,9 @@ const Cart = {
                 el.textContent = data.count || '';
                 el.style.display = data.count > 0 ? 'inline-block' : 'none';
             });
-        } catch (e) { /* تجاهل أخطاء الشبكة */ }
+        } catch (e) {  }
     },
 
-    /** إضافة منتج إلى السلة */
     async add(productId, quantity = 1) {
         const body = new FormData();
         body.append('action', 'add');
@@ -58,7 +44,6 @@ const Cart = {
         }
     },
 
-    /** حذف عنصر من السلة */
     async remove(itemId) {
         const body = new FormData();
         body.append('action', 'remove');
@@ -82,7 +67,6 @@ const Cart = {
         }
     },
 
-    /** تحديث الكمية */
     async update(itemId, quantity) {
         const body = new FormData();
         body.append('action',   'update');
@@ -100,7 +84,6 @@ const Cart = {
         }
     },
 
-    /** رسالة Toast مؤقتة */
     showToast(message, type = 'success') {
         let toast = document.getElementById('bousala-toast');
         if (!toast) {
@@ -127,55 +110,10 @@ const Cart = {
         toast.textContent = message;
         toast.style.opacity = '1';
         clearTimeout(toast._timer);
-        // toast._timer = setTimeout(() => { toast.style.opacity = '0'; }, 3000);
+        
            toast._timer = setTimeout(() => { toast.style.opacity = '0'; }, 3200);
     },
 };
-
-// ====================================================
-// عرض المنتجات ديناميكياً
-// ====================================================
-
-// const Products = {
-
-//     async load(category, containerId) {
-//         const container = document.getElementById(containerId);
-//         if (!container) return;
-
-//         container.innerHTML = '<p style="text-align:center;padding:20px">جار التحميل...</p>';
-
-//         const res  = await fetch(`${API.products}?action=list&category=${category}`);
-//         const data = await res.json();
-
-//         if (!data.success || !data.products.length) {
-//             container.innerHTML = '<p style="text-align:center;padding:20px;color:#999">لا توجد منتجات حالياً</p>';
-//             return;
-//         }
-
-//         container.innerHTML = data.products.map(p => `
-//             <div class="product-card">
-//                 <div class="product-img">
-//                     <img src="${p.image || 'images/logo.png'}" alt="${p.name}">
-//                 </div>
-//                 <div class="product-info">
-//                     <h3>${p.name}</h3>
-//                     <p>${p.description || ''}</p>
-//                     <div class="product-footer">
-//                         <span class="price">${Number(p.price).toFixed(2)} ر.س</span>
-//                         ${p.stock > 0
-//                             ? `<button class="add-to-cart-btn" onclick="Cart.add(${p.id})">أضف للسلة</button>`
-//                             : `<span class="out-of-stock">نفذت الكمية</span>`
-//                         }
-//                     </div>
-//                 </div>
-//             </div>`
-//         ).join('');
-//     },
-// };
-
-// ====================================================
-// رسائل Flash من PHP
-// ====================================================
 
 function showFlashFromURL() {
     const params = new URLSearchParams(window.location.search);
@@ -183,7 +121,7 @@ function showFlashFromURL() {
     const msg    = params.get('flash_msg');
     if (type && msg) {
         Cart.showToast(decodeURIComponent(msg), type);
-        // إزالة الباراميترات من الرابط
+        
         const url = new URL(window.location);
         url.searchParams.delete('flash_type');
         url.searchParams.delete('flash_msg');
@@ -191,25 +129,15 @@ function showFlashFromURL() {
     }
 }
 
-// ====================================================
-// تهيئة عند تحميل الصفحة
-// ====================================================
-
 document.addEventListener('DOMContentLoaded', () => {
     Cart.updateBadge();
     showFlashFromURL();
 
-    // // تحميل صفحة السلة ديناميكياً إذا كانت مفتوحة
-    // if (document.querySelector('.cart-items-section')) {
-    //     Cart.loadCartPage();
-    // }
-
-    // // أزرار الإضافة للسلة
     document.querySelectorAll('[data-add-to-cart]').forEach(btn => {
           btn.addEventListener('click', () => Cart.add(btn.dataset.addToCart));
     });
 });
-//////////////////////////////////////////////////////////لتعديل زر تسجيل الدخول الى تسجيل الخروج والعكس
+
 document.addEventListener('DOMContentLoaded', () => {
     if (document.cookie.includes("user_logged_in=true")) {
         const loginLink = document.querySelector('.login-link');

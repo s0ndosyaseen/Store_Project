@@ -1,7 +1,7 @@
 <?php
-// =============================================
-// API: إدارة سلة المشتريات
-// =============================================
+
+
+
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -20,7 +20,7 @@ $userId    = $_SESSION['user_id'] ?? null;
 $sessionId = getSessionKey();
 $action    = $_GET['action'] ?? ($_POST['action'] ?? '');
 
-// ---- دالة مساعدة: جلب سلة المشتريات ----
+
 function fetchCart(PDO $pdo, ?int $userId, string $sessionId): array {
     if ($userId) {
         $stmt = $pdo->prepare(
@@ -44,7 +44,7 @@ function fetchCart(PDO $pdo, ?int $userId, string $sessionId): array {
 
 switch ($action) {
 
-    // عرض السلة الحالية
+
     case 'view':
         $items = fetchCart($pdo, $userId, $sessionId);
         $totals = getCartTotal($items);
@@ -56,7 +56,7 @@ switch ($action) {
         ], JSON_UNESCAPED_UNICODE);
         break;
 
-    // إضافة منتج إلى السلة
+
     case 'add':
         $productId = (int)($_POST['product_id'] ?? 0);
         $quantity  = max(1, (int)($_POST['quantity'] ?? 1));
@@ -66,7 +66,7 @@ switch ($action) {
             break;
         }
 
-        // التحقق من وجود المنتج والمخزون
+
         $stmt = $pdo->prepare('SELECT id, stock FROM products WHERE id = ?');
         $stmt->execute([$productId]);
         $product = $stmt->fetch();
@@ -76,7 +76,7 @@ switch ($action) {
             break;
         }
 
-        // التحقق من وجود المنتج في السلة مسبقاً
+
         if ($userId) {
             $stmt = $pdo->prepare('SELECT id, quantity FROM cart_items WHERE user_id = ? AND product_id = ?');
             $stmt->execute([$userId, $productId]);
@@ -114,7 +114,7 @@ switch ($action) {
         ], JSON_UNESCAPED_UNICODE);
         break;
 
-    // تحديث الكمية
+
     case 'update':
         $itemId   = (int)($_POST['item_id'] ?? 0);
         $quantity = (int)($_POST['quantity'] ?? 0);
@@ -125,7 +125,7 @@ switch ($action) {
         }
 
         if ($quantity <= 0) {
-            // حذف العنصر إذا كانت الكمية صفر
+
             $pdo->prepare('DELETE FROM cart_items WHERE id = ?')->execute([$itemId]);
             $items = fetchCart($pdo, $userId, $sessionId);
             $totals = getCartTotal($items);
@@ -139,7 +139,7 @@ switch ($action) {
             break;
         }
 
-        // التحقق من المخزون
+
         $stmt = $pdo->prepare(
             'SELECT ci.id, p.stock FROM cart_items ci JOIN products p ON p.id = ci.product_id WHERE ci.id = ?'
         );
@@ -168,7 +168,7 @@ switch ($action) {
         ], JSON_UNESCAPED_UNICODE);
         break;
 
-    // حذف منتج من السلة
+
     case 'remove':
         $itemId = (int)($_POST['item_id'] ?? 0);
         if ($itemId <= 0) {
@@ -187,7 +187,7 @@ switch ($action) {
         ], JSON_UNESCAPED_UNICODE);
         break;
 
-    // تفريغ السلة بالكامل
+
     case 'clear':
         if ($userId) {
             $pdo->prepare('DELETE FROM cart_items WHERE user_id = ?')->execute([$userId]);
@@ -197,7 +197,7 @@ switch ($action) {
         echo json_encode(['success' => true, 'message' => 'تم تفريغ السلة', 'count' => 0], JSON_UNESCAPED_UNICODE);
         break;
 
-    // عدد المنتجات في السلة فقط
+
     case 'count':
         if ($userId) {
             $stmt = $pdo->prepare('SELECT COALESCE(SUM(quantity), 0) AS cnt FROM cart_items WHERE user_id = ?');

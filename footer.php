@@ -65,7 +65,7 @@
             <div class="copyright">
                 <p>&copy; جميع الحقوق محفوظة لـ (Al-Bousala) البوصلة 2026</p>
             </div>
-            
+
             <div class="social-icons">
                 <a href="#"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>

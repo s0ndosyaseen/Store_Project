@@ -4,9 +4,9 @@
 
     <meta charset="UTF-8">
     <title> تأكيد الدفع - البوصلة</title>
-    <!-- <link rel="stylesheet" href="login-signup.css"> -->
+
     <link rel="stylesheet" href="shopping.css?v=4">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"><!--مكتبة ايقونات-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
@@ -25,7 +25,7 @@
             <li><a href="home.html#story">قصتـنا</a></li>
             <li> <a href="home.html#categories">الـحضـارات</a></li>
             <li><a href="my_orders.php" class="login-btn">تتبع الطلب</a></li>
-            <!--  <li><a href="#">مـلابـس</a></li> -->
+
             <li><a href="login.html" class="login-btn login-link">تسجيل الدخول</a></li>
         </ul>
     </nav>
@@ -104,14 +104,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (orderForm) {
         orderForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const submitBtn = orderForm.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
             submitBtn.disabled = true;
             submitBtn.textContent = 'جاري معالجة الطلب...';
-            
+
             const formData = new FormData(orderForm);
-            
+
             try {
                 const res = await fetch('backend/proc_order.php', {
                     method: 'POST',
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 });
 
                 const data = await res.json();
-                
+
                 if (data.success) {
                     Cart.showToast(data.message, 'success');
                     setTimeout(() => {

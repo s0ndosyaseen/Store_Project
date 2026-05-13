@@ -1,7 +1,7 @@
 <?php
-// =============================================
-// تفاصيل طلب محدد - لوحة التحكم
-// =============================================
+
+
+
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -49,7 +49,7 @@ $statusLabels = [
     <title>تفاصيل الطلب #<?= $orderId ?></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="order.css">
-   
+
 </head>
 <body>
 
@@ -59,7 +59,7 @@ $statusLabels = [
      <button class="open-btn" onclick="openNav()" style="margin-left: 30px;">
         <i class="fas fa-bars"></i>
     </button>
-  
+
     <a href="javascript:history.back()" >
         <i class="fas fa-arrow-right"></i> عودة
     </a>

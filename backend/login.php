@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user_name']  = $user['name'];
         $_SESSION['user_email'] = $user['email'];
 
-        // ربط السلة
+
         try {
             $updateCart = $pdo->prepare("UPDATE cart_items SET user_id = ?, session_id = NULL WHERE session_id = ?");
             $updateCart->execute([$user['id'], $old_session_id]);
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
 
     } else {
-        // --- حالة الخطأ ---
+
         echo "<script>
             alert('البريد الإلكتروني أو كلمة المرور غير صحيحة!');
             window.location.href = '../login.html';

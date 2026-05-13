@@ -2,34 +2,25 @@
     padding: 0;
     margin: 0;
   box-sizing: border-box;
-
 }
 .body{
     background-color:bisque;
-
     height: 10000px;
 }
 .container{
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
-   /* background-color: aqua; */
-   /* height: 1000px; */
-   
 }
 .header .logo{
     float :left ;
      WIDTH: 37%;
-
 }
  .header .navbar li{
 display: inline-block;
 padding: 10PX;
-/* margin-top: 68px; */
 font-size: 20px;
 font-weight: bold;
-
-
  }
 .header .navbar li a{
     text-decoration: none;
@@ -39,12 +30,10 @@ font-weight: bold;
 .header{
     background-color:bisque;
     overflow: hidden;
-
 }
 .header .logo img{
  width: 100%;
 }
-
  .header .navbar{
     height: 35px;
     margin-top:50px;
@@ -52,8 +41,6 @@ font-weight: bold;
     margin-right: 51px;
     background-color: blanchedalmond;
  }
-
- /* start home */
 .home{
     background-image: url(images/bgand.png) ;
     height: 700px;
@@ -61,24 +48,19 @@ font-weight: bold;
     background-size:cover ;
     background-attachment: fixed;
 }
-
 .home .home-pic{
 position: absolute;
 left: 50%;
 top :60%;
 text-align: center;
 transform: translate(-50%,-50%);
-
 }
-
 .home .home-pic h1{
       text-shadow: 
         -1px -1px 0 #000,  
          1px -1px 0 #000,
         -1px  1px 0 #000,
          1px  1px 0 #000; 
-        
-    
     color:antiquewhite;
     font-size: 70px;
 }
@@ -88,11 +70,8 @@ transform: translate(-50%,-50%);
          1px -1px 0 #000,
         -1px  1px 0 #000,
          1px  1px 0 #000; 
-        
-    
     color: antiquewhite;
     font-size: 20px;
-
 }
 .home .home-pic a{
     text-decoration: none;
@@ -101,18 +80,13 @@ transform: translate(-50%,-50%);
     padding: 10px 50px;
     margin: 22px;
     display: inline-block;
-
 }
-
-/* start classes */
-
 .slider{
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     gap: 20px;
     padding: 20px;
-    
 }
 .slider::-webkit-scrollbar {
     display: none;
@@ -120,7 +94,6 @@ transform: translate(-50%,-50%);
 .above{
     display: inline-block;
     margin: 20px;
- 
 }
 .above h3{
     color: rgb(83, 87, 87);
@@ -132,36 +105,27 @@ transform: translate(-50%,-50%);
   background-position: center;
 background-size: cover; 
 background-repeat: no-repeat; 
-
 transition: all 0.5s ease-in-out; 
     filter: grayscale(0%); 
-
 }
-/* واووووو اشياء حلوة */
 .hadara:hover {
     filter: grayscale(70%);
-
     transform: scale(1.02); 
     cursor: pointer;
 }
-
 .hadara.and{
     background-image: url(images/and.png);
-
 }
 .hadara.ps{
     background-image: url(images/ps.jpg);
 }
 .hadara.fk{
     background-image: url(images/fk.png);
-
 }
 .hadara.egp{
         background-image: url(images/egp.png);
-    
 }
 .hadara h3{
-    /* text-align: center; */
 font-size: 24px; 
   line-height: 32px; 
   font-weight: 700; 
@@ -177,19 +141,12 @@ font-size: 24px;
   border-color: #E6A64DFF; 
   border-style: solid; 
 }
-
-
-/* sstart content  */
-
-
 .contain {
   display: flex;
   gap: 30px;
   padding: 30px;
    background: rgb(249, 235, 215);
 }
-
-/* Sidebar */
 .sidebar {
   width: 250px;
   background: peachpuff;
@@ -197,25 +154,19 @@ font-size: 24px;
   border-radius: 16px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.05);
 }
-
 .sidebar h3 {
   margin-bottom: 15px;
 }
-
 .filter {
   margin-bottom: 20px;
 }
-
 .filter label {
   display: block;
   margin: 8px 0;
 }
-
-/* Products */
 .products {
   flex: 1;
 }
-
 .products-heading {
   margin-bottom: 18px;
   padding: 22px 24px;
@@ -224,7 +175,6 @@ font-size: 24px;
   color: #fff;
   box-shadow: 0 14px 34px rgba(58, 43, 18, .12);
 }
-
 .products-heading span {
   display: inline-flex;
   margin-bottom: 6px;
@@ -235,22 +185,17 @@ font-size: 24px;
   font-size: 12px;
   font-weight: 800;
 }
-
 .products-heading h2 {
   margin: 0;
   color: #fff;
   font-size: 30px;
   line-height: 1.35;
 }
-
-/* Grid */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 25px;
 }
-
-/* Card */
 .card {
   background:peachpuff;
   border-radius: 16px;
@@ -259,12 +204,10 @@ font-size: 24px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
   transition: all 0.3s ease;
 }
-
 .card:hover {
   transform: translateY(-6px);
   box-shadow: 0 15px 35px rgba(0,0,0,0.12);
 }
-
 .card img {
     width: 100%;
     height: 420px;
@@ -272,19 +215,15 @@ font-size: 24px;
     margin-bottom: 10px;
     object-fit: cover;
 }
-
 .card h4 {
   margin: 10px 0;
   font-size: 15px;
   color: #333;
 }
-
 .price {
   color: #a67c52;
   font-weight: bold;
 }
-
-/* Badge */
 .badge {
   position: absolute;
   top: 10px;
@@ -295,8 +234,6 @@ font-size: 24px;
   border-radius: 8px;
   font-size: 12px;
 }
-
-/* Button */
 .load-more {
   margin: 30px auto;
   display: block;
@@ -308,34 +245,26 @@ font-size: 24px;
   cursor: pointer;
   transition: 0.3s;
 }
-
 .load-more:hover {
   background: #a67c52;
   color: white;
 }
-
 .hidden {
   display: none;
 }
-
 .price-values {
   margin-bottom: 10px;
   font-weight: bold;
   color: #a67c52;
 }
-
 input[type="range"] {
   width: 100%;
   margin: 5px 0;
 }
-
-
 .footer {
     background-color:bisque;
     padding: 60px 20px;
-    /* border-top: 1px solid #e49a38; */
 }
-
 .horz {
     display: flex;
     justify-content: center;
@@ -344,16 +273,12 @@ input[type="range"] {
     gap: 40px;
     margin: 0 auto;
      border-top: 1px solid #e49a38;
-
 }
-
 .feature-item {
-
     flex: 1;
     text-align: center;
     padding: 40px;
 }
-
 .icon-wrapper {
     width: 80px;
     height: 80px;
@@ -366,74 +291,57 @@ input[type="range"] {
     margin: 0 auto 20px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
 }
-
 .icon-wrapper i {
     font-size: 30px;
     color:peachpuff; 
 }
-
 .feature-item h3 {
     font-size: 1.4rem;
     color: #333;
     margin-bottom: 15px;
     font-weight: bold;
 }
-
 .feature-item p {
     font-size: 0.95rem;
     color: #777;
     line-height: 1.6;
     margin: 0 auto;
 }
-
-
-/*اسفل  مع اللوجو*/
-
-
 .footer-column {
     flex: 1;
     margin: 0 15px;
     padding: 40px;
 }
-
 .footer-column h4 {
     color: #4a4a4a;
     font-size: 1.1rem;
     margin-bottom: 20px;
     font-weight: bold;
 }
-
 .footer-column ul {
     list-style: none;
     padding: 0;
 }
-
 .footer-column ul li {
     margin-bottom: 10px;
 }
-
 .footer-column ul li a {
     text-decoration: none;
     color: #888;
     font-size: 0.95rem;
     transition: color 0.3s;
 }
-
 .footer-column ul li a:hover {
     color: #d4a373; 
 }
-
-/* تنسيق النشرة الإخبارية */
 .newsletter {
     flex: 1.5; 
 }
-
 .subscribe-form {
     display: flex;
     gap: 10px;
     margin-bottom: 15px;
 }
-
 .subscribe-form input {
     flex: 1;
     padding: 10px 15px;
@@ -441,7 +349,6 @@ input[type="range"] {
     border-radius: 8px;
     outline: none;
 }
-
 .subscribe-form button {
     padding: 10px 20px;
     background-color: #fff;
@@ -450,26 +357,19 @@ input[type="range"] {
     cursor: pointer;
     transition: all 0.3s;
 }
-
 .subscribe-form button:hover {
     background-color: #f8f8f8;
     border-color: #d4a373;
 }
-
 .newsletter p {
     color: #999;
     font-size: 0.85rem;
     line-height: 1.6;
 }
-
-/* تنسيق اللوجو */
 .footer-logo img {
     max-width: 303px;
     height: auto;
 }
-
-/* اسفل شيء يخص الحقوق */
-
 .footer-bottom {
     display: flex;
     justify-content: space-between;
@@ -479,18 +379,14 @@ input[type="range"] {
     background-color: #684005;
     direction: rtl;
 }
-
 .copyright p {
     color: #f1cc88;
     font-size: 0.85rem;
 }
-
-/* أيقونات السوشيال ميديا الدائرية */
 .social-icons {
     display: flex;
     gap: 15px;
 }
-
 .social-icons a {
     width: 35px;
     height: 35px;
@@ -503,24 +399,20 @@ input[type="range"] {
     text-decoration: none;
     transition: all 0.3s;
 }
-
 .social-icons a:hover {
     border-color: #d4a373;
     color: #d4a373;
     transform: translateY(-3px);
 }
-
 .bottom-links a {
     text-decoration: none;
     color: #e8dda4;
     font-size: 0.85rem;
     margin-left: 20px;
 }
-
 .bottom-links a:hover {
     color: #d4a373;
 }
-
 .add-to-cart-btn {
         background: #c4a35a; color: #fff; border: none;
         padding: 8px 16px; border-radius: 6px; cursor: pointer;
@@ -538,13 +430,10 @@ input[type="range"] {
         width:18px; height:18px; font-size:11px;
         text-align:center; line-height:18px;
     }
-
-/* Bestsellers Slider Section */
 .bestsellers-section {
     margin: 40px 0;
     padding: 0;
 }
-
 .bestsellers-header {
     margin-bottom: 20px;
     padding: 18px 24px;
@@ -553,7 +442,6 @@ input[type="range"] {
     color: #fff;
     box-shadow: 0 14px 34px rgba(58, 43, 18, .12);
 }
-
 .bestsellers-header span {
     display: inline-flex;
     margin-bottom: 6px;
@@ -564,14 +452,12 @@ input[type="range"] {
     font-size: 12px;
     font-weight: 800;
 }
-
 .bestsellers-header h2 {
     margin: 0;
     color: #fff;
     font-size: 24px;
     line-height: 1.35;
 }
-
 .bestsellers-slider {
     display: flex;
     gap: 20px;
@@ -581,7 +467,6 @@ input[type="range"] {
     border-radius: 12px;
     transition: transform 0.4s ease;
 }
-
 .bestseller-card {
     flex: 0 0 260px;
     background: peachpuff;
@@ -590,12 +475,10 @@ input[type="range"] {
     box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     transition: all 0.3s ease;
 }
-
 .bestseller-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 28px rgba(0,0,0,0.12);
 }
-
 .bestseller-card img {
     width: 100%;
     height: 240px;
@@ -603,32 +486,27 @@ input[type="range"] {
     margin-bottom: 10px;
     object-fit: cover;
 }
-
 .bestseller-card h4 {
     margin: 8px 0;
     font-size: 14px;
     color: #333;
 }
-
 .bestseller-card .price {
     color: #a67c52;
     font-weight: bold;
     font-size: 13px;
 }
-
 .bestseller-card .add-to-cart-btn {
     font-size: 12px;
     padding: 6px 12px;
     margin-top: 6px;
 }
-
 .slider-controls {
     display: flex;
     justify-content: space-between;
     gap: 10px;
     margin-top: 10px;
 }
-
 .slider-nav {
     flex: 1;
     background: #c4a35a;
@@ -640,11 +518,9 @@ input[type="range"] {
     transition: background 0.3s ease;
     font-size: 16px;
 }
-
 .slider-nav:hover {
     background: #a8873d;
 }
-
 .promo-carousel {
     position: relative;
     margin: 28px 0 8px;
@@ -654,13 +530,11 @@ input[type="range"] {
     background: #1a1a2e;
     box-shadow: 0 14px 34px rgba(58, 43, 18, .14);
 }
-
 .promo-track,
 .promo-slide {
     width: 100%;
     height: 100%;
 }
-
 .promo-slide {
     position: absolute;
     inset: 0;
@@ -668,19 +542,16 @@ input[type="range"] {
     transform: scale(1.03);
     transition: opacity .7s ease, transform .7s ease;
 }
-
 .promo-slide.active {
     opacity: 1;
     transform: scale(1);
 }
-
 .promo-slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 }
-
 .promo-dots {
     position: absolute;
     left: 18px;
@@ -689,7 +560,6 @@ input[type="range"] {
     gap: 7px;
     z-index: 2;
 }
-
 .promo-dots button {
     width: 9px;
     height: 9px;
@@ -699,111 +569,86 @@ input[type="range"] {
     background: rgba(255,255,255,.55);
     cursor: pointer;
 }
-
 .promo-dots button.active {
     width: 26px;
     border-radius: 999px;
     background: #c4a35a;
 }
-
-/* =========================
-   Responsive layout
-========================= */
-
 html,
 body {
     max-width: 100%;
     overflow-x: hidden;
 }
-
 img {
     max-width: 100%;
 }
-
 @media (max-width: 1150px) {
     .container {
         width: min(92%, 980px);
         margin-inline: auto;
     }
-
     .header .logo {
         width: 28%;
     }
-
     .header .navbar {
         margin-right: 20px;
     }
-
     .header .navbar li {
         font-size: 17px;
         padding: 8px;
     }
-
     .home .home-pic h1 {
         font-size: 52px;
     }
-
     .hadara {
         flex-basis: 390px;
         height: 390px;
     }
-
     .hadara h3 {
         padding-top: 315px;
     }
-
     .contain {
         gap: 20px;
         padding: 22px;
     }
-
     .grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-
     .card img {
         width: 100%;
         height: 380px;
         object-fit: cover;
     }
-
     .bestseller-card {
         flex: 0 0 240px;
     }
-
     .bestseller-card img {
         height: 220px;
     }
-
     .bestsellers-header h2 {
         font-size: 22px;
     }
 }
-
 @media (max-width: 780px) {
     .container {
         width: calc(100% - 28px);
         margin-inline: 14px;
     }
-
     .header {
         padding: 12px 0 16px;
         text-align: center;
     }
-
     .header .logo,
     .header .navbar {
         float: none;
         width: 100%;
         margin: 0;
     }
-
     .header .logo img {
         width: min(210px, 58vw);
         display: block;
         margin: 0 auto 8px;
     }
-
     .header .navbar {
         height: auto;
         display: flex;
@@ -813,14 +658,12 @@ img {
         padding: 8px 10px;
         background: transparent;
     }
-
     .header .navbar li {
         display: inline-flex;
         margin: 0;
         padding: 0;
         font-size: 14px;
     }
-
     .header .navbar li a {
         display: inline-flex;
         align-items: center;
@@ -830,192 +673,153 @@ img {
         border-radius: 10px;
         background: rgba(255, 255, 255, 0.45);
     }
-
     .home {
         min-height: 560px;
         height: auto;
         background-attachment: scroll !important;
         position: relative;
     }
-
     .home .home-pic {
         width: min(92%, 560px);
         top: 54%;
     }
-
     .home .home-pic h1 {
         font-size: clamp(32px, 11vw, 48px);
         line-height: 1.25;
     }
-
     .home .home-pic p {
         font-size: 16px;
         line-height: 1.8;
     }
-
     .home .home-pic a {
         padding: 10px 26px;
         margin: 16px 0 0;
     }
-
     .above {
         display: block;
         margin: 24px 16px 10px;
     }
-
     .above h2 {
         font-size: 26px;
     }
-
     .above h3 {
         font-size: 15px;
         line-height: 1.8;
     }
-
     .slider {
         gap: 14px;
         padding: 16px;
         scroll-padding-inline: 16px;
     }
-
     .hadara {
         flex-basis: min(84vw, 340px);
         height: 360px;
         border-radius: 16px;
         overflow: hidden;
     }
-
     .hadara h3 {
         padding-top: 285px;
         padding-right: 16px;
         font-size: 21px;
     }
-
     .contain {
         display: grid;
         grid-template-columns: 1fr;
         padding: 18px;
     }
-
     .sidebar {
         width: 100%;
         order: -1;
     }
-
     .grid {
         grid-template-columns: 1fr;
         gap: 18px;
     }
-
     .products-heading {
         padding: 18px;
         border-radius: 16px;
     }
-
     .products-heading h2 {
         font-size: 24px;
     }
-
     .card {
         padding: 12px;
     }
-
     .card img {
         width: 100%;
         height: 300px;
         object-fit: cover;
     }
-
     .promo-carousel {
         height: 190px;
         border-radius: 16px;
     }
-
     .bestsellers-slider {
         gap: 12px;
         padding: 12px;
     }
-
     .bestseller-card {
         flex: 0 0 200px;
     }
-
     .bestseller-card img {
         height: 180px;
     }
-
     .bestseller-card h4 {
         font-size: 12px;
     }
-
     .slider-nav {
         padding: 8px;
         font-size: 14px;
     }
-
     .footer-bottom {
         flex-direction: column;
         gap: 14px;
         text-align: center;
     }
-
     .bottom-links a {
         display: inline-block;
         margin: 0 8px;
     }
 }
-
 @media (max-width: 430px) {
     .header .navbar li {
         width: calc(50% - 6px);
     }
-
     .header .navbar li a {
         width: 100%;
         font-size: 13px;
     }
-
     .home .home-pic h1 {
         font-size: 30px;
     }
-
     .hadara {
         flex-basis: 86vw;
         height: 315px;
     }
-
     .hadara h3 {
         padding-top: 250px;
     }
-
     .promo-carousel {
         height: 160px;
     }
-
     .bestseller-card {
         flex: 0 0 160px;
     }
-
     .bestseller-card img {
         height: 140px;
     }
-
     .bestseller-card h4 {
         font-size: 11px;
     }
-
     .slider-nav {
         padding: 6px;
         font-size: 12px;
     }
 }
-
-/* Cleaner mobile nav override */
 @media (max-width: 780px) {
     .header {
         overflow: visible;
     }
-
     .header .navbar {
         flex-wrap: nowrap;
         justify-content: flex-start;
@@ -1027,17 +831,14 @@ img {
         -webkit-overflow-scrolling: touch;
         background: transparent;
     }
-
     .header .navbar::-webkit-scrollbar {
         display: none;
     }
-
     .header .navbar li {
         width: auto;
         flex: 0 0 auto;
         scroll-snap-align: start;
     }
-
     .header .navbar li a {
         width: auto;
         white-space: nowrap;
@@ -1047,7 +848,6 @@ img {
         box-shadow: 0 4px 12px rgba(95, 60, 18, .06);
     }
 }
-
 @media (max-width: 430px) {
     .header .navbar li {
         width: auto;

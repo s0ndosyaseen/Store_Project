@@ -1,7 +1,7 @@
 <?php
-// =============================================
-// API: جلب المنتجات حسب الحضارة
-// =============================================
+
+
+
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -21,11 +21,11 @@ $id       = (int)($_GET['id'] ?? 0);
 
 switch ($action) {
 
-    // قائمة المنتجات (مع فلترة حسب الحضارة والفئة الفرعية)
+
     case 'list':
         $subcategory = $_GET['subcategory'] ?? '';
         $sort = $_GET['sort'] ?? '';
-        
+
         if ($sort === 'bestselling') {
             $sql = "
                 SELECT p.id, p.name, p.description, p.price, p.image, p.category, p.subcategory, p.stock,
@@ -43,17 +43,17 @@ switch ($action) {
             $sql = 'SELECT id, name, description, price, image, category, subcategory, stock FROM products WHERE 1=1';
         }
         $params = [];
-        
+
         if (!empty($category)) {
             $sql .= $sort === 'bestselling' ? ' AND p.category = ?' : ' AND category = ?';
             $params[] = $category;
         }
-        
+
         if (!empty($subcategory)) {
             $sql .= $sort === 'bestselling' ? ' AND p.subcategory = ?' : ' AND subcategory = ?';
             $params[] = $subcategory;
         }
-        
+
         $sql .= $sort === 'bestselling'
             ? ' ORDER BY sold_count DESC, p.id ASC'
             : ' ORDER BY id ASC';
@@ -63,7 +63,7 @@ switch ($action) {
         echo json_encode(['success' => true, 'products' => $products], JSON_UNESCAPED_UNICODE);
         break;
 
-    // تفاصيل منتج واحد
+
     case 'single':
         if ($id <= 0) {
             echo json_encode(['success' => false, 'message' => 'معرف المنتج غير صالح'], JSON_UNESCAPED_UNICODE);
@@ -81,7 +81,7 @@ switch ($action) {
         echo json_encode(['success' => true, 'product' => $product], JSON_UNESCAPED_UNICODE);
         break;
 
-    // بحث في المنتجات
+
     case 'search':
         $query = sanitize($_GET['q'] ?? '');
         if (empty($query)) {

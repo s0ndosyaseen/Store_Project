@@ -4,7 +4,7 @@ require_once __DIR__ . '/../config/functions.php';
 $pdo = getDB();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // تنظيف المدخلات
+
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
 
     if (empty($email)) {
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // البحث عن الإيميل في قاعدة البيانات
+
     $stmt = $pdo->prepare("SELECT name FROM users WHERE email = ?");
     $stmt->execute([$email]);
     $user = $stmt->fetch();

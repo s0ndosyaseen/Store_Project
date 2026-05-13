@@ -1,12 +1,12 @@
 <?php
 
-// =============================================
-// مشترك: فحص صلاحية الدخول لكل صفحات الآدمن
-// =============================================
+
+
+
 if (session_status() === PHP_SESSION_NONE) session_start();
 
 if (isset($_GET['go_home'])) {
-    unset($_SESSION['is_admin'], $_SESSION['user_role']); // حذف الرتبة أيضاً عند الخروج
+    unset($_SESSION['is_admin'], $_SESSION['user_role']);
     header('Location: ../home.html');
     exit;
 }
@@ -16,14 +16,14 @@ require_once __DIR__ . '/../config/functions.php';
 
 $pdo = getDB();
 
-// تسجيل خروج
+
 if (($_GET['logout'] ?? '') === '1') {
     unset($_SESSION['is_admin'], $_SESSION['user_role']);
     header('Location: index.php');
     exit;
 }
 
-// محاولة تسجيل دخول
+
 $loginError = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_pass'])) {
     $inputPass = $_POST['admin_pass'];
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_pass'])) {
 
     if ($foundAccount) {
         $_SESSION['is_admin'] = true;
-        $_SESSION['user_role'] = $foundAccount['role']; // [إضافة] تخزين الرتبة (admin أو employee)
+        $_SESSION['user_role'] = $foundAccount['role'];
         session_regenerate_id(true);
         header('Location: ' . basename($_SERVER['PHP_SELF']));
         exit;
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_pass'])) {
     }
 }
 
-// عرض فورم الدخول إذا لم يكن مسجلاً
+
 if (empty($_SESSION['is_admin'])) {
     ?>
     <!DOCTYPE html>

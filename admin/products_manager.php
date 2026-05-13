@@ -3,7 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// التأكد من تسجيل الدخول كأدمن
+
 if (empty($_SESSION['is_admin'])) {
     header('Location: index.php');
     exit;
@@ -23,7 +23,7 @@ if (isset($_GET['go_home'])) {
 require_once __DIR__ . '/../config/db.php';
 $pdo = getDB();
 
-// الحذف
+
 if (isset($_GET['delete'])) {
     $id = (int)$_GET['delete'];
     $stmt = $pdo->prepare("DELETE FROM products WHERE id = ?");
@@ -47,7 +47,7 @@ $products = $pdo->query("SELECT * FROM products ORDER BY id DESC")->fetchAll();
         .btn-add { background: #27ae60; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 8px; display: inline-block; margin-bottom: 20px; transition: 0.3s; }
         .btn-add:hover { background: #219150; }
 
-        /* تنسيق حاوية الأزرار */
+
         .actions-cell { display: flex; gap: 8px; align-items: center; }
 
         .btn-edit {
@@ -86,7 +86,7 @@ $products = $pdo->query("SELECT * FROM products ORDER BY id DESC")->fetchAll();
 <body>
 <?php include '_nav.php'; ?>
 <header>
-    <div> 
+    <div>
      <button class="open-btn" onclick="openNav()" style="margin-left: 30px;">
         <i class="fas fa-bars"></i>
     </button>

@@ -1,68 +1,50 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
-
 :root{
     --gold: #c4a35a;
     --dark: #1a1a2e;
     --light: #f8f5ef;
     --white: #ffffff;
 }
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
-
 body{
     font-family:'Cairo', sans-serif;
     background-color:#dfd3c3;
     background-image:
             linear-gradient(rgba(242,236,228,0.8), rgba(242,236,228,0.85)),
             url('../images/shope_background.png');
-
     min-height:100vh;
     color:#444;
 }
-
-/* ========================= */
-
 .contact-section{
     padding:70px 8%;
     position:relative;
 }
-
 .contact-container{
     position:relative;
     z-index:2;
 }
-
 .contact-header{
     text-align:center;
     margin-bottom:50px;
 }
-
 .contact-header h1{
     font-size:42px;
     color:var(--dark);
     margin-bottom:12px;
 }
-
 .contact-header p{
     color:#6d6d6d;
     font-size:16px;
 }
-
-/* ========================= */
-
 .contact-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:35px;
 }
-
-/* ========================= */
-
 .contact-info,
 .contact-form-box{
     background:rgba(255,255,255,0.92);
@@ -72,130 +54,91 @@ body{
     border:1px solid rgba(196,163,90,0.2);
     backdrop-filter:blur(4px);
 }
-
-/* ========================= */
-
 .info-card{
     display:flex;
     align-items:flex-start;
     gap:18px;
-
     padding:18px;
     margin-bottom:18px;
-
     border-radius:16px;
     transition:0.3s;
     background:#fffdf9;
 }
-
 .info-card:hover{
     transform:translateY(-3px);
     background:#fffaf0;
 }
-
 .info-card i{
     width:55px;
     height:55px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     border-radius:50%;
     background:linear-gradient(135deg,#d4b16a,#b58a32);
-
     color:white;
     font-size:20px;
-
     flex-shrink:0;
 }
-
 .info-card h3{
     color:var(--dark);
     margin-bottom:6px;
     font-size:17px;
 }
-
 .info-card p{
     color:#666;
     font-size:14px;
     line-height:1.7;
 }
-
-/* ========================= */
-
 .contact-form-box h2{
     color:var(--dark);
     margin-bottom:25px;
     font-size:28px;
 }
-
-/* ========================= */
-
 .form-group{
     margin-bottom:20px;
 }
-
 .form-group input,
 .form-group textarea{
     width:100%;
     padding:15px 18px;
-
     border:none;
     outline:none;
-
     border-radius:14px;
-
     background:#f9f7f2;
-
     font-family:'Cairo', sans-serif;
     font-size:15px;
-
     transition:0.3s;
 }
-
 .form-group input:focus,
 .form-group textarea:focus{
     background:white;
     box-shadow:0 0 0 3px rgba(196,163,90,0.2);
 }
-
 .form-group textarea{
     resize:none;
     min-height:140px;
 }
-
-/* ========================= */
-
 button{
     width:100%;
     border:none;
     cursor:pointer;
-
     padding:15px;
-
     border-radius:14px;
-
     background:linear-gradient(135deg,#d4b16a,#b58a32);
-
     color:white;
-
     font-family:'Cairo', sans-serif;
     font-size:16px;
     font-weight:700;
-
     transition:0.3s;
 }
-
 button:hover{
     transform:translateY(-2px);
     box-shadow:0 8px 18px rgba(181,138,50,0.3);
 }
-
 button i{
     margin-left:8px;
 }
-
 .success-msg{
     background:#edf9f0;
     color:#2e7d32;
@@ -205,81 +148,60 @@ button i{
     text-align:center;
     font-weight:600;
 }
-
-/* ========================= */
-
 @media(max-width:900px){
-
     .contact-grid{
         grid-template-columns:1fr;
     }
-
 }
-
 @media(max-width:600px){
-
     .contact-section{
         padding:40px 5%;
     }
-
     .contact-header h1{
         font-size:32px;
     }
-
     .contact-info,
     .contact-form-box{
         padding:25px;
     }
-
 }
-
 @media(max-width:420px){
-
     html,
     body{
         max-width:100%;
         overflow-x:hidden;
     }
-
     .contact-section{
         padding:28px 12px;
     }
-
     .contact-header{
         margin-bottom:28px;
     }
-
     .contact-header h1{
         font-size:28px;
         line-height:1.35;
     }
-
     .contact-header p{
         font-size:14px;
         line-height:1.8;
     }
-
     .contact-info,
     .contact-form-box{
         padding:18px;
         border-radius:16px;
     }
-
     .info-card{
         gap:12px;
         padding:14px;
     }
-
     .info-card i{
         width:44px;
         height:44px;
         font-size:17px;
     }
-
     .contact-form-box h2{
         font-size:22px;
     }
-
     .form-group input,
     .form-group textarea,
     button{

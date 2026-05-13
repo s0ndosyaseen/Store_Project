@@ -1,9 +1,9 @@
 <?php
 require_once __DIR__ . '/_auth.php';
 require_once __DIR__ . '/../config/db.php';
-$pdo = getDB();// لتعريف المتغير بسطر28
+$pdo = getDB();
 
-// منع الموظف من دخول هذه الصفحة نهائياً
+
 if (($_SESSION['user_role'] ?? '') !== 'admin') {
     header('Location: index.php');
     exit;
@@ -11,12 +11,12 @@ if (($_SESSION['user_role'] ?? '') !== 'admin') {
 
 $pageTitle = 'الإعدادات العامة';
 
-// ============================================================
-// تأكد من وجود جدول settings
-// ============================================================
+
+
+
 
 $defaults = [
-    //'admin_password' => 'sonly', مش لازمة لانه حذفت الباسوورد من السيتنج
+
     'store_name'     => 'البوصلة',
     'store_phone'    => '',
     'store_email'    => '',
@@ -34,19 +34,19 @@ foreach ($defaults as $k => $v) {
 $msg = '';
 $msgType = 'success';
 
-// ============================================================
-// معالجة POST
-// ============================================================
+
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
 
-    // --- تغيير كلمة المرور ---
+
     if ($action === 'change_password') {
         $current = $_POST['current_pass'] ?? '';
         $new1    = $_POST['new_pass']     ?? '';
         $new2    = $_POST['confirm_pass'] ?? '';
 
-        // الباسورد الحالي للأدمن من جدول accounts
+
         $stmt = $pdo->prepare("SELECT password FROM accounts WHERE role = 'admin' LIMIT 1");
         $stmt->execute();
         $stored = $stmt->fetchColumn();
@@ -69,13 +69,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $msgType = 'error';
         } else {
             $hashed = password_hash($new1, PASSWORD_DEFAULT);
-            // التحديث يتم في جدول accounts للأدمن
+
             $pdo->prepare("UPDATE accounts SET password=? WHERE role='admin'")
                     ->execute([$hashed]);
             $msg = 'تم تغيير كلمة مرور الإدارة بنجاح ✓';
         }
     }
-    // --- تحديث معلومات المتجر ---
+
     elseif ($action === 'update_store') {
         $fields = ['store_name','store_phone','store_email','store_whatsapp','store_address','footer_text'];
         $upd = $pdo->prepare("UPDATE settings SET setting_value=? WHERE setting_key=?");
@@ -95,12 +95,12 @@ if (!$msg && isset($_GET['msg'])) {
     $msgType = $_GET['type'] ?? 'success';
 }
 
-// جلب كل الإعدادات
+
 $rows = $pdo->query('SELECT setting_key, setting_value FROM settings')->fetchAll();
 $settings = [];
 foreach ($rows as $r) $settings[$r['setting_key']] = $r['setting_value'];
 
-/*  رسائل التواصل */
+
 
 $messages = $pdo->query("
     SELECT *
@@ -121,24 +121,24 @@ $messages = $pdo->query("
     <style>
         .sidebar {
     height: 100%;
-    width: 0; /* يبدأ بعرض صفر ليكون مخفياً */
-    position: fixed; /* ثابت فوق كل شيء */
-    z-index: 2000; /* قيمة عالية جداً لضمان ظهوره فوق الهيدر */
+    width: 0;
+    position: fixed;
+    z-index: 2000;
     top: 0;
-    right: 0; /* لأنه موقع عربي */
-    background-color: #1a1a2e; /* نفس لون الهيدر للفخامة */
+    right: 0;
+    background-color: #1a1a2e;
     overflow-x: hidden;
-    transition: 0.5s; /* سرعة الحركة */
+    transition: 0.5s;
     padding-top: 60px;
     box-shadow: -2px 0 10px rgba(0,0,0,0.5);
 }
 
-/* تنسيق الروابط داخل السايد بار */
+
 .sidebar a {
     padding: 15px 25px;
     text-decoration: none;
     font-size: 16px;
-    color: #c4a35a; /* اللون الذهبي */
+    color: #c4a35a;
     display: block;
     transition: 0.3s;
     text-align: right;
@@ -150,16 +150,16 @@ $messages = $pdo->query("
     color: #fff;
 }
 
-/* زر الإغلاق */
+
 .sidebar .close-btn {
     position: absolute;
     top: 10px;
-    left: 25px; /* في جهة اليسار لأن السايد بار على اليمين */
+    left: 25px;
     font-size: 36px;
     border: none;
 }
 
-/* طبقة التعتيم الخلفية */
+
 .overlay {
     display: none;
     position: fixed;
@@ -168,19 +168,16 @@ $messages = $pdo->query("
     top: 0;
     left: 0;
     background-color: rgba(0,0,0,0.7);
-    z-index: 1500; /* أقل من السايد بار وأعلى من محتوى الصفحة */
+    z-index: 1500;
 
 }
-/* =========================
-   SETTINGS PAGE DESIGN
-========================= */
+
 
 .form-card {
     background: rgba(255,255,255,0.95);
     border-radius: 18px;
     padding: 28px;
-    /* margin-right: 24px;
-    margin-left: 24px; */
+
     box-shadow: 0 8px 25px rgba(0,0,0,0.08);
     border: 1px solid rgba(196,163,90,0.25);
     backdrop-filter: blur(4px);
@@ -192,7 +189,7 @@ $messages = $pdo->query("
     box-shadow: 0 10px 28px rgba(0,0,0,0.12);
 }
 
-/* العناوين */
+
 .form-card h3 {
     color: #1a1a2e;
     font-size: 18px;
@@ -202,7 +199,7 @@ $messages = $pdo->query("
     padding-bottom: 12px;
 }
 
-/* الفورم */
+
 .form-group {
     display: flex;
     flex-direction: column;
@@ -215,7 +212,7 @@ $messages = $pdo->query("
     color: #6d5520;
 }
 
-/* الانبوتات */
+
 .form-group input,
 .form-group textarea,
 .form-group select {
@@ -244,7 +241,7 @@ $messages = $pdo->query("
     background: #fff;
 }
 
-/* زرار العين */
+
 .form-group button {
     transition: 0.3s;
 }
@@ -253,7 +250,7 @@ $messages = $pdo->query("
     color: #c4a35a !important;
 }
 
-/* الأزرار */
+
 .btn {
     border: none;
     border-radius: 12px;
@@ -276,7 +273,7 @@ $messages = $pdo->query("
     box-shadow: 0 6px 18px rgba(181,138,50,0.35);
 }
 
-/* رسائل التنبيه */
+
 .alert {
     width: 90%;
     margin: 20px auto;
@@ -302,7 +299,7 @@ $messages = $pdo->query("
     border: 1px solid #f1b5b0;
 }
 
-/* system info */
+
 .system-box {
     background: white;
     border-radius: 12px;
@@ -329,7 +326,7 @@ $messages = $pdo->query("
     font-family: monospace;
 }
 
-/* شبكة الكروت */
+
 .settings-grid {
     padding: 24px;
     display: grid;
@@ -339,9 +336,9 @@ $messages = $pdo->query("
 }
 
 
-/* ========================= */
-/* رسائل التواصل */
-/* ========================= */
+
+
+
 
 .messages-container{
     display:flex;
@@ -404,7 +401,7 @@ $messages = $pdo->query("
 
 
 
-/* responsive */
+
 @media (max-width: 900px) {
     .settings-grid {
         grid-template-columns: 1fr;
@@ -432,7 +429,7 @@ $messages = $pdo->query("
     }
 }
 
-/* حركة ناعمة */
+
 @keyframes fadeUp {
     from {
         opacity: 0;

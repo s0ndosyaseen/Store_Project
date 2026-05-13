@@ -1,11 +1,10 @@
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
     body { 
         font-family: 'Segoe UI', Tahoma, sans-serif;
         background: #f5f5f0;
         color: #333;
         direction: rtl; 
         }
-
         header { background: #e8d9b5;
              color: #c4a35a;
              padding: 16px 32px; 
@@ -14,7 +13,6 @@
              gap: 16px; 
         }
         header a {
-             /* color: #c4a35a; */
              opacity:.7; 
             text-decoration: none; 
             font-size: 14px;
@@ -24,11 +22,9 @@
             padding: 8px 16px;
             border-radius: 6px; 
         }
-
        header a:hover {
     background: #a67c37;
 }
-
         header h1 { font-size: 18px; }
         .main {
              padding: 28px 32px;
@@ -82,49 +78,40 @@
              color: #fff;
              background: #f39c12; 
         }
-
-        /* تنسيق السايد بار الأساسي */
 .sidebar {
     height: 100%;
-    width: 0; /* يبدأ بعرض صفر ليكون مخفياً */
-    position: fixed; /* ثابت فوق كل شيء */
-    z-index: 2000; /* قيمة عالية جداً لضمان ظهوره فوق الهيدر */
+    width: 0; 
+    position: fixed; 
+    z-index: 2000; 
     top: 0;
-    right: 0; /* لأنه موقع عربي */
-    background-color: #1a1a2e; /* نفس لون الهيدر للفخامة */
+    right: 0; 
+    background-color: #1a1a2e; 
     overflow-x: hidden;
-    transition: 0.5s; /* سرعة الحركة */
+    transition: 0.5s; 
     padding-top: 60px;
     box-shadow: -2px 0 10px rgba(0,0,0,0.5);
 }
-
-/* تنسيق الروابط داخل السايد بار */
 .sidebar a {
     padding: 15px 25px;
     text-decoration: none;
     font-size: 16px;
-    color: #c4a35a; /* اللون الذهبي */
+    color: #c4a35a; 
     display: block;
     transition: 0.3s;
     text-align: right;
     border-bottom: 1px solid rgba(255,255,255,0.05);
 }
-
 .sidebar a:hover {
     background-color: #252545;
     color: #fff;
 }
-
-/* زر الإغلاق */
 .sidebar .close-btn {
     position: absolute;
     top: 10px;
-    left: 25px; /* في جهة اليسار لأن السايد بار على اليمين */
+    left: 25px; 
     font-size: 36px;
     border: none;
 }
-
-/* طبقة التعتيم الخلفية */
 .overlay {
     display: none;
     position: fixed;
@@ -133,9 +120,8 @@
     top: 0;
     left: 0;
     background-color: rgba(0,0,0,0.7);
-    z-index: 1500; /* أقل من السايد بار وأعلى من محتوى الصفحة */
+    z-index: 1500; 
 }
-        /* تنسيق زر الطباعة */
 .btn-print {
     background: #c4a35a;
     color: #fff;
@@ -144,17 +130,15 @@
     border-radius: 6px;
     cursor: pointer;
     font-size: 14px;
-    margin-right: auto; /* لدفعه لليسار في الهيدر */
+    margin-right: auto; 
     display: flex;
     align-items: center;
     gap: 8px;
     transition: 0.3s;
 }
-
 .btn-print:hover {
     background: #a67c37;
 }
-
 .open-btn {
     font-size: 24px;
     cursor: pointer;
@@ -166,30 +150,22 @@
 .open-btn:hover {
     color: #fff;
 }
-
-/* --- سحر الطباعة --- */
 @media print {
-    /* إخفاء الهيدر وأي أزرار عند الطباعة */
     header, .btn-print, .fas {
         display: none !important;
     }
-
     body {
-        background: #fff; /* خلفية بيضاء للطباعة */
+        background: #fff; 
     }
-
     .main {
         padding: 0;
         max-width: 100%;
     }
-
     .card {
         box-shadow: none;
-        border: 1px solid #eee; /* إطار بسيط بدلاً من الظل */
+        border: 1px solid #eee; 
         margin-bottom: 10px;
     }
-    
-    /* التأكد من ظهور الألوان في بعض المتصفحات */
     .badge {
         border: 1px solid #000 !important;
         color: #000 !important;

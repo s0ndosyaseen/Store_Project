@@ -4,7 +4,7 @@ require_once 'config/functions.php';
 
 $pdo = getDB();
 
-/* جلب الإعدادات */
+
 $stmt = $pdo->query("SELECT setting_key, setting_value FROM settings");
 
 $settings = [];
@@ -14,11 +14,11 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 }
 
 $msg = '';
- if($_SERVER['REQUEST_METHOD'] === 'POST'){ 
+ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $name = sanitize($_POST['name'] ?? '');
-  $email = sanitize($_POST['email'] ?? ''); 
-  $message = sanitize($_POST['message'] ?? ''); 
-  if($name && $email && $message){ 
+  $email = sanitize($_POST['email'] ?? '');
+  $message = sanitize($_POST['message'] ?? '');
+  if($name && $email && $message){
     $insert = $pdo->prepare(" INSERT INTO contact_messages(name,email,message) VALUES(?,?,?) ");
      $insert->execute([$name,$email,$message]); $msg = "تم إرسال رسالتك بنجاح ✓"; } }
 ?>
@@ -111,38 +111,38 @@ $msg = '';
                 <h2>أرسل رسالة</h2>
 
       <form method="POST">
-    
+
       <?php if(!empty($msg)): ?>
            <div class="success-msg">
                <?= $msg ?>
            </div>
        <?php endif; ?>
-        
+
        <div class="form-group">
            <input type="text"
                  name="name"
                   placeholder="الاسم الكامل"
                  required>
       </div>
-        
+
       <div class="form-group">
            <input type="email"
                   name="email"
                   placeholder="البريد الإلكتروني"
                   required>
        </div>
-        
+
        <div class="form-group">
            <textarea name="message"
                      placeholder="اكتب رسالتك هنا..."
                      required></textarea>
        </div>
-        
+
        <button type="submit">
            <i class="fas fa-paper-plane"></i>
              إرسال الرسالة
       </button>
-        
+
     </form>
 
             </div>

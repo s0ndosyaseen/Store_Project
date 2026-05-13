@@ -1,5 +1,5 @@
 <?php
-// signup.html -> register.php
+
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -32,7 +32,7 @@ if (strlen($pass) < 8) {
 }
 
 if (!empty($errors)) {
-    // redirectWith('../signup.html', 'error', implode(' | ', $errors));
+
     $msg = implode(' | ', $errors);
     echo "<script>
         alert('$msg');
@@ -46,7 +46,7 @@ $pdo = getDB();
 $stmt = $pdo->prepare('SELECT id FROM users WHERE email = ?');
 $stmt->execute([$email]);
 if ($stmt->fetch()) {
-    // redirectWith('../signup.html', 'error', 'هذا البريد الإلكتروني مسجل مسبقاً');
+
     echo "<script>
         alert('هذا البريد الإلكتروني مسجل مسبقاً');
         window.location.href = '../signup.html';
