@@ -181,20 +181,20 @@ $statusColors = [
         </div>
     </div>
 
-    <!-- قسم الرسم البياني -->
+    <!--  الرسم البياني -->
  <div class="dashboard-charts">
     <div class="chart-container">
         <h3 style="margin-bottom: 15px;">تحليلات المبيعات (آخر 7 أيام)</h3>
          <canvas id="salesChart" height="100"></canvas>
     </div>
-    <!-- الرسم الدائري للأقسام -->
     <div class="chart-container">
         <h3><i class="fas fa-chart-pie"></i> مبيعات الحضارات</h3>
         <canvas id="categoryChart"></canvas>
     </div>
 
 </div>
-<!-- استدعاء مكتبة الرسم البياني -->
+
+<!--  مكتبة الرسم البياني -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 const ctx = document.getElementById('salesChart').getContext('2d');
@@ -319,8 +319,11 @@ const categoryChart = new Chart(catCtx, {
                 <td data-label="#"><strong>#<?= $order['id'] ?></strong></td>
                 <td data-label="العميل"><?= htmlspecialchars($order['fname'] . ' ' . $order['lname']) ?></td>
                 <td data-label="التواصل">
+
                     <?= htmlspecialchars($order['email']) ?><br>
-                    <small><?= htmlspecialchars($order['phone']) ?></small>
+                    <div style="white-space:wrap;">
+                        <?= htmlspecialchars($order['phone']) ?>
+                    </div>
                 </td>
                 <td data-label="العنوان" style="max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
                     <?= htmlspecialchars($order['address']) ?>
