@@ -7,7 +7,14 @@
     <a href="products_manager.php"><i class="fas fa-boxes"></i> إدارة المنتجات</a>
     <a href="users_manager.php"><i class="fas fa-users"></i> إدارة المستخدمين</a>
     <a href="add_categ.php"><i class="fas fa-th-list"></i> إدارة الحضارات</a>
-    <a href="settings.php"><i class="fas fa-cog"></i> الإعدادات</a>
+
+    <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin'): ?>
+        <a href="settings.php"><i class="fas fa-cog"></i> الإعدادات</a>
+    <?php endif; ?>
+    <?php if (($_SESSION['user_role'] ?? '') === 'admin'): ?>
+        <a href="manage_employees.php"><i class="fas fa-users"></i> إدارة الموظفين</a>
+    <?php endif; ?>
+
     <footer>
     <a href="?go_home=1"><i class="fas fa-store"></i> العودة للمتجر</a>
     
