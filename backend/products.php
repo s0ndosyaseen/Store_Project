@@ -24,21 +24,39 @@ switch ($action) {
     // قائمة المنتجات (مع فلترة حسب الحضارة والفئة الفرعية)
     case 'list':
         $subcategory = $_GET['subcategory'] ?? '';
+        $sort = $_GET['sort'] ?? '';
         
-        $sql = 'SELECT id, name, description, price, image, category, subcategory, stock FROM products WHERE 1=1';
+        if ($sort === 'bestselling') {
+            $sql = "
+                SELECT p.id, p.name, p.description, p.price, p.image, p.category, p.subcategory, p.stock,
+                       COALESCE(s.sold_qty, 0) AS sold_count
+                FROM products p
+                LEFT JOIN (
+                    SELECT oi.product_id, SUM(oi.quantity) AS sold_qty
+                    FROM order_items oi
+                    JOIN orders o ON o.id = oi.order_id
+                    WHERE o.status != 'cancelled'
+                    GROUP BY oi.product_id
+                ) s ON s.product_id = p.id
+                WHERE 1=1";
+        } else {
+            $sql = 'SELECT id, name, description, price, image, category, subcategory, stock FROM products WHERE 1=1';
+        }
         $params = [];
         
         if (!empty($category)) {
-            $sql .= ' AND category = ?';
+            $sql .= $sort === 'bestselling' ? ' AND p.category = ?' : ' AND category = ?';
             $params[] = $category;
         }
         
         if (!empty($subcategory)) {
-            $sql .= ' AND subcategory = ?';
+            $sql .= $sort === 'bestselling' ? ' AND p.subcategory = ?' : ' AND subcategory = ?';
             $params[] = $subcategory;
         }
         
-        $sql .= ' ORDER BY id ASC';
+        $sql .= $sort === 'bestselling'
+            ? ' ORDER BY sold_count DESC, p.id ASC'
+            : ' ORDER BY id ASC';
         $stmt = $pdo->prepare($sql);
         $stmt->execute($params);
         $products = $stmt->fetchAll();

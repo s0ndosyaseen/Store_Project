@@ -216,6 +216,33 @@ font-size: 24px;
   flex: 1;
 }
 
+.products-heading {
+  margin-bottom: 18px;
+  padding: 22px 24px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #1a1a2e, #876723);
+  color: #fff;
+  box-shadow: 0 14px 34px rgba(58, 43, 18, .12);
+}
+
+.products-heading span {
+  display: inline-flex;
+  margin-bottom: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.12);
+  color: #f5dfae;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.products-heading h2 {
+  margin: 0;
+  color: #fff;
+  font-size: 30px;
+  line-height: 1.35;
+}
+
 /* Grid */
 .grid {
   display: grid;
@@ -239,10 +266,11 @@ font-size: 24px;
 }
 
 .card img {
-    height: 500px;
-  width: 350px;
-  border-radius: 12px;
-  margin-bottom: 10px;
+    width: 100%;
+    height: 420px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    object-fit: cover;
 }
 
 .card h4 {
@@ -502,7 +530,7 @@ input[type="range"] {
     .add-to-cart-btn:hover { background: #a8873d; }
     .add-to-cart-btn:disabled { background: #ccc; cursor: not-allowed; }
     .card a.card-link { text-decoration: none; color: inherit; display: block; }
-    .card a.card-link:hover img { transform: scale(1.04); transition: transform .3s; }
+.card a.card-link:hover img { transform: scale(1.04); transition: transform .3s; }
     .cart-nav-link { position: relative; }
     .cart-nav-badge {
         display:none; position:absolute; top:-8px; right:-8px;
@@ -510,6 +538,173 @@ input[type="range"] {
         width:18px; height:18px; font-size:11px;
         text-align:center; line-height:18px;
     }
+
+/* Bestsellers Slider Section */
+.bestsellers-section {
+    margin: 40px 0;
+    padding: 0;
+}
+
+.bestsellers-header {
+    margin-bottom: 20px;
+    padding: 18px 24px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #1a1a2e, #876723);
+    color: #fff;
+    box-shadow: 0 14px 34px rgba(58, 43, 18, .12);
+}
+
+.bestsellers-header span {
+    display: inline-flex;
+    margin-bottom: 6px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.12);
+    color: #f5dfae;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.bestsellers-header h2 {
+    margin: 0;
+    color: #fff;
+    font-size: 24px;
+    line-height: 1.35;
+}
+
+.bestsellers-slider {
+    display: flex;
+    gap: 20px;
+    padding: 15px;
+    overflow: hidden;
+    background: rgb(249, 235, 215);
+    border-radius: 12px;
+    transition: transform 0.4s ease;
+}
+
+.bestseller-card {
+    flex: 0 0 260px;
+    background: peachpuff;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.bestseller-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+}
+
+.bestseller-card img {
+    width: 100%;
+    height: 240px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+
+.bestseller-card h4 {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.bestseller-card .price {
+    color: #a67c52;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.bestseller-card .add-to-cart-btn {
+    font-size: 12px;
+    padding: 6px 12px;
+    margin-top: 6px;
+}
+
+.slider-controls {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.slider-nav {
+    flex: 1;
+    background: #c4a35a;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 16px;
+}
+
+.slider-nav:hover {
+    background: #a8873d;
+}
+
+.promo-carousel {
+    position: relative;
+    margin: 28px 0 8px;
+    height: 280px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #1a1a2e;
+    box-shadow: 0 14px 34px rgba(58, 43, 18, .14);
+}
+
+.promo-track,
+.promo-slide {
+    width: 100%;
+    height: 100%;
+}
+
+.promo-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: scale(1.03);
+    transition: opacity .7s ease, transform .7s ease;
+}
+
+.promo-slide.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.promo-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.promo-dots {
+    position: absolute;
+    left: 18px;
+    bottom: 14px;
+    display: flex;
+    gap: 7px;
+    z-index: 2;
+}
+
+.promo-dots button {
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255,255,255,.55);
+    cursor: pointer;
+}
+
+.promo-dots button.active {
+    width: 26px;
+    border-radius: 999px;
+    background: #c4a35a;
+}
 
 /* =========================
    Responsive layout
@@ -570,6 +765,18 @@ img {
         width: 100%;
         height: 380px;
         object-fit: cover;
+    }
+
+    .bestseller-card {
+        flex: 0 0 240px;
+    }
+
+    .bestseller-card img {
+        height: 220px;
+    }
+
+    .bestsellers-header h2 {
+        font-size: 22px;
     }
 }
 
@@ -700,14 +907,50 @@ img {
         gap: 18px;
     }
 
+    .products-heading {
+        padding: 18px;
+        border-radius: 16px;
+    }
+
+    .products-heading h2 {
+        font-size: 24px;
+    }
+
     .card {
         padding: 12px;
     }
 
     .card img {
         width: 100%;
-        height: min(70vh, 420px);
+        height: 300px;
         object-fit: cover;
+    }
+
+    .promo-carousel {
+        height: 190px;
+        border-radius: 16px;
+    }
+
+    .bestsellers-slider {
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .bestseller-card {
+        flex: 0 0 200px;
+    }
+
+    .bestseller-card img {
+        height: 180px;
+    }
+
+    .bestseller-card h4 {
+        font-size: 12px;
+    }
+
+    .slider-nav {
+        padding: 8px;
+        font-size: 14px;
     }
 
     .footer-bottom {
@@ -743,6 +986,27 @@ img {
 
     .hadara h3 {
         padding-top: 250px;
+    }
+
+    .promo-carousel {
+        height: 160px;
+    }
+
+    .bestseller-card {
+        flex: 0 0 160px;
+    }
+
+    .bestseller-card img {
+        height: 140px;
+    }
+
+    .bestseller-card h4 {
+        font-size: 11px;
+    }
+
+    .slider-nav {
+        padding: 6px;
+        font-size: 12px;
     }
 }
 
