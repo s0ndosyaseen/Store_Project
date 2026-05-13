@@ -89,6 +89,7 @@ function stepClass(string $step, string $current, array $steps): string {
             color: #342713;
         }
 
+        
         .orders-shell {
             width: min(1180px, calc(100% - 28px));
             margin: 34px auto 70px;
