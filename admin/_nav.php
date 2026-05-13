@@ -6,11 +6,15 @@
     <a href="index.php"><i class="fas fa-chart-line"></i> الإحصائيات والطلبات</a>
     <a href="products_manager.php"><i class="fas fa-boxes"></i> إدارة المنتجات</a>
     <a href="users_manager.php"><i class="fas fa-users"></i> إدارة المستخدمين</a>
+    <a href="add_categ.php"><i class="fas fa-th-list"></i> إدارة الحضارات</a>
     <a href="settings.php"><i class="fas fa-cog"></i> الإعدادات</a>
+    <footer>
     <a href="?go_home=1"><i class="fas fa-store"></i> العودة للمتجر</a>
-    <a href="?logout=1" style="color: #ff7675; border-top: 1px solid #333; margin-top: 20px;">
+    
+     <a href="?logout=1" style="color: #ff7675; border-top: 1px solid #333; margin-top: 20px;">
         <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
     </a>
+    </footer>
 </div>
 
 <!-- طبقة التعتيم عند فتح القائمة -->

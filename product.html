@@ -237,6 +237,45 @@
             text-align:center; line-height:18px;
         }
         .cart-nav-link { position: relative; }
+
+        @media (max-width: 520px) {
+            .product-detail-page {
+                margin: 22px auto;
+                padding: 0 12px 34px;
+            }
+
+            .product-card-detail {
+                padding: 16px;
+                border-radius: 14px;
+                gap: 18px;
+            }
+
+            .product-info-detail h1 {
+                font-size: 22px;
+            }
+
+            .product-price-big {
+                font-size: 28px;
+            }
+
+            .product-image-wrap {
+                aspect-ratio: 4 / 5;
+            }
+
+            .quantity-section,
+            .qty-control,
+            .btn-back {
+                width: 100%;
+            }
+
+            .qty-control {
+                justify-content: space-between;
+            }
+
+            .qty-control input {
+                flex: 1;
+            }
+        }
     </style>
 </head>
 <body>
@@ -254,6 +293,7 @@
                 <li><a href="home.html">الرئيسية</a></li>
                 <li><a href="home.html#story">قصتـنا</a></li>
                 <li><a href="home.html#categories">الـحضـارات</a></li>
+                <li><a href="my_orders.php" class="login-btn">تتبع الطلب</a></li>
                 <li>
                     <a href="cart-full.html" class="login-btn cart-nav-link">
                         سلة المشتريات
@@ -372,10 +412,10 @@
 // خريطة الحضارات: category → { الاسم، رابط الصفحة }
 // ================================================
 const CIVILIZATION_MAP = {
-    andalus: { name: 'الأندلس',    page: 'andalus.html',  badge: 'الأندلسية'  },
-    sham:    { name: 'بلاد الشام', page: 'sham.html',     badge: 'الشامية'    },
-    victory: { name: 'الفيكتورية', page: 'victory.html',  badge: 'الفيكتورية' },
-    egypt:   { name: 'الفرعونية',  page: 'egp.html',      badge: 'الفرعونية'  },
+    andalus: { name: 'الأندلس',    page: 'category.php?type=andalus',  badge: 'الأندلسية'  },
+    sham:    { name: 'بلاد الشام', page: 'category.php?type=sham',     badge: 'الشامية'    },
+    victory: { name: 'الفيكتورية', page: 'category.php?type=victory',  badge: 'الفيكتورية' },
+    egypt:   { name: 'الفرعونية',  page: 'category.php?type=egypt',    badge: 'الفرعونية'  },
 };
 
 let currentProductId = null;
@@ -401,11 +441,30 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
+        await loadCivilizationMap();
         renderProduct(data.product);
     } catch(e) {
         showError();
     }
 });
+
+async function loadCivilizationMap() {
+    try {
+        const res = await fetch('backend/categories.php');
+        const data = await res.json();
+        if (!data.success || !Array.isArray(data.categories)) return;
+
+        data.categories.forEach(cat => {
+            CIVILIZATION_MAP[cat.slug] = {
+                name: cat.title || cat.slug,
+                page: `category.php?type=${encodeURIComponent(cat.slug)}`,
+                badge: cat.title || cat.slug
+            };
+        });
+    } catch (e) {
+        console.error('تعذر تحميل أسماء الحضارات:', e);
+    }
+}
 
 // ================================================
 // رسم بيانات المنتج في الصفحة
@@ -419,7 +478,11 @@ function renderProduct(p) {
     img.alt = p.name;
 
     // شارة الحضارة
-    const civ = CIVILIZATION_MAP[p.category] || { name: p.category, page: '#', badge: p.category };
+    const civ = CIVILIZATION_MAP[p.category] || {
+        name: p.category,
+        page: `category.php?type=${encodeURIComponent(p.category)}`,
+        badge: p.category
+    };
     document.getElementById('prod-badge').textContent = civ.badge;
 
     // الاسم والوصف والسعر

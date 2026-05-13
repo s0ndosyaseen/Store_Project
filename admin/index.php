@@ -133,7 +133,18 @@ $statusColors = [
     <img src="../images/logo.png" alt="Logo" style="height: 60px; width: auto;">
 </header>
 
-<div class="main">
+<div class="main admin-dashboard">
+    <section class="dashboard-head">
+        <div>
+            <span class="eyebrow">نظرة عامة</span>
+            <h2>لوحة متابعة المتجر</h2>
+            <p>تابع الطلبات، الإيرادات، وحركة المنتجات من مكان واحد.</p>
+        </div>
+        <div class="dashboard-actions">
+            <a href="products_manager.php"><i class="fas fa-boxes"></i> المنتجات</a>
+            <a href="add_categ.php"><i class="fas fa-landmark"></i> الحضارات</a>
+        </div>
+    </section>
     <!-- إحصائيات -->
     <div class="stats">
         <div class="stat-card">
@@ -163,7 +174,7 @@ $statusColors = [
     </div>
 
     <!-- قسم الرسم البياني -->
- <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 30px;">
+ <div class="dashboard-charts">
     <div class="chart-container">
         <h3 style="margin-bottom: 15px;">تحليلات المبيعات (آخر 7 أيام)</h3>
          <canvas id="salesChart" height="100"></canvas>
@@ -270,10 +281,18 @@ const categoryChart = new Chart(catCtx, {
     </div>
 
     <!-- جدول الطلبات -->
+    <section class="orders-panel">
+        <div class="orders-panel-head">
+            <div>
+                <h3><i class="fas fa-receipt"></i> الطلبات الأخيرة</h3>
+                <p>إدارة حالات الطلبات ومراجعة تفاصيل العملاء.</p>
+            </div>
+        </div>
     <?php if (empty($orders)): ?>
         <div class="empty"><i class="fas fa-box-open" style="font-size:40px;margin-bottom:12px;display:block"></i>لا توجد طلبات</div>
     <?php else: ?>
-    <table>
+    <div class="admin-table-scroll">
+    <table class="orders-table">
         <thead>
             <tr>
                 <th>#</th>
@@ -289,23 +308,23 @@ const categoryChart = new Chart(catCtx, {
         <tbody>
         <?php foreach ($orders as $order): ?>
             <tr>
-                <td><strong>#<?= $order['id'] ?></strong></td>
-                <td><?= htmlspecialchars($order['fname'] . ' ' . $order['lname']) ?></td>
-                <td>
+                <td data-label="#"><strong>#<?= $order['id'] ?></strong></td>
+                <td data-label="العميل"><?= htmlspecialchars($order['fname'] . ' ' . $order['lname']) ?></td>
+                <td data-label="التواصل">
                     <?= htmlspecialchars($order['email']) ?><br>
                     <small><?= htmlspecialchars($order['phone']) ?></small>
                 </td>
-                <td style="max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
+                <td data-label="العنوان" style="max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
                     <?= htmlspecialchars($order['address']) ?>
                 </td>
-                <td><strong><?= number_format((float)$order['total'], 2) ?> ر.س</strong></td>
-                <td>
+                <td data-label="الإجمالي"><strong><?= number_format((float)$order['total'], 2) ?> ر.س</strong></td>
+                <td data-label="الحالة">
                     <span class="badge" style="background:<?= $statusColors[$order['status']] ?>">
                         <?= $statusLabels[$order['status']] ?>
                     </span>
                 </td>
-                <td><?= date('Y/m/d', strtotime($order['created_at'])) ?></td>
-                <td>
+                <td data-label="التاريخ"><?= date('Y/m/d', strtotime($order['created_at'])) ?></td>
+                <td data-label="إجراء">
                     <form method="POST" style="display:flex;gap:6px;align-items:center">
                         <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
                         <select name="status">
@@ -323,7 +342,9 @@ const categoryChart = new Chart(catCtx, {
         <?php endforeach; ?>
         </tbody>
     </table>
+    </div>
     <?php endif; ?>
+    </section>
 </div>
 
 </body>

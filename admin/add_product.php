@@ -4,6 +4,7 @@ if (empty($_SESSION['is_admin'])) { header('Location: index.php'); exit; }
 
 require_once __DIR__ . '/../config/db.php';
 $pdo = getDB();
+$categories = $pdo->query("SELECT slug, title FROM categories ORDER BY id ASC")->fetchAll();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
@@ -47,11 +48,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <textarea name="description" placeholder="وصف المنتج"></textarea>
             <input type="number" name="price" placeholder="السعر" min="0" required>
             <input type="number" name="stock" placeholder="الكمية في المخزن" min="0" required>
-            <select name="category">
-                <option value="andalus">أندلسي</option>
-                <option value="sham">شامي</option>
-                <option value="victory">فيكتوري</option>
-                <option value="egypt">فرعوني</option>
+            <select name="category" required>
+                <?php foreach ($categories as $category): ?>
+                    <option value="<?= htmlspecialchars($category['slug']) ?>">
+                        <?= htmlspecialchars($category['title']) ?>
+                    </option>
+                <?php endforeach; ?>
             </select>
             <select name="subcategory" required>
                 <option value="ديكور">ديكور</option>
