@@ -241,66 +241,6 @@
 
 
 
-.slider-controls {
-      position: absolute;
-
-    inset: 50% 0 auto 0;
-
-    transform: translateY(-50%);
-
-    pointer-events: none;
-
-    z-index: 10;
-}
-
-.slider-nav {
-   position: absolute;
-
-    width: 52px;
-    height: 52px;
-
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: none;
-
-    background:
-        linear-gradient(135deg,
-            rgba(196,163,90,.96),
-            rgba(145,113,45,.96));
-
-    color: white;
-
-    font-size: 18px;
-
-    cursor: pointer;
-
-    pointer-events: auto;
-
-    box-shadow:
-        0 10px 25px rgba(0,0,0,.16);
-
-    transition: .3s ease;
-}
-
-.slider-nav:hover {
-    transform: scale(1.08);
-
-    box-shadow:
-        0 14px 32px rgba(0,0,0,.22);
-}
-.slider-nav.left {
-    right: 12px;
-}
-
-.slider-nav.right {
-    left: 12px;
-}
-
-
 
 
 .contain {
@@ -599,10 +539,7 @@
         height: 190px;
     }
 
-    .slider-nav {
-        padding: 11px;
-        font-size: 14px;
-    }
+   
 }
     </style>
 </head>
@@ -719,10 +656,10 @@
         </div>
     </aside>
 
-    <!-- Products -->
+    <!-- products -->
     <main class="products">
 
-        <!-- Bestsellers Slider Section -->
+        <!-- bestsellers  -->
         <section class="bestsellers-section">
             <div class="bestsellers-header">
                 <span>أفضل الاختيارات</span>
@@ -734,19 +671,16 @@
                     <p style="margin-top:12px">جار تحميل المنتجات الأكثر مبيعاً...</p>
                 </div>
             </div>
-            <div class="slider-controls">
-                <button class="slider-nav left" id="bestsellers-prev"><i class="fas fa-chevron-right"></i></button>
-                <button class="slider-nav right" id="bestsellers-next"><i class="fas fa-chevron-left"></i></button>
-            </div>
+            
         </section>
 
-        <!-- Promo Carousel -->
+
         <section class="promo-carousel" aria-label="عروض البوصلة">
             <div class="promo-track" id="promo-track"></div>
             <div class="promo-dots" id="promo-dots"></div>
         </section>
 
-        <!-- Regular Products Section -->
+
         <section class="products-heading">
             <span>مختارات العملاء</span>
             <h2>جميع المنتجات</h2>
