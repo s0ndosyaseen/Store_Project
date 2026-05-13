@@ -44,19 +44,26 @@ $stats = $pdo->query(
 $usersCount = $pdo->query('SELECT COUNT(*) FROM users')->fetchColumn();
 $productsCount = $pdo->query('SELECT COUNT(*) FROM products')->fetchColumn();
 
+// جلب بيانات آخر 7 أيام من المبيعات
 $chartQuery = $pdo->query("
     SELECT 
         DATE(created_at) as order_date, 
         SUM(total) as daily_total 
     FROM orders 
-    WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+    WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
       AND status != 'cancelled'
     GROUP BY DATE(created_at)
     ORDER BY DATE(created_at) ASC
 ");
 $chartResults = $chartQuery->fetchAll(PDO::FETCH_ASSOC);
 
-// 2. تجهيز مصفوفات للأيام والمبالغ
+// تحويل النتائج إلى مصفوفة مفهرسة حسب التاريخ للوصول السريع
+$salesByDate = [];
+foreach ($chartResults as $row) {
+    $salesByDate[$row['order_date']] = (float)$row['daily_total'];
+}
+
+// تجهيز مصفوفات للأيام والمبالغ
 $days = [];
 $revenues = [];
 
@@ -65,11 +72,12 @@ $arabicDays = [
     'Wednesday' => 'الأربعاء', 'Thursday' => 'الخميس', 'Friday' => 'الجمعة', 'Saturday' => 'السبت'
 ];
 
-// ملء المصفوفات بالبيانات
-foreach ($chartResults as $row) {
-    $dayName = date('l', strtotime($row['order_date']));
+// حلقة على جميع الأيام السبعة (بما فيها الأيام بدون طلبات)
+for ($i = 6; $i >= 0; $i--) {
+    $date = date('Y-m-d', strtotime("-$i days"));
+    $dayName = date('l', strtotime($date));
     $days[] = $arabicDays[$dayName];
-    $revenues[] = (float)$row['daily_total'];
+    $revenues[] = $salesByDate[$date] ?? 0;
 }
 
 // 3. تحويلها لـ JSON لاستخدامها في JavaScript
