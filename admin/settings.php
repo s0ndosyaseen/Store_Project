@@ -1,5 +1,13 @@
 <?php
 require_once __DIR__ . '/_auth.php';
+require_once __DIR__ . '/../config/db.php';
+$pdo = getDB();// لتعريف المتغير بسطر28
+
+// منع الموظف من دخول هذه الصفحة نهائياً
+if (($_SESSION['user_role'] ?? '') !== 'admin') {
+    header('Location: index.php');
+    exit;
+}
 
 $pageTitle = 'الإعدادات العامة';
 
@@ -8,7 +16,7 @@ $pageTitle = 'الإعدادات العامة';
 // ============================================================
 
 $defaults = [
-    'admin_password' => 'sonly',
+    //'admin_password' => 'sonly', مش لازمة لانه حذفت الباسوورد من السيتنج
     'store_name'     => 'البوصلة',
     'store_phone'    => '',
     'store_email'    => '',
@@ -38,11 +46,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $new1    = $_POST['new_pass']     ?? '';
         $new2    = $_POST['confirm_pass'] ?? '';
 
-        $stored = $pdo->query("SELECT setting_value FROM settings WHERE setting_key='admin_password'")->fetchColumn();
+        // الباسورد الحالي للأدمن من جدول accounts
+        $stmt = $pdo->prepare("SELECT password FROM accounts WHERE role = 'admin' LIMIT 1");
+        $stmt->execute();
+        $stored = $stmt->fetchColumn();
 
-        // التحقق من كلمة المرور الحالية
         $ok = false;
-        if (str_starts_with($stored, '$2y$')) {
+        if (strpos($stored, '$2y$') === 0) {
             $ok = password_verify($current, $stored);
         } else {
             $ok = ($current === $stored);
@@ -59,12 +69,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $msgType = 'error';
         } else {
             $hashed = password_hash($new1, PASSWORD_DEFAULT);
-            $pdo->prepare("UPDATE settings SET setting_value=? WHERE setting_key='admin_password'")
-                ->execute([$hashed]);
-            $msg = 'تم تغيير كلمة المرور بنجاح ✓';
+            // التحديث يتم في جدول accounts للأدمن
+            $pdo->prepare("UPDATE accounts SET password=? WHERE role='admin'")
+                    ->execute([$hashed]);
+            $msg = 'تم تغيير كلمة مرور الإدارة بنجاح ✓';
         }
     }
-
     // --- تحديث معلومات المتجر ---
     elseif ($action === 'update_store') {
         $fields = ['store_name','store_phone','store_email','store_whatsapp','store_address','footer_text'];
@@ -78,6 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: settings.php?msg=' . urlencode($msg) . '&type=' . $msgType);
     exit;
 }
+
 
 if (!$msg && isset($_GET['msg'])) {
     $msg     = $_GET['msg'];
@@ -96,7 +107,6 @@ $messages = $pdo->query("
     FROM contact_messages
     ORDER BY created_at DESC
 ")->fetchAll(PDO::FETCH_ASSOC);
-
 
 
 ?>
@@ -542,6 +552,7 @@ $messages = $pdo->query("
             </button>
         </form>
     </div>
+        </div>
 
 </div>
 
