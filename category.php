@@ -1022,9 +1022,10 @@ loadCategoryInfo();
     }
 
     const PROMO_IMAGES = [
-        'images/order.png',
-        'images/order1.png',
-        'images/order2.png'
+        'images/role.png',
+        'images/role3.png',
+        'images/role2.png'
+        
     ];
 
     function initPromoCarousel() {
